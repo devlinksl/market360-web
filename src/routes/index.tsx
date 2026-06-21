@@ -61,10 +61,7 @@ function Home() {
 /* ─── FLYER SHOWCASE ────────────────────────────────────────── */
 function FlyerShowcase() {
   const flyers = [
-    { src: flyerEndless.url, alt: "One App. Endless Opportunities." },
-    { src: flyerEverything.url, alt: "Everything you need. One powerful marketplace." },
-    { src: flyerBuysell.url, alt: "Market360 — Buy. Sell. Pay. Grow." },
-    { src: flyerDownload.url, alt: "Download Market360 Today." },
+  { src: flyerBuysell.url, alt: "Market360 — Buy. Sell. Pay. Grow." },
   ];
   return (
     <section className="section-pad bg-surface border-y border-border">
