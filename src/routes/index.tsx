@@ -98,7 +98,7 @@ function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="animate-fade-up">
             <span className="eyebrow">
-              <Globe className="h-3.5 w-3.5" /> Sierra Leone's Digital Marketplace
+              <Star className="h-3.5 w-3.5 fill-primary text-primary" /> Sierra Leone's #1 Online Marketplace
             </span>
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[4.25rem] lg:leading-[1.05]">
               Commerce, payments, and growth —{" "}
