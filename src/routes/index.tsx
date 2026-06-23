@@ -488,6 +488,7 @@ function BuyerExperience() {
             </div>
           ))}
         </div>
+        </div>
       </div>
     </section>
   );
