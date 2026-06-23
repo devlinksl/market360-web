@@ -608,6 +608,13 @@ function WalletShowcase() {
     <section className="section-pad bg-surface border-y border-border">
       <div className="container-pro grid gap-12 lg:grid-cols-2 items-center">
         <div className="order-2 lg:order-1">
+          <figure className="mb-5 relative overflow-hidden rounded-3xl border border-border shadow-elevated">
+            <img src={imgWallet.url} alt="Hands holding a phone showing the Market360 wallet" className="aspect-[5/3] w-full object-cover" loading="lazy" decoding="async" width={1280} height={960} />
+            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-2xl bg-background/85 backdrop-blur px-3 py-2 text-xs">
+              <span className="flex items-center gap-1.5 font-semibold"><Wallet className="h-3.5 w-3.5 text-primary" /> Instant settlement</span>
+              <span className="text-muted-foreground">Mobile money ready</span>
+            </div>
+          </figure>
           <div className="relative mx-auto max-w-sm">
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary to-primary-glow p-7 text-primary-foreground shadow-[var(--shadow-elevated)]">
               <div className="flex items-center justify-between">
