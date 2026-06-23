@@ -1296,6 +1296,7 @@ function DownloadCta() {
             </div>
           ))}
         </div>
+        </div>
       </div>
     </section>
   );
