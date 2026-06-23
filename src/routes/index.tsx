@@ -60,34 +60,123 @@ function Home() {
   );
 }
 
-/* ─── FLYER SHOWCASE ────────────────────────────────────────── */
-function FlyerShowcase() {
-  const flyers = [
-  { src: flyerBuysell.url, alt: "Market360 — Buy. Sell. Pay. Grow." },
+/* ─── 3D CARD STACK (scroll fan-out) ────────────────────────── */
+function CardStack3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const el = containerRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        // 0 when section enters bottom, 1 when section top reaches mid-viewport
+        const raw = 1 - (rect.top - vh * 0.1) / (vh * 0.9);
+        setProgress(Math.max(0, Math.min(1, raw)));
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  const cards = [
+    {
+      tag: "For Buyers",
+      title: "Shop verified sellers safely.",
+      desc: "Browse trusted stores, pay securely with escrow, and track every delivery in real time.",
+      Icon: ShoppingBag,
+      img: imgBuyer.url,
+      tint: "from-emerald-500/20 to-emerald-300/10",
+    },
+    {
+      tag: "For Sellers",
+      title: "Launch your store in minutes.",
+      desc: "Pro tools for listings, orders, and customers — without the technical setup.",
+      Icon: Store,
+      img: imgSeller.url,
+      tint: "from-green-500/20 to-lime-300/10",
+    },
+    {
+      tag: "Wallet",
+      title: "Get paid the moment you sell.",
+      desc: "Instant settlements, free internal transfers, and easy mobile money withdrawals.",
+      Icon: Wallet,
+      img: imgWallet.url,
+      tint: "from-emerald-400/20 to-teal-300/10",
+    },
   ];
+
   return (
-    <section className="section-pad bg-surface border-y border-border">
+    <section ref={containerRef} className="section-pad bg-surface border-y border-border">
       <div className="container-pro">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">The Market360 experience</span>
+          <span className="eyebrow"><Sparkles className="h-3 w-3" /> Layered experience</span>
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl md:text-5xl">
-            One app. <span className="gradient-text">Endless opportunities.</span>
+            Three sides. <span className="gradient-text">One marketplace.</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
-            See how Market360 brings shopping, selling, payments, and delivery into one beautifully simple experience.
+            Scroll to unfold how Market360 connects buyers, sellers, and wallet into a single flow.
           </p>
         </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {flyers.map((f) => (
-            <div key={f.alt} className="surface-card surface-card-hover overflow-hidden p-0">
-              <img src={f.src} alt={f.alt} className="w-full h-auto block" loading="lazy" decoding="async" />
-            </div>
-          ))}
+
+        <div
+          className="relative mx-auto mt-14 h-[460px] w-full max-w-3xl"
+          style={{ perspective: "1400px" }}
+        >
+          {cards.map((c, i) => {
+            const center = i - 1; // -1, 0, 1
+            const spread = progress; // 0 → 1
+            const tx = center * 240 * spread;
+            const ty = Math.abs(center) * 14 * (1 - spread) - center * 4 * spread;
+            const rot = center * 14 * spread;
+            const scale = 1 - Math.abs(center) * 0.05 * (1 - spread);
+            return (
+              <div
+                key={c.tag}
+                className="absolute inset-x-0 mx-auto h-[420px] w-[300px] sm:w-[340px] rounded-3xl border border-border bg-card shadow-elevated overflow-hidden transition-[transform,box-shadow] duration-300 ease-out"
+                style={{
+                  transform: `translate3d(${tx}px, ${ty}px, 0) rotate(${rot}deg) scale(${scale})`,
+                  transformStyle: "preserve-3d",
+                  zIndex: 10 - Math.abs(center),
+                }}
+              >
+                <div className="relative h-44 overflow-hidden">
+                  <img src={c.img} alt={c.tag} className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${c.tint}`} />
+                </div>
+                <div className="p-5">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    <c.Icon className="h-3 w-3" /> {c.tag}
+                  </span>
+                  <h3 className="mt-3 text-lg font-bold leading-tight">{c.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+                  <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-primary">
+                    Learn more <ArrowRight className="h-3 w-3" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
+
+        <p className="mt-10 text-center text-xs uppercase tracking-wider text-muted-foreground">
+          ↓ Keep scrolling to see the cards fan out
+        </p>
       </div>
     </section>
   );
 }
+
 
 /* ─── HERO ─────────────────────────────────────────────────── */
 function Hero() {
