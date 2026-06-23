@@ -445,6 +445,14 @@ function BuyerExperience() {
             </Link>
           </div>
         </div>
+        <div className="space-y-5">
+        <figure className="relative overflow-hidden rounded-3xl border border-border shadow-elevated">
+          <img src={imgBuyer.url} alt="Shopper using Market360 in a Sierra Leone market" className="aspect-[5/4] w-full object-cover" loading="lazy" decoding="async" width={1280} height={960} />
+          <figcaption className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-2xl bg-background/85 backdrop-blur px-3 py-2 text-xs">
+            <span className="flex items-center gap-1.5 font-semibold"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Buyer protected</span>
+            <span className="text-muted-foreground">Escrow on every order</span>
+          </figcaption>
+        </figure>
         <div className="grid gap-4 sm:grid-cols-2">
           {[
             {
