@@ -2,10 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { ArrowRight } from "lucide-react";
-import flyerEndless from "@/assets/flyer-endless.png.asset.json";
-import flyerDownload from "@/assets/flyer-download.png.asset.json";
-import flyerEverything from "@/assets/flyer-everything.png.asset.json";
-import flyerBuysell from "@/assets/flyer-buysell.png.asset.json";
+import { newsPosts } from "@/lib/news-data";
 
 export const Route = createFileRoute("/news")({
   head: () => ({
@@ -21,24 +18,8 @@ export const Route = createFileRoute("/news")({
   component: NewsPage,
 });
 
-const featured = {
-  category: "Announcement",
-  title: "Market360 opens its public tester program",
-  excerpt: "We're inviting the community to help shape the next era of Market360 — with early access, perks, and direct influence on the roadmap.",
-  date: "Jun 12, 2026",
-  image: flyerEverything.url,
-};
-
-const posts = [
-  { category: "Product", title: "Wallet 2.0 ships: faster settlements, lower fees", excerpt: "Get paid in minutes with our re-engineered wallet.", date: "Jun 04, 2026", image: flyerBuysell.url },
-  { category: "Update", title: "Smarter search rolls out to all users", excerpt: "A redesigned discovery engine helps buyers find exactly what they want.", date: "May 22, 2026", image: flyerEndless.url },
-  { category: "Roadmap", title: "What's coming this quarter", excerpt: "Storefronts, bulk uploads, smarter analytics, and more.", date: "May 10, 2026", image: flyerDownload.url },
-  { category: "Trust", title: "New fraud protection layer goes live", excerpt: "Our updated AI model flags risky activity in real-time.", date: "Apr 28, 2026", image: flyerBuysell.url },
-  { category: "Community", title: "Tester spotlights: meet 5 of our top contributors", excerpt: "The people helping us ship better, faster.", date: "Apr 15, 2026", image: flyerEverything.url },
-  { category: "Product", title: "Seller dashboard gets a refresh", excerpt: "Cleaner layout, faster insights, smoother workflows.", date: "Apr 02, 2026", image: flyerEndless.url },
-];
-
 function NewsPage() {
+  const [featured, ...posts] = newsPosts;
   return (
     <SiteLayout>
       <PageHero
@@ -49,41 +30,45 @@ function NewsPage() {
 
       <section className="section-pad">
         <div className="container-pro">
-          <article className="surface-card surface-card-hover overflow-hidden p-0">
-            <div className="grid md:grid-cols-[1.2fr_1fr]">
-              <div className="relative aspect-[16/10] md:aspect-auto overflow-hidden bg-surface">
-                <img src={featured.image} alt={featured.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
-              </div>
-              <div className="p-7 md:p-10 flex flex-col justify-center">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">Featured · {featured.category}</span>
-                <h2 className="mt-3 text-2xl md:text-3xl font-bold leading-tight">{featured.title}</h2>
-                <p className="mt-3 text-muted-foreground">{featured.excerpt}</p>
-                <div className="mt-5 flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground">{featured.date}</p>
-                  <Link to="/tester" className="inline-flex items-center gap-1 text-sm font-semibold text-primary">Read more <ArrowRight className="h-4 w-4" /></Link>
+          <Link to="/news/$slug" params={{ slug: featured.slug }} className="block">
+            <article className="surface-card surface-card-hover overflow-hidden p-0">
+              <div className="grid md:grid-cols-[1.2fr_1fr]">
+                <div className="relative aspect-[16/10] md:aspect-auto overflow-hidden bg-surface">
+                  <img src={featured.image} alt={featured.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
+                </div>
+                <div className="p-7 md:p-10 flex flex-col justify-center">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary">Featured · {featured.category}</span>
+                  <h2 className="mt-3 text-2xl md:text-3xl font-bold leading-tight">{featured.title}</h2>
+                  <p className="mt-3 text-muted-foreground">{featured.excerpt}</p>
+                  <div className="mt-5 flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">{featured.date} · {featured.readTime}</p>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">Read more <ArrowRight className="h-4 w-4" /></span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </Link>
 
           <div className="mt-12">
             <h2 className="text-2xl font-bold">All updates</h2>
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((p) => (
-                <article key={p.title} className="surface-card surface-card-hover overflow-hidden p-0 flex flex-col">
-                  <div className="relative aspect-[16/9] overflow-hidden bg-surface">
-                    <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" decoding="async" />
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-primary">{p.category}</span>
-                    <h3 className="mt-2 font-semibold text-lg leading-snug">{p.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground flex-1">{p.excerpt}</p>
-                    <div className="mt-4 flex items-center justify-between">
-                      <p className="text-xs text-muted-foreground">{p.date}</p>
-                      <a href="#" className="inline-flex items-center gap-1 text-sm font-medium text-primary">Read <ArrowRight className="h-3.5 w-3.5" /></a>
+                <Link key={p.slug} to="/news/$slug" params={{ slug: p.slug }} className="block">
+                  <article className="surface-card surface-card-hover overflow-hidden p-0 flex flex-col h-full">
+                    <div className="relative aspect-[16/9] overflow-hidden bg-surface">
+                      <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" decoding="async" />
                     </div>
-                  </div>
-                </article>
+                    <div className="p-6 flex flex-col flex-1">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-primary">{p.category}</span>
+                      <h3 className="mt-2 font-semibold text-lg leading-snug">{p.title}</h3>
+                      <p className="mt-2 text-sm text-muted-foreground flex-1">{p.excerpt}</p>
+                      <div className="mt-4 flex items-center justify-between">
+                        <p className="text-xs text-muted-foreground">{p.date}</p>
+                        <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">Read <ArrowRight className="h-3.5 w-3.5" /></span>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
               ))}
             </div>
           </div>
