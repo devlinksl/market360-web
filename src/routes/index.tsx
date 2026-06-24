@@ -19,7 +19,7 @@ import imgHero from "@/assets/img-hero.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Market360 — Sierra Leone's Digital Commerce Platform" },
+      { title: "Market360 Sl" },
       {
         name: "description",
         content:
