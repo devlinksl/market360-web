@@ -97,6 +97,7 @@ function CardStack3D() {
       Icon: ShoppingBag,
       img: imgBuyer.url,
       tint: "from-emerald-500/20 to-emerald-300/10",
+      to: "/for-buyers" as const,
     },
     {
       tag: "For Sellers",
@@ -105,6 +106,7 @@ function CardStack3D() {
       Icon: Store,
       img: imgSeller.url,
       tint: "from-green-500/20 to-lime-300/10",
+      to: "/for-sellers" as const,
     },
     {
       tag: "Wallet",
@@ -113,11 +115,21 @@ function CardStack3D() {
       Icon: Wallet,
       img: imgWallet.url,
       tint: "from-emerald-400/20 to-teal-300/10",
+      to: "/wallet" as const,
     },
   ];
 
+  // Smaller spread on mobile so cards never escape the viewport
+  const [spreadPx, setSpreadPx] = useState(240);
+  useEffect(() => {
+    const update = () => setSpreadPx(window.innerWidth < 640 ? 110 : window.innerWidth < 1024 ? 180 : 240);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   return (
-    <section ref={containerRef} className="section-pad bg-surface border-y border-border">
+    <section ref={containerRef} className="section-pad bg-surface border-y border-border overflow-hidden">
       <div className="container-pro">
         <div className="mx-auto max-w-2xl text-center">
           <span className="eyebrow"><Sparkles className="h-3 w-3" /> Layered experience</span>
@@ -125,25 +137,26 @@ function CardStack3D() {
             Three sides. <span className="gradient-text">One marketplace.</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Scroll to unfold how Market360 connects buyers, sellers, and wallet into a single flow.
+            Scroll to unfold how Market360 connects buyers, sellers, and wallet into a single flow. Tap any card to dive deeper.
           </p>
         </div>
 
         <div
-          className="relative mx-auto mt-14 h-[460px] w-full max-w-3xl"
+          className="relative mx-auto mt-14 h-[460px] w-full max-w-3xl overflow-hidden"
           style={{ perspective: "1400px" }}
         >
           {cards.map((c, i) => {
             const center = i - 1; // -1, 0, 1
-            const spread = progress; // 0 → 1
-            const tx = center * 240 * spread;
+            const spread = progress;
+            const tx = center * spreadPx * spread;
             const ty = Math.abs(center) * 14 * (1 - spread) - center * 4 * spread;
-            const rot = center * 14 * spread;
+            const rot = center * 10 * spread;
             const scale = 1 - Math.abs(center) * 0.05 * (1 - spread);
             return (
-              <div
+              <Link
                 key={c.tag}
-                className="absolute inset-x-0 mx-auto h-[420px] w-[300px] sm:w-[340px] rounded-3xl border border-border bg-card shadow-elevated overflow-hidden transition-[transform,box-shadow] duration-300 ease-out"
+                to={c.to}
+                className="absolute inset-x-0 mx-auto block h-[420px] w-[260px] sm:w-[300px] md:w-[340px] rounded-3xl border border-border bg-card shadow-elevated overflow-hidden transition-[transform,box-shadow] duration-300 ease-out hover:shadow-2xl"
                 style={{
                   transform: `translate3d(${tx}px, ${ty}px, 0) rotate(${rot}deg) scale(${scale})`,
                   transformStyle: "preserve-3d",
@@ -160,17 +173,17 @@ function CardStack3D() {
                   </span>
                   <h3 className="mt-3 text-lg font-bold leading-tight">{c.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-                  <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-primary">
-                    Learn more <ArrowRight className="h-3 w-3" />
+                  <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+                    Read more <ArrowRight className="h-3 w-3" />
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
 
         <p className="mt-10 text-center text-xs uppercase tracking-wider text-muted-foreground">
-          ↓ Keep scrolling to see the cards fan out
+          ↓ Keep scrolling to see the cards fan out · tap to read more
         </p>
       </div>
     </section>

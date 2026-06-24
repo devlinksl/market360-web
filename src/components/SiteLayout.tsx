@@ -90,7 +90,26 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
           </div>
 
           <div className="flex-1 overflow-y-auto px-5 pb-10 pt-3">
-            <h2 className="text-xl font-bold tracking-tight">Where do you want to go?</h2>
+            <Link
+              to="/tester"
+              onClick={() => onOpenChange(false)}
+              className="group relative block overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary to-primary-glow p-5 text-primary-foreground shadow-glow tile-anim"
+              style={{ animationDelay: "30ms" }}
+            >
+              <div className="flex items-center gap-4">
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/20 backdrop-blur ring-1 ring-white/30">
+                  <FlaskConical className="h-6 w-6" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider opacity-90">Now recruiting</p>
+                  <p className="text-base font-bold leading-tight">Join the Market360 Tester Program</p>
+                  <p className="mt-0.5 text-xs opacity-90">Early access · perks · shape the roadmap</p>
+                </div>
+                <ArrowRight className="h-4 w-4 opacity-90" />
+              </div>
+            </Link>
+
+            <h2 className="mt-5 text-xl font-bold tracking-tight">Where do you want to go?</h2>
             <div className="mt-4 grid grid-cols-2 gap-3">
               {mobileTiles.map(({ to, label, desc, Icon, accent }, i) => (
                 <Link
@@ -98,7 +117,7 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
                   to={to}
                   onClick={() => onOpenChange(false)}
                   className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-4 min-h-[130px] shadow-soft tile-anim"
-                  style={{ animationDelay: `${60 + i * 45}ms` }}
+                  style={{ animationDelay: `${90 + i * 45}ms` }}
                 >
                   <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${accent} opacity-80`} />
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 backdrop-blur ring-1 ring-primary/15">

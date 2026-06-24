@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "";
+import { newsPosts } from "@/lib/news-data";
+
+const BASE_URL = "https://market360-web.lovable.app";
 
 interface SitemapEntry {
   path: string;
@@ -16,6 +18,9 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/features", changefreq: "monthly", priority: "0.9" },
+          { path: "/for-buyers", changefreq: "monthly", priority: "0.9" },
+          { path: "/for-sellers", changefreq: "monthly", priority: "0.9" },
+          { path: "/wallet", changefreq: "monthly", priority: "0.9" },
           { path: "/download", changefreq: "monthly", priority: "0.9" },
           { path: "/tester", changefreq: "weekly", priority: "0.9" },
           { path: "/seller-solutions", changefreq: "monthly", priority: "0.9" },
@@ -26,6 +31,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/help", changefreq: "monthly", priority: "0.7" },
           { path: "/privacy", changefreq: "yearly", priority: "0.4" },
           { path: "/terms", changefreq: "yearly", priority: "0.4" },
+          ...newsPosts.map((p) => ({ path: `/news/${p.slug}`, changefreq: "monthly" as const, priority: "0.6" })),
         ];
         const urls = entries.map((e) =>
           `  <url>\n    <loc>${BASE_URL}${e.path}</loc>\n    <changefreq>${e.changefreq}</changefreq>\n    <priority>${e.priority}</priority>\n  </url>`
