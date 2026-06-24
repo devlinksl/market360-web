@@ -74,7 +74,7 @@ function NewsArticle() {
             <p className="mt-6 text-lg text-foreground leading-relaxed">{post.excerpt}</p>
 
             <div className="mt-8 space-y-6">
-              {post.body.map((b, i) => (
+              {post.body.map((b: { heading?: string; paragraph: string }, i: number) => (
                 <div key={i}>
                   {b.heading && <h2 className="text-2xl font-bold mt-8 mb-3">{b.heading}</h2>}
                   <p className="text-base text-muted-foreground leading-relaxed">{b.paragraph}</p>

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as TesterRouteImport } from './routes/tester'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -17,12 +18,20 @@ import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as HelpRouteImport } from './routes/help'
+import { Route as ForSellersRouteImport } from './routes/for-sellers'
+import { Route as ForBuyersRouteImport } from './routes/for-buyers'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as DownloadRouteImport } from './routes/download'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 
+const WalletRoute = WalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TesterRoute = TesterRouteImport.update({
   id: '/tester',
   path: '/tester',
@@ -63,6 +72,16 @@ const HelpRoute = HelpRouteImport.update({
   path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForSellersRoute = ForSellersRouteImport.update({
+  id: '/for-sellers',
+  path: '/for-sellers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForBuyersRoute = ForBuyersRouteImport.update({
+  id: '/for-buyers',
+  path: '/for-buyers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesRoute = FeaturesRouteImport.update({
   id: '/features',
   path: '/features',
@@ -88,6 +107,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NewsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -95,14 +119,18 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/download': typeof DownloadRoute
   '/features': typeof FeaturesRoute
+  '/for-buyers': typeof ForBuyersRoute
+  '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
-  '/news': typeof NewsRoute
+  '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
+  '/wallet': typeof WalletRoute
+  '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,14 +138,18 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/download': typeof DownloadRoute
   '/features': typeof FeaturesRoute
+  '/for-buyers': typeof ForBuyersRoute
+  '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
-  '/news': typeof NewsRoute
+  '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
+  '/wallet': typeof WalletRoute
+  '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -126,14 +158,18 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/download': typeof DownloadRoute
   '/features': typeof FeaturesRoute
+  '/for-buyers': typeof ForBuyersRoute
+  '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
-  '/news': typeof NewsRoute
+  '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
+  '/wallet': typeof WalletRoute
+  '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -143,6 +179,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/download'
     | '/features'
+    | '/for-buyers'
+    | '/for-sellers'
     | '/help'
     | '/news'
     | '/privacy'
@@ -151,6 +189,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/tester'
+    | '/wallet'
+    | '/news/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -158,6 +198,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/download'
     | '/features'
+    | '/for-buyers'
+    | '/for-sellers'
     | '/help'
     | '/news'
     | '/privacy'
@@ -166,6 +208,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/tester'
+    | '/wallet'
+    | '/news/$slug'
   id:
     | '__root__'
     | '/'
@@ -173,6 +217,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/download'
     | '/features'
+    | '/for-buyers'
+    | '/for-sellers'
     | '/help'
     | '/news'
     | '/privacy'
@@ -181,6 +227,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/tester'
+    | '/wallet'
+    | '/news/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -189,18 +237,28 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DownloadRoute: typeof DownloadRoute
   FeaturesRoute: typeof FeaturesRoute
+  ForBuyersRoute: typeof ForBuyersRoute
+  ForSellersRoute: typeof ForSellersRoute
   HelpRoute: typeof HelpRoute
-  NewsRoute: typeof NewsRoute
+  NewsRoute: typeof NewsRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   SafetyRoute: typeof SafetyRoute
   SellerSolutionsRoute: typeof SellerSolutionsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   TesterRoute: typeof TesterRoute
+  WalletRoute: typeof WalletRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wallet': {
+      id: '/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof WalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tester': {
       id: '/tester'
       path: '/tester'
@@ -257,6 +315,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/for-sellers': {
+      id: '/for-sellers'
+      path: '/for-sellers'
+      fullPath: '/for-sellers'
+      preLoaderRoute: typeof ForSellersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-buyers': {
+      id: '/for-buyers'
+      path: '/for-buyers'
+      fullPath: '/for-buyers'
+      preLoaderRoute: typeof ForBuyersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features': {
       id: '/features'
       path: '/features'
@@ -292,8 +364,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
+      parentRoute: typeof NewsRoute
+    }
   }
 }
+
+interface NewsRouteChildren {
+  NewsSlugRoute: typeof NewsSlugRoute
+}
+
+const NewsRouteChildren: NewsRouteChildren = {
+  NewsSlugRoute: NewsSlugRoute,
+}
+
+const NewsRouteWithChildren = NewsRoute._addFileChildren(NewsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -301,14 +390,17 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DownloadRoute: DownloadRoute,
   FeaturesRoute: FeaturesRoute,
+  ForBuyersRoute: ForBuyersRoute,
+  ForSellersRoute: ForSellersRoute,
   HelpRoute: HelpRoute,
-  NewsRoute: NewsRoute,
+  NewsRoute: NewsRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   SafetyRoute: SafetyRoute,
   SellerSolutionsRoute: SellerSolutionsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   TesterRoute: TesterRoute,
+  WalletRoute: WalletRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
