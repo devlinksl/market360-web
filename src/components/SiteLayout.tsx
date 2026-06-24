@@ -3,20 +3,18 @@ import { useState, useEffect, type ReactNode } from "react";
 import { Drawer } from "vaul";
 import {
   Menu, ShoppingBag, Mail, MapPin, Twitter, Facebook, Instagram, Linkedin,
-  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, Shield, ArrowRight, X,
+  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, ExternalLink,
 } from "lucide-react";
 import logoAsset from "@/assets/market360-logo.png.asset.json";
 
 const mobileTiles = [
-  { to: "/features", label: "Explore Features", desc: "Wallet, analytics, trust", Icon: Sparkles, accent: "from-emerald-100 to-emerald-50" },
   { to: "/seller-solutions", label: "Sell on Market360", desc: "Tools for stores", Icon: Store, accent: "from-green-100 to-emerald-50" },
   { to: "/download", label: "Get the App", desc: "iOS & Android", Icon: Download, accent: "from-lime-100 to-emerald-50" },
-  { to: "/tester", label: "Tester Program", desc: "Now recruiting", Icon: FlaskConical, accent: "from-emerald-100 to-green-50" },
-  { to: "/safety", label: "Trust & Safety", desc: "How we protect you", Icon: Shield, accent: "from-emerald-100 to-green-50" },
   { to: "/news", label: "News & Updates", desc: "Product changelog", Icon: Newspaper, accent: "from-emerald-50 to-white" },
-  { to: "/help", label: "Help Center", desc: "FAQs & guides", Icon: LifeBuoy, accent: "from-green-50 to-white" },
   { to: "/about", label: "About Market360", desc: "Our story", Icon: Info, accent: "from-emerald-50 to-white" },
   { to: "/contact", label: "Contact Us", desc: "We're here to help", Icon: Mail, accent: "from-emerald-100 to-emerald-50" },
+  { to: "/privacy", label: "Privacy Policy", desc: "How we use your data", Icon: Lock, accent: "from-slate-100 to-emerald-50" },
+  { to: "/terms", label: "Terms of Service", desc: "Rules & conditions", Icon: FileText, accent: "from-slate-100 to-green-50" },
 ];
 
 const navLinks = [
@@ -93,19 +91,34 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
             <Link
               to="/tester"
               onClick={() => onOpenChange(false)}
-              className="group relative block overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary to-primary-glow p-5 text-primary-foreground shadow-glow tile-anim"
+              className="group relative block overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-[#006B3C] via-[#00A859] to-[#00c96b] p-5 text-white shadow-[0_8px_32px_rgba(0,168,89,0.35)] tile-anim"
               style={{ animationDelay: "30ms" }}
             >
-              <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/20 backdrop-blur ring-1 ring-white/30">
-                  <FlaskConical className="h-6 w-6" />
+              {/* Subtle grid texture */}
+              <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
+              {/* Glow orb */}
+              <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
+              <div className="relative flex items-center gap-4">
+                <div className="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/15 ring-1 ring-white/25 backdrop-blur-sm">
+                  <FlaskConical className="h-7 w-7 text-white drop-shadow-sm" />
+                  <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[8px] font-black text-primary shadow">
+                    ✦
+                  </span>
                 </div>
-                <div className="flex-1">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider opacity-90">Now recruiting</p>
-                  <p className="text-base font-bold leading-tight">Join the Market360 Tester Program</p>
-                  <p className="mt-0.5 text-xs opacity-90">Early access · perks · shape the roadmap</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/70">Now recruiting · Beta</p>
+                  <p className="text-base font-extrabold leading-tight tracking-tight">Join the Tester Program</p>
+                  <div className="mt-1.5 flex flex-wrap gap-1.5">
+                    {["Early access", "Exclusive perks", "Shape the app"].map((tag) => (
+                      <span key={tag} className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold text-white/90 ring-1 ring-white/20">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <ArrowRight className="h-4 w-4 opacity-90" />
+                <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/15 ring-1 ring-white/25 group-hover:bg-white/25 transition-colors">
+                  <ArrowRight className="h-4 w-4 text-white" />
+                </div>
               </div>
             </Link>
 
@@ -137,6 +150,26 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
               className="btn-primary mt-6 w-full justify-center"
             >
               <Download className="h-4 w-4" /> Download the App
+            </Link>
+
+            <Link
+              to="/help"
+              onClick={() => onOpenChange(false)}
+              className="group relative mt-3 flex w-full items-center justify-between overflow-hidden rounded-2xl border border-border bg-gradient-to-r from-secondary/80 to-secondary/40 px-5 py-3.5 transition-all hover:border-primary/30 hover:from-primary/5 hover:to-primary/0"
+            >
+              <div className="flex items-center gap-3">
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-background shadow-sm ring-1 ring-border">
+                  <LifeBuoy className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground leading-none">Help Center</p>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">FAQs, guides & support</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground group-hover:text-primary transition-colors">
+                <span>Visit</span>
+                <ExternalLink className="h-3 w-3" />
+              </div>
             </Link>
 
             <div className="mt-6 flex justify-center gap-2 pb-6">
