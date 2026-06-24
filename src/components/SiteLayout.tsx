@@ -3,18 +3,19 @@ import { useState, useEffect, type ReactNode } from "react";
 import { Drawer } from "vaul";
 import {
   Menu, ShoppingBag, Mail, MapPin, Twitter, Facebook, Instagram, Linkedin,
-  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, ExternalLink,
+  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock,
 } from "lucide-react";
 import logoAsset from "@/assets/market360-logo.png.asset.json";
 
 const mobileTiles = [
-  { to: "/seller-solutions", label: "Sell on Market360", desc: "Tools for stores", Icon: Store, accent: "from-green-100 to-emerald-50" },
-  { to: "/download", label: "Get the App", desc: "iOS & Android", Icon: Download, accent: "from-lime-100 to-emerald-50" },
-  { to: "/news", label: "News & Updates", desc: "Product changelog", Icon: Newspaper, accent: "from-emerald-50 to-white" },
-  { to: "/about", label: "About Market360", desc: "Our story", Icon: Info, accent: "from-emerald-50 to-white" },
-  { to: "/contact", label: "Contact Us", desc: "We're here to help", Icon: Mail, accent: "from-emerald-100 to-emerald-50" },
-  { to: "/privacy", label: "Privacy Policy", desc: "How we use your data", Icon: Lock, accent: "from-slate-100 to-emerald-50" },
-  { to: "/terms", label: "Terms of Service", desc: "Rules & conditions", Icon: FileText, accent: "from-slate-100 to-green-50" },
+  { to: "/seller-solutions", label: "Sell on Market360", desc: "Tools for stores", Icon: Store, accent: "from-green-100 to-emerald-50", legal: false },
+  { to: "/download", label: "Get the App", desc: "iOS & Android", Icon: Download, accent: "from-lime-100 to-emerald-50", legal: false },
+  { to: "/news", label: "News & Updates", desc: "Product changelog", Icon: Newspaper, accent: "from-emerald-50 to-white", legal: false },
+  { to: "/about", label: "About Market360", desc: "Our story", Icon: Info, accent: "from-emerald-50 to-white", legal: false },
+  { to: "/contact", label: "Contact Us", desc: "We're here to help", Icon: Mail, accent: "from-emerald-100 to-emerald-50", legal: false },
+  { to: "/help", label: "Help Center", desc: "FAQs & guides", Icon: LifeBuoy, accent: "from-green-50 to-white", legal: false },
+  { to: "/privacy", label: "Privacy Policy", desc: "How we use your data", Icon: Lock, accent: "from-slate-50 to-slate-100", legal: true },
+  { to: "/terms", label: "Terms of Service", desc: "Rules & conditions", Icon: FileText, accent: "from-slate-50 to-slate-100", legal: true },
 ];
 
 const navLinks = [
@@ -91,55 +92,74 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
             <Link
               to="/tester"
               onClick={() => onOpenChange(false)}
-              className="group relative block overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-[#006B3C] via-[#00A859] to-[#00c96b] p-5 text-white shadow-[0_8px_32px_rgba(0,168,89,0.35)] tile-anim"
-              style={{ animationDelay: "30ms" }}
+              className="group relative block overflow-hidden rounded-2xl border border-border shadow-soft tile-anim"
+              style={{ animationDelay: "30ms", minHeight: "148px" }}
             >
-              {/* Subtle grid texture */}
-              <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
-              {/* Glow orb */}
-              <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
-              <div className="relative flex items-center gap-4">
-                <div className="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/15 ring-1 ring-white/25 backdrop-blur-sm">
-                  <FlaskConical className="h-7 w-7 text-white drop-shadow-sm" />
-                  <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[8px] font-black text-primary shadow">
-                    ✦
-                  </span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/70">Now recruiting · Beta</p>
-                  <p className="text-base font-extrabold leading-tight tracking-tight">Join the Tester Program</p>
-                  <div className="mt-1.5 flex flex-wrap gap-1.5">
-                    {["Early access", "Exclusive perks", "Shape the app"].map((tag) => (
-                      <span key={tag} className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold text-white/90 ring-1 ring-white/20">
-                        {tag}
-                      </span>
-                    ))}
+              {/* Background image */}
+              <img
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              {/* Dark gradient scrim */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+              {/* Top-left badge */}
+              <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 shadow">
+                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white">Now Recruiting</span>
+              </div>
+              {/* Content */}
+              <div className="relative flex h-full flex-col justify-end p-4 pt-14">
+                <p className="text-xs font-semibold uppercase tracking-widest text-white/60">Tester Program · Beta</p>
+                <p className="mt-0.5 text-[17px] font-extrabold leading-tight tracking-tight text-white">
+                  Join the Market360<br />Tester Program
+                </p>
+                <div className="mt-3 flex items-center justify-between">
+                  <p className="text-[11px] text-white/70">Early access · Perks · Shape the app</p>
+                  <div className="grid h-7 w-7 place-items-center rounded-full bg-white/20 ring-1 ring-white/30 group-hover:bg-white/35 transition-colors">
+                    <ArrowRight className="h-3.5 w-3.5 text-white" />
                   </div>
-                </div>
-                <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/15 ring-1 ring-white/25 group-hover:bg-white/25 transition-colors">
-                  <ArrowRight className="h-4 w-4 text-white" />
                 </div>
               </div>
             </Link>
 
             <h2 className="mt-5 text-xl font-bold tracking-tight">Where do you want to go?</h2>
             <div className="mt-4 grid grid-cols-2 gap-3">
-              {mobileTiles.map(({ to, label, desc, Icon, accent }, i) => (
+              {mobileTiles.map(({ to, label, desc, Icon, accent, legal }, i) => (
                 <Link
                   key={to}
                   to={to}
                   onClick={() => onOpenChange(false)}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-4 min-h-[130px] shadow-soft tile-anim"
+                  className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-card p-4 shadow-soft tile-anim ${
+                    legal
+                      ? "min-h-[90px] border-border/60"
+                      : "min-h-[130px] border-border"
+                  }`}
                   style={{ animationDelay: `${90 + i * 45}ms` }}
                 >
                   <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${accent} opacity-80`} />
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 backdrop-blur ring-1 ring-primary/15">
-                    <Icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground leading-tight">{label}</p>
-                    <p className="mt-0.5 text-[11px] text-muted-foreground leading-snug">{desc}</p>
-                  </div>
+                  {legal ? (
+                    <div className="flex h-full flex-col justify-between">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/70 backdrop-blur ring-1 ring-border/40">
+                        <Icon className="h-4 w-4 text-muted-foreground" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground leading-tight">{label}</p>
+                        <p className="mt-0.5 text-[10px] text-muted-foreground/70 leading-snug">{desc}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 backdrop-blur ring-1 ring-primary/15">
+                        <Icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground leading-tight">{label}</p>
+                        <p className="mt-0.5 text-[11px] text-muted-foreground leading-snug">{desc}</p>
+                      </div>
+                    </>
+                  )}
                 </Link>
               ))}
             </div>
@@ -150,26 +170,6 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
               className="btn-primary mt-6 w-full justify-center"
             >
               <Download className="h-4 w-4" /> Download the App
-            </Link>
-
-            <Link
-              to="/help"
-              onClick={() => onOpenChange(false)}
-              className="group relative mt-3 flex w-full items-center justify-between overflow-hidden rounded-2xl border border-border bg-gradient-to-r from-secondary/80 to-secondary/40 px-5 py-3.5 transition-all hover:border-primary/30 hover:from-primary/5 hover:to-primary/0"
-            >
-              <div className="flex items-center gap-3">
-                <div className="grid h-9 w-9 place-items-center rounded-xl bg-background shadow-sm ring-1 ring-border">
-                  <LifeBuoy className="h-4 w-4 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground leading-none">Help Center</p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground">FAQs, guides & support</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground group-hover:text-primary transition-colors">
-                <span>Visit</span>
-                <ExternalLink className="h-3 w-3" />
-              </div>
             </Link>
 
             <div className="mt-6 flex justify-center gap-2 pb-6">
