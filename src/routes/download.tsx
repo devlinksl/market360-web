@@ -21,11 +21,18 @@ export const Route = createFileRoute("/download")({
 });
 
 /* ─── Brand store badges (inline SVG, dark pill style) ──────── */
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=app.market360.devlink";
+const APP_STORE_URL = "https://apps.apple.com/app/market360"; // Coming soon
+
 function AppStoreBadge({ className = "" }: { className?: string }) {
   return (
-    <a href="#" aria-label="Download on the App Store"
-      className={`group inline-flex items-center gap-3 rounded-2xl bg-black px-5 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] ${className}`}>
-      {/* Apple glyph */}
+    <a
+      href={APP_STORE_URL}
+      target="_blank"
+      rel="noopener"
+      aria-label="Download Market360 on the App Store"
+      className={`group inline-flex items-center gap-3 rounded-2xl bg-black px-5 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] ${className}`}
+    >
       <svg viewBox="0 0 24 24" className="h-8 w-8" aria-hidden="true" fill="currentColor">
         <path d="M16.365 1.43c0 1.14-.43 2.22-1.27 3.05-.88.88-2.31 1.55-3.5 1.45-.14-1.16.45-2.36 1.23-3.13.85-.84 2.32-1.47 3.54-1.37zM20.5 17.48c-.55 1.27-.81 1.83-1.52 2.95-.99 1.55-2.39 3.49-4.13 3.51-1.54.02-1.94-1-4.04-1-2.09 0-2.53 1.02-4.07 1-1.74-.02-3.05-1.78-4.04-3.33C.83 17.16.45 11.7 3.13 8.79c1.45-1.58 3.42-2.59 5.5-2.62 1.86-.03 3.62 1.25 4.04 1.25.42 0 2.56-1.55 4.81-1.32.94.04 3.58.38 5.28 2.84-4.65 2.55-3.88 8.99 1.74 8.54z" />
       </svg>
@@ -39,26 +46,26 @@ function AppStoreBadge({ className = "" }: { className?: string }) {
 
 function GooglePlayBadge({ className = "" }: { className?: string }) {
   return (
-    <a href="#" aria-label="Get it on Google Play"
-      className={`group inline-flex items-center gap-3 rounded-2xl bg-black px-5 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] ${className}`}>
-      {/* Google Play triangle, 4-color */}
+    <a
+      href={PLAY_STORE_URL}
+      target="_blank"
+      rel="noopener"
+      aria-label="Get Market360 on Google Play"
+      className={`group inline-flex items-center gap-3 rounded-2xl bg-black px-5 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] ${className}`}
+    >
       <svg viewBox="0 0 512 512" className="h-8 w-8" aria-hidden="true">
         <defs>
           <linearGradient id="gpBlue" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#00C3FF" />
-            <stop offset="100%" stopColor="#1A73E8" />
+            <stop offset="0%" stopColor="#00C3FF" /><stop offset="100%" stopColor="#1A73E8" />
           </linearGradient>
           <linearGradient id="gpRed" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#FF3A44" />
-            <stop offset="100%" stopColor="#C31162" />
+            <stop offset="0%" stopColor="#FF3A44" /><stop offset="100%" stopColor="#C31162" />
           </linearGradient>
           <linearGradient id="gpYellow" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#FFE000" />
-            <stop offset="100%" stopColor="#FFBD00" />
+            <stop offset="0%" stopColor="#FFE000" /><stop offset="100%" stopColor="#FFBD00" />
           </linearGradient>
           <linearGradient id="gpGreen" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#00F076" />
-            <stop offset="100%" stopColor="#00A05A" />
+            <stop offset="0%" stopColor="#00F076" /><stop offset="100%" stopColor="#00A05A" />
           </linearGradient>
         </defs>
         <path d="M48 32v448l240-224L48 32z" fill="url(#gpBlue)" />
