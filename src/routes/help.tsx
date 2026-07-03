@@ -2350,7 +2350,7 @@ function HelpPage() {
                 <h2 className="text-2xl font-bold flex items-center gap-2"><Star className="h-5 w-5 text-primary" /> Featured articles</h2>
                 <div className="mt-6 grid gap-3">
                   {featuredArticles.map((a) => (
-                    <ArticleRow key={a.id} article={a} categoryLabel={a.categoryLabel} categoryColor="#00A859" onClick={() => handleArticle(a.id)} />
+                    <ArticleRow key={a.id} article={a} category={{ label: a.categoryLabel, color: "#00A859" }} onClick={() => handleArticle(a.id)} />
                   ))}
                 </div>
               </div>
@@ -2361,7 +2361,7 @@ function HelpPage() {
                 <h2 className="text-2xl font-bold flex items-center gap-2"><TrendingUp className="h-5 w-5 text-primary" /> Trending this week</h2>
                 <div className="mt-6 grid gap-3">
                   {trendingArticles.map((a) => (
-                    <ArticleRow key={a.id} article={a} categoryLabel={a.categoryLabel} categoryColor="#00A859" onClick={() => handleArticle(a.id)} />
+                    <ArticleRow key={a.id} article={a} category={{ label: a.categoryLabel, color: "#00A859" }} onClick={() => handleArticle(a.id)} />
                   ))}
                 </div>
               </div>
@@ -2370,11 +2370,11 @@ function HelpPage() {
         )}
 
         {view.type === "category" && (
-          <CategoryView categoryId={view.id} onBack={handleBack} onArticle={handleArticle} />
+          <CategoryView categoryId={view.id} onBack={handleBack} onNavigate={handleArticle} />
         )}
 
         {view.type === "article" && (
-          <ArticleView articleId={view.id} onBack={handleBack} onArticle={handleArticle} />
+          <ArticleView articleId={view.id} onBack={handleBack} onNavigate={handleArticle} />
         )}
 
         <div className="mt-20">
