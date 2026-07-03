@@ -13,6 +13,7 @@ import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as TesterRouteImport } from './routes/tester'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
 import { Route as SellerSolutionsRouteImport } from './routes/seller-solutions'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -45,6 +46,11 @@ const TermsRoute = TermsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
+  id: '/sitemap-index.xml',
+  path: '/sitemap-index.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellerSolutionsRoute = SellerSolutionsRouteImport.update({
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
+    | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
     | '/tester'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
+    | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
     | '/tester'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
+    | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
     | '/tester'
@@ -244,6 +256,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SafetyRoute: typeof SafetyRoute
   SellerSolutionsRoute: typeof SellerSolutionsRoute
+  SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   TesterRoute: typeof TesterRoute
@@ -278,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-index.xml': {
+      id: '/sitemap-index.xml'
+      path: '/sitemap-index.xml'
+      fullPath: '/sitemap-index.xml'
+      preLoaderRoute: typeof SitemapIndexDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/seller-solutions': {
@@ -397,6 +417,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SafetyRoute: SafetyRoute,
   SellerSolutionsRoute: SellerSolutionsRoute,
+  SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   TesterRoute: TesterRoute,
