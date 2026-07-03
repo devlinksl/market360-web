@@ -2280,4 +2280,109 @@ function HelpPage() {
         .hc-art-title {
           font-size: clamp(22px, 4vw, 32px);
           font-weight: 800;
+          color: #0a0a0a;
+          line-height: 1.2;
+        }
+      `}</style>
+
+      <div className="hc-hero">
+        <div className="mx-auto max-w-3xl px-4 relative z-10">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">How can we help?</h1>
+          <p className="mt-3 text-white/85">Search articles or browse categories below.</p>
+          <div className="mt-6 relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <input
+              ref={searchRef}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setTimeout(() => setSearchFocused(false), 150)}
+              placeholder="Search help articles…"
+              className="w-full rounded-2xl border border-border bg-white pl-12 pr-12 py-4 text-base shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/40"
+            />
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                aria-label="Clear search"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
+            {showSearch && (
+              <div className="absolute left-0 right-0 top-full mt-2 max-h-96 overflow-auto rounded-2xl border border-border bg-white shadow-xl z-20">
+                {searchResults.length === 0 ? (
+                  <p className="p-6 text-sm text-muted-foreground">No results for "{query}".</p>
+                ) : (
+                  searchResults.map((a) => (
+                    <button
+                      key={a.id}
+                      onMouseDown={() => handleArticle(a.id)}
+                      className="flex w-full items-start gap-3 border-b border-border p-4 text-left hover:bg-surface last:border-b-0"
+                    >
+                      <FileText className="mt-0.5 h-4 w-4 text-primary shrink-0" />
+                      <div className="flex-1">
+                        <p className="font-semibold text-sm">{a.title}</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">{a.description}</p>
+                        <p className="mt-1 text-[11px] text-muted-foreground">{a.categoryLabel} · {a.readingTime} min read</p>
+                      </div>
+                    </button>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <section className="container-pro section-pad">
+        {view.type === "home" && (
+          <>
+            <h2 className="text-2xl font-bold">Browse by topic</h2>
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {KB.map((cat) => (
+                <CategoryCard key={cat.id} cat={cat} onClick={() => handleCategory(cat.id)} />
+              ))}
+            </div>
+
+            {featuredArticles.length > 0 && (
+              <div className="mt-16">
+                <h2 className="text-2xl font-bold flex items-center gap-2"><Star className="h-5 w-5 text-primary" /> Featured articles</h2>
+                <div className="mt-6 grid gap-3">
+                  {featuredArticles.map((a) => (
+                    <ArticleRow key={a.id} article={a} categoryLabel={a.categoryLabel} categoryColor="#00A859" onClick={() => handleArticle(a.id)} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {trendingArticles.length > 0 && (
+              <div className="mt-16">
+                <h2 className="text-2xl font-bold flex items-center gap-2"><TrendingUp className="h-5 w-5 text-primary" /> Trending this week</h2>
+                <div className="mt-6 grid gap-3">
+                  {trendingArticles.map((a) => (
+                    <ArticleRow key={a.id} article={a} categoryLabel={a.categoryLabel} categoryColor="#00A859" onClick={() => handleArticle(a.id)} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {view.type === "category" && (
+          <CategoryView categoryId={view.id} onBack={handleBack} onArticle={handleArticle} />
+        )}
+
+        {view.type === "article" && (
+          <ArticleView articleId={view.id} onBack={handleBack} onArticle={handleArticle} />
+        )}
+
+        <div className="mt-20">
+          <StillNeedHelp />
+        </div>
+      </section>
+    </SiteLayout>
+  );
+}
+
           
