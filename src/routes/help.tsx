@@ -2370,7 +2370,7 @@ function HelpPage() {
         )}
 
         {view.type === "category" && (
-          <CategoryView categoryId={view.id} onBack={handleBack} onNavigate={handleArticle} />
+          <CategoryView categoryId={view.id} onBack={handleBack} onArticle={handleArticle} />
         )}
 
         {view.type === "article" && (
