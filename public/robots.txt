@@ -1,4 +1,28 @@
+# Market360 — robots.txt
+# Allow all major crawlers to index public pages.
+
 User-agent: *
 Allow: /
 
-Sitemap: https://market360-web.lovable.app/sitemap.xml
+# Disallow non-public / internal paths
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /register
+Disallow: /account
+Disallow: /internal/
+Disallow: /_build/
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /*?*utm_
+Disallow: /*?*ref=
+
+# Crawl the sitemaps
+Sitemap: https://market360.shop/sitemap.xml
+Sitemap: https://market360.shop/sitemap-index.xml
+
+# Host preference
+Host: market360.shop
