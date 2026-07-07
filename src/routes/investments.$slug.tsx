@@ -1,13 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { getInvestment, investments, type Risk } from "@/lib/investments-data";
+import { getInvestment, investments, type Investment, type Risk } from "@/lib/investments-data";
 import {
   TrendingUp, Clock, Wallet, ShieldCheck, ArrowRight, FileText,
   CheckCircle2, AlertTriangle, Users, ChevronLeft,
 } from "lucide-react";
 
 export const Route = createFileRoute("/investments/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): Investment => {
     const inv = getInvestment(params.slug);
     if (!inv) throw notFound();
     return inv;
