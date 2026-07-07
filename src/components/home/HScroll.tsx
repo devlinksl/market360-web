@@ -22,7 +22,7 @@ export function HScroll({
         type="button"
         aria-label="Scroll left"
         onClick={() => scrollBy(-320)}
-        className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 -translate-x-2 grid h-10 w-10 place-items-center rounded-full border border-border bg-background/95 shadow-soft backdrop-blur md:grid hover:text-primary"
+        className="absolute left-0 top-1/2 z-10 -translate-y-1/2 -translate-x-2 hidden md:grid h-10 w-10 place-items-center rounded-full border border-border bg-background/95 shadow-soft backdrop-blur hover:text-primary"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
@@ -30,7 +30,7 @@ export function HScroll({
         type="button"
         aria-label="Scroll right"
         onClick={() => scrollBy(320)}
-        className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 translate-x-2 grid h-10 w-10 place-items-center rounded-full border border-border bg-background/95 shadow-soft backdrop-blur md:grid hover:text-primary"
+        className="absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-2 hidden md:grid h-10 w-10 place-items-center rounded-full border border-border bg-background/95 shadow-soft backdrop-blur hover:text-primary"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
@@ -45,3 +45,4 @@ export function HScroll({
     </div>
   );
 }
+
