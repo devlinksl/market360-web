@@ -276,7 +276,7 @@ function Footer() {
   return (
     <footer className="border-t border-border bg-surface mt-16">
       <div className="container-pro py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(5,1fr)]">
           <div>
             <Link to="/" className="flex items-center gap-2.5 font-display font-bold text-lg">
               <Logo className="h-9 w-9 rounded-xl" />
