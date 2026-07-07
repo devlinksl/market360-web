@@ -215,4 +215,22 @@ img, video { content-visibility: auto; }
   }
 }
 
+/* Marquee */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee { overflow: hidden; width: 100%; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: marquee-x var(--marquee-duration, 30s) linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* Snap card sizing helpers */
+.snap-card { scroll-snap-align: start; flex: 0 0 auto; }
+
+
 
