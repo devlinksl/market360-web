@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 import { newsPosts } from "@/lib/news-data";
+import { investments } from "@/lib/investments-data";
 
 const BASE_URL = "https://market360.shop";
 const NOW = new Date().toISOString().slice(0, 10);
@@ -30,6 +31,7 @@ const PAGE_ENTRIES: SitemapEntry[] = [
   { path: "/for-buyers", changefreq: "monthly", priority: "0.9" },
   { path: "/for-sellers", changefreq: "monthly", priority: "0.9" },
   { path: "/wallet", changefreq: "monthly", priority: "0.9" },
+  { path: "/investments", changefreq: "weekly", priority: "0.95" },
   { path: "/download", changefreq: "monthly", priority: "0.9", images: [{ loc: `${BASE_URL}/brand/flyer-download.png`, title: "Download Market360" }] },
   { path: "/tester", changefreq: "weekly", priority: "0.9" },
   { path: "/seller-solutions", changefreq: "monthly", priority: "0.9" },
@@ -71,14 +73,22 @@ export const Route = createFileRoute("/sitemap.xml")({
           images: p.image ? [{ loc: p.image.startsWith("http") ? p.image : `${BASE_URL}${p.image}`, title: p.title, caption: p.excerpt }] : undefined,
         }));
 
-        const entries = [...PAGE_ENTRIES, ...newsEntries];
+        const investmentEntries: SitemapEntry[] = investments.map((i) => ({
+          path: `/investments/${i.slug}`,
+          changefreq: "weekly",
+          priority: "0.8",
+          lastmod: NOW,
+          images: i.image ? [{ loc: i.image.startsWith("http") ? i.image : `${BASE_URL}${i.image}`, title: i.title, caption: i.tagline }] : undefined,
+        }));
+
+        const entries = [...PAGE_ENTRIES, ...newsEntries, ...investmentEntries];
         const urls = entries.map(urlBlock).join("\n");
         const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>`;
 
         return new Response(xml, {
           headers: {
             "Content-Type": "application/xml; charset=utf-8",
-            "Cache-Control": "public, max-age=3600, s-maxage=3600",
+            "Cache-Control": "public, max-age=300, s-maxage=300",
             "X-Robots-Tag": "noindex",
           },
         });

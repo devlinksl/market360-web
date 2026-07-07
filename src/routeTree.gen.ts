@@ -18,6 +18,7 @@ import { Route as SellerSolutionsRouteImport } from './routes/seller-solutions'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as InvestmentsRouteImport } from './routes/investments'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as ForSellersRouteImport } from './routes/for-sellers'
 import { Route as ForBuyersRouteImport } from './routes/for-buyers'
@@ -27,6 +28,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
+import { Route as InvestmentsSlugRouteImport } from './routes/investments.$slug'
 
 const WalletRoute = WalletRouteImport.update({
   id: '/wallet',
@@ -71,6 +73,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestmentsRoute = InvestmentsRouteImport.update({
+  id: '/investments',
+  path: '/investments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HelpRoute = HelpRouteImport.update({
@@ -118,6 +125,11 @@ const NewsSlugRoute = NewsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => NewsRoute,
 } as any)
+const InvestmentsSlugRoute = InvestmentsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => InvestmentsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -128,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
+  '/investments': typeof InvestmentsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
@@ -137,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/investments/$slug': typeof InvestmentsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesByTo {
@@ -148,6 +162,7 @@ export interface FileRoutesByTo {
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
+  '/investments': typeof InvestmentsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
@@ -157,6 +172,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/investments/$slug': typeof InvestmentsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRoutesById {
@@ -169,6 +185,7 @@ export interface FileRoutesById {
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
+  '/investments': typeof InvestmentsRouteWithChildren
   '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
@@ -178,6 +195,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/investments/$slug': typeof InvestmentsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
 }
 export interface FileRouteTypes {
@@ -191,6 +209,7 @@ export interface FileRouteTypes {
     | '/for-buyers'
     | '/for-sellers'
     | '/help'
+    | '/investments'
     | '/news'
     | '/privacy'
     | '/safety'
@@ -200,6 +219,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/investments/$slug'
     | '/news/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -211,6 +231,7 @@ export interface FileRouteTypes {
     | '/for-buyers'
     | '/for-sellers'
     | '/help'
+    | '/investments'
     | '/news'
     | '/privacy'
     | '/safety'
@@ -220,6 +241,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/investments/$slug'
     | '/news/$slug'
   id:
     | '__root__'
@@ -231,6 +253,7 @@ export interface FileRouteTypes {
     | '/for-buyers'
     | '/for-sellers'
     | '/help'
+    | '/investments'
     | '/news'
     | '/privacy'
     | '/safety'
@@ -240,6 +263,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/investments/$slug'
     | '/news/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -252,6 +276,7 @@ export interface RootRouteChildren {
   ForBuyersRoute: typeof ForBuyersRoute
   ForSellersRoute: typeof ForSellersRoute
   HelpRoute: typeof HelpRoute
+  InvestmentsRoute: typeof InvestmentsRouteWithChildren
   NewsRoute: typeof NewsRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   SafetyRoute: typeof SafetyRoute
@@ -328,6 +353,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/investments': {
+      id: '/investments'
+      path: '/investments'
+      fullPath: '/investments'
+      preLoaderRoute: typeof InvestmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/help': {
       id: '/help'
       path: '/help'
@@ -391,8 +423,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsSlugRouteImport
       parentRoute: typeof NewsRoute
     }
+    '/investments/$slug': {
+      id: '/investments/$slug'
+      path: '/$slug'
+      fullPath: '/investments/$slug'
+      preLoaderRoute: typeof InvestmentsSlugRouteImport
+      parentRoute: typeof InvestmentsRoute
+    }
   }
 }
+
+interface InvestmentsRouteChildren {
+  InvestmentsSlugRoute: typeof InvestmentsSlugRoute
+}
+
+const InvestmentsRouteChildren: InvestmentsRouteChildren = {
+  InvestmentsSlugRoute: InvestmentsSlugRoute,
+}
+
+const InvestmentsRouteWithChildren = InvestmentsRoute._addFileChildren(
+  InvestmentsRouteChildren,
+)
 
 interface NewsRouteChildren {
   NewsSlugRoute: typeof NewsSlugRoute
@@ -413,6 +464,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForBuyersRoute: ForBuyersRoute,
   ForSellersRoute: ForSellersRoute,
   HelpRoute: HelpRoute,
+  InvestmentsRoute: InvestmentsRouteWithChildren,
   NewsRoute: NewsRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   SafetyRoute: SafetyRoute,
@@ -426,13 +478,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

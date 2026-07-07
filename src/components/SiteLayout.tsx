@@ -3,11 +3,12 @@ import { useState, useEffect, type ReactNode } from "react";
 import { Drawer } from "vaul";
 import {
   Menu, ShoppingBag, Mail, MapPin, Twitter, Facebook, Instagram, Linkedin,
-  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock,
+  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, TrendingUp,
 } from "lucide-react";
 import logoAsset from "@/assets/market360-logo.png.asset.json";
 
 const mobileTiles = [
+  { to: "/investments", label: "Investments", desc: "Grow your money", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
   { to: "/seller-solutions", label: "Sell on Market360", desc: "Tools for stores", Icon: Store, accent: "from-green-100 to-emerald-50", legal: false },
   { to: "/download", label: "Get the App", desc: "iOS & Android", Icon: Download, accent: "from-lime-100 to-emerald-50", legal: false },
   { to: "/news", label: "News & Updates", desc: "Product changelog", Icon: Newspaper, accent: "from-emerald-50 to-white", legal: false },
@@ -16,17 +17,18 @@ const mobileTiles = [
   { to: "/help", label: "Help Center", desc: "FAQs & guides", Icon: LifeBuoy, accent: "from-green-50 to-white", legal: false },
   { to: "/privacy", label: "Privacy Policy", desc: "How we use your data", Icon: Lock, accent: "from-slate-50 to-slate-100", legal: true },
   { to: "/terms", label: "Terms of Service", desc: "Rules & conditions", Icon: FileText, accent: "from-slate-50 to-slate-100", legal: true },
-];
+] as const;
 
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/features", label: "Features" },
+  { to: "/investments", label: "Investments" },
   { to: "/seller-solutions", label: "Sellers" },
   { to: "/download", label: "Download" },
   { to: "/tester", label: "Tester Program" },
   { to: "/news", label: "News" },
   { to: "/help", label: "Help" },
-];
+] as const;
 
 export function Logo({ className = "h-9 w-9" }: { className?: string }) {
   return (
@@ -256,9 +258,14 @@ function Footer() {
       { to: "/tester", label: "Become a Tester" },
       { to: "/contact", label: "Contact" },
     ]},
+    { title: "Investments", links: [
+      { to: "/investments", label: "Opportunities" },
+      { to: "/help", label: "Investment Academy" },
+    ]},
     { title: "Resources", links: [
       { to: "/help", label: "Help Center" },
       { to: "/safety", label: "Trust & Safety" },
+      { to: "/sitemap.xml", label: "Sitemap" },
     ]},
     { title: "Legal", links: [
       { to: "/privacy", label: "Privacy Policy" },
@@ -269,7 +276,7 @@ function Footer() {
   return (
     <footer className="border-t border-border bg-surface mt-16">
       <div className="container-pro py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(5,1fr)]">
           <div>
             <Link to="/" className="flex items-center gap-2.5 font-display font-bold text-lg">
               <Logo className="h-9 w-9 rounded-xl" />
@@ -301,9 +308,13 @@ function Footer() {
               <ul className="mt-4 space-y-3">
                 {c.links.map((l) => (
                   <li key={l.to}>
-                    <Link to={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">
-                      {l.label}
-                    </Link>
+                    {l.to.endsWith(".xml") ? (
+                      <a href={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">{l.label}</a>
+                    ) : (
+                      <Link to={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">
+                        {l.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
