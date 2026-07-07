@@ -58,7 +58,8 @@ const riskTone: Record<Risk, string> = {
 function fmt(n: number) { return "NLE " + n.toLocaleString(); }
 
 function InvestmentDetail() {
-  const i = Route.useLoaderData();
+  const i = Route.useLoaderData() as Investment;
+
 
   return (
     <SiteLayout>
