@@ -258,9 +258,14 @@ function Footer() {
       { to: "/tester", label: "Become a Tester" },
       { to: "/contact", label: "Contact" },
     ]},
+    { title: "Investments", links: [
+      { to: "/investments", label: "Opportunities" },
+      { to: "/help", label: "Investment Academy" },
+    ]},
     { title: "Resources", links: [
       { to: "/help", label: "Help Center" },
       { to: "/safety", label: "Trust & Safety" },
+      { to: "/sitemap.xml", label: "Sitemap" },
     ]},
     { title: "Legal", links: [
       { to: "/privacy", label: "Privacy Policy" },
