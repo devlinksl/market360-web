@@ -308,9 +308,13 @@ function Footer() {
               <ul className="mt-4 space-y-3">
                 {c.links.map((l) => (
                   <li key={l.to}>
-                    <Link to={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">
-                      {l.label}
-                    </Link>
+                    {l.to.endsWith(".xml") ? (
+                      <a href={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">{l.label}</a>
+                    ) : (
+                      <Link to={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">
+                        {l.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
