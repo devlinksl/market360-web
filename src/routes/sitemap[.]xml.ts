@@ -31,6 +31,7 @@ const PAGE_ENTRIES: SitemapEntry[] = [
   { path: "/for-buyers", changefreq: "monthly", priority: "0.9" },
   { path: "/for-sellers", changefreq: "monthly", priority: "0.9" },
   { path: "/wallet", changefreq: "monthly", priority: "0.9" },
+  { path: "/investments", changefreq: "weekly", priority: "0.95" },
   { path: "/download", changefreq: "monthly", priority: "0.9", images: [{ loc: `${BASE_URL}/brand/flyer-download.png`, title: "Download Market360" }] },
   { path: "/tester", changefreq: "weekly", priority: "0.9" },
   { path: "/seller-solutions", changefreq: "monthly", priority: "0.9" },
