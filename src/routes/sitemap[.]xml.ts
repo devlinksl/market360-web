@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 import { newsPosts } from "@/lib/news-data";
+import { investments } from "@/lib/investments-data";
 
 const BASE_URL = "https://market360.shop";
 const NOW = new Date().toISOString().slice(0, 10);
