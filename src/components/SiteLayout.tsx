@@ -22,7 +22,7 @@ const mobileTiles = [
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/features", label: "Features" },
-  { to: "/investments", label: "Investments" },
+  { to: "/investments", label: "Investors" },
   { to: "/seller-solutions", label: "Sellers" },
   { to: "/download", label: "Download" },
   { to: "/tester", label: "Tester Program" },
