@@ -5,7 +5,7 @@ import {
   Menu, ShoppingBag, Mail, MapPin, Twitter, Facebook, Instagram, Linkedin,
   Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, TrendingUp,
 } from "lucide-react";
-import logoAsset from "@/assets/market360-logo.png.asset.json";
+const logoAsset = "/brand/market360-logo.png";
 
 const mobileTiles = [
   { to: "/investments", label: "Investments", desc: "Grow your money", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
@@ -32,7 +32,7 @@ const navLinks = [
 
 export function Logo({ className = "h-9 w-9" }: { className?: string }) {
   return (
-    <img src={logoAsset.url} alt="Market360 logo" className={className} width={40} height={40} loading="eager" decoding="async" />
+    <img src={logoAsset} alt="Market360 logo" className={className} width={40} height={40} loading="eager" decoding="async" />
   );
 }
 
