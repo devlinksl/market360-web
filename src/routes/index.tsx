@@ -258,7 +258,7 @@ function InvestOpps() {
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {top.map((i) => (
-            <Link key={i.slug} to="/investments/$slug" params={{ slug: i.slug }} className="surface-card surface-card-hover overflow-hidden">
+            <Link key={i.slug} to="/investments" className="surface-card surface-card-hover overflow-hidden">
               <img src={i.image} alt={i.title} loading="lazy" className="aspect-[16/10] w-full object-cover" />
               <div className="p-5">
                 <div className="flex items-center gap-2 text-xs">
