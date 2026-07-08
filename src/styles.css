@@ -175,6 +175,8 @@
 
 @utility shadow-glow {
   box-shadow: var(--shadow-glow);
+}
+
 
 @utility grid-bg {
   background-image:
