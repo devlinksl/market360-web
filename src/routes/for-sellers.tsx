@@ -5,7 +5,7 @@ import {
   Store, UserCheck, Package, DollarSign, Repeat, BarChart3, Award, Megaphone,
   Zap, CheckCircle2, ArrowRight, Smartphone, FileText, Users,
 } from "lucide-react";
-import imgSeller from "@/assets/img-seller.jpg.asset.json";
+const imgSeller = "/brand/img-seller.jpg";
 
 export const Route = createFileRoute("/for-sellers")({
   head: () => ({
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/for-sellers")({
       { property: "og:title", content: "Market360 for Sellers" },
       { property: "og:description", content: "Pro selling tools, instant payouts, verified storefronts." },
       { property: "og:url", content: "/for-sellers" },
-      { property: "og:image", content: imgSeller.url },
+      { property: "og:image", content: imgSeller },
     ],
     links: [{ rel: "canonical", href: "/for-sellers" }],
   }),
@@ -60,7 +60,7 @@ function SellersPage() {
             </ul>
           </div>
           <figure className="overflow-hidden rounded-3xl border border-border shadow-elevated">
-            <img src={imgSeller.url} alt="Sierra Leonean shop owner managing his Market360 store" className="aspect-[5/4] w-full object-cover" loading="eager" decoding="async" />
+            <img src={imgSeller} alt="Sierra Leonean shop owner managing his Market360 store" className="aspect-[5/4] w-full object-cover" loading="eager" decoding="async" />
           </figure>
         </div>
       </section>

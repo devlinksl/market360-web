@@ -5,7 +5,7 @@ import {
   Wallet, Zap, Globe, RefreshCw, FileText, Shield, Lock, Smartphone,
   CheckCircle2, ArrowRight, CreditCard, Bell, Fingerprint,
 } from "lucide-react";
-import imgWallet from "@/assets/img-wallet.jpg.asset.json";
+const imgWallet = "/brand/img-wallet.jpg";
 
 export const Route = createFileRoute("/wallet")({
   head: () => ({
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/wallet")({
       { property: "og:title", content: "Market360 Wallet" },
       { property: "og:description", content: "Instant settlements, free transfers, secure payouts." },
       { property: "og:url", content: "/wallet" },
-      { property: "og:image", content: imgWallet.url },
+      { property: "og:image", content: imgWallet },
     ],
     links: [{ rel: "canonical", href: "/wallet" }],
   }),
@@ -37,7 +37,7 @@ function WalletPage() {
       <section className="section-pad">
         <div className="container-pro grid gap-12 lg:grid-cols-2 items-center">
           <figure className="overflow-hidden rounded-3xl border border-border shadow-elevated">
-            <img src={imgWallet.url} alt="Hand holding a phone showing the Market360 wallet" className="aspect-[5/4] w-full object-cover" loading="eager" decoding="async" />
+            <img src={imgWallet} alt="Hand holding a phone showing the Market360 wallet" className="aspect-[5/4] w-full object-cover" loading="eager" decoding="async" />
           </figure>
           <div>
             <h2 className="text-3xl font-bold sm:text-4xl">A wallet built for commerce, not just storage.</h2>

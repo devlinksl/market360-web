@@ -5,7 +5,7 @@ import {
   ShieldCheck, Search, Truck, MessageCircle, Star, CreditCard, RefreshCw,
   Award, LayoutGrid, Lock, CheckCircle2, ArrowRight, Smartphone, Heart, Bell,
 } from "lucide-react";
-import imgBuyer from "@/assets/img-buyer.jpg.asset.json";
+const imgBuyer = "/brand/img-buyer.jpg";
 
 export const Route = createFileRoute("/for-buyers")({
   head: () => ({
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/for-buyers")({
       { property: "og:title", content: "Market360 for Buyers" },
       { property: "og:description", content: "Verified sellers, escrow protection, and real-time tracking." },
       { property: "og:url", content: "/for-buyers" },
-      { property: "og:image", content: imgBuyer.url },
+      { property: "og:image", content: imgBuyer },
     ],
     links: [{ rel: "canonical", href: "/for-buyers" }],
   }),
@@ -37,7 +37,7 @@ function BuyersPage() {
       <section className="section-pad">
         <div className="container-pro grid gap-12 lg:grid-cols-2 items-center">
           <figure className="overflow-hidden rounded-3xl border border-border shadow-elevated">
-            <img src={imgBuyer.url} alt="Shopper using Market360" className="aspect-[5/4] w-full object-cover" loading="eager" decoding="async" />
+            <img src={imgBuyer} alt="Shopper using Market360" className="aspect-[5/4] w-full object-cover" loading="eager" decoding="async" />
           </figure>
           <div>
             <h2 className="text-3xl font-bold sm:text-4xl">Built around how you actually shop.</h2>

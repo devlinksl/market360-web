@@ -5,10 +5,10 @@ import {
   Menu, ShoppingBag, Mail, MapPin, Twitter, Facebook, Instagram, Linkedin,
   Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, TrendingUp,
 } from "lucide-react";
-import logoAsset from "@/assets/market360-logo.png.asset.json";
+const logoAsset = "/brand/market360-logo.png";
 
 const mobileTiles = [
-  { to: "/investments", label: "Investments", desc: "Grow your money", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
+  { to: "/investments", label: "Investors", desc: "Invest in Market360", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
   { to: "/seller-solutions", label: "Sell on Market360", desc: "Tools for stores", Icon: Store, accent: "from-green-100 to-emerald-50", legal: false },
   { to: "/download", label: "Get the App", desc: "iOS & Android", Icon: Download, accent: "from-lime-100 to-emerald-50", legal: false },
   { to: "/news", label: "News & Updates", desc: "Product changelog", Icon: Newspaper, accent: "from-emerald-50 to-white", legal: false },
@@ -22,7 +22,7 @@ const mobileTiles = [
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/features", label: "Features" },
-  { to: "/investments", label: "Investments" },
+  { to: "/investments", label: "Investors" },
   { to: "/seller-solutions", label: "Sellers" },
   { to: "/download", label: "Download" },
   { to: "/tester", label: "Tester Program" },
@@ -32,7 +32,7 @@ const navLinks = [
 
 export function Logo({ className = "h-9 w-9" }: { className?: string }) {
   return (
-    <img src={logoAsset.url} alt="Market360 logo" className={className} width={40} height={40} loading="eager" decoding="async" />
+    <img src={logoAsset} alt="Market360 logo" className={className} width={40} height={40} loading="eager" decoding="async" />
   );
 }
 
@@ -258,9 +258,9 @@ function Footer() {
       { to: "/tester", label: "Become a Tester" },
       { to: "/contact", label: "Contact" },
     ]},
-    { title: "Investments", links: [
-      { to: "/investments", label: "Opportunities" },
-      { to: "/help", label: "Investment Academy" },
+    { title: "Investors", links: [
+      { to: "/investments", label: "Investor Relations" },
+      { to: "/investments", label: "Funding Rounds" },
     ]},
     { title: "Resources", links: [
       { to: "/help", label: "Help Center" },

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Mail, MessageCircle, MapPin, Phone, Send, Clock, Headphones, Building2, Sparkles } from "lucide-react";
-import flyerEndless from "@/assets/flyer-endless.png.asset.json";
+const flyerEndless = "/brand/flyer-endless.png";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -45,7 +45,7 @@ function ContactPage() {
             </div>
           </div>
           <div className="relative">
-            <img src={flyerEndless.url} alt="Market360 — One App. Endless Opportunities." className="w-full rounded-3xl border border-border shadow-elevated" loading="eager" decoding="async" />
+            <img src={flyerEndless} alt="Market360 — One App. Endless Opportunities." className="w-full rounded-3xl border border-border shadow-elevated" loading="eager" decoding="async" />
           </div>
         </div>
       </section>

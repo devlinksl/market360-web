@@ -5,11 +5,11 @@ import { Counter } from "@/components/home/Counter";
 import { Marquee } from "@/components/home/Marquee";
 import { investments } from "@/lib/investments-data";
 import { newsPosts } from "@/lib/news-data";
-import imgHero from "@/assets/img-hero.jpg.asset.json";
-import imgBuyer from "@/assets/img-buyer.jpg.asset.json";
-import imgSeller from "@/assets/img-seller.jpg.asset.json";
-import imgWallet from "@/assets/img-wallet.jpg.asset.json";
-import imgDelivery from "@/assets/img-delivery.jpg.asset.json";
+const imgHero = "/brand/img-hero.jpg";
+const imgBuyer = "/brand/img-buyer.jpg";
+const imgSeller = "/brand/img-seller.jpg";
+const imgWallet = "/brand/img-wallet.jpg";
+const imgDelivery = "/brand/img-delivery.jpg";
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
   Smartphone, ShoppingBag, Wallet, TrendingUp, GraduationCap, PlayCircle,
@@ -67,7 +67,7 @@ function Hero() {
         {/* Right — mockup + floating cards */}
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative aspect-[9/16] max-w-sm mx-auto rounded-[2.5rem] border-8 border-foreground/90 bg-foreground shadow-elevated overflow-hidden">
-            <img src={imgHero.url} alt="Market360 app preview" className="h-full w-full object-cover" loading="eager" />
+            <img src={imgHero} alt="Market360 app preview" className="h-full w-full object-cover" loading="eager" />
             <div className="absolute inset-x-0 top-0 flex justify-center pt-2">
               <span className="h-1.5 w-16 rounded-full bg-background/40" />
             </div>
@@ -134,16 +134,16 @@ function TrustBar() {
 }
 
 const categories = [
-  { name: "Electronics", count: "2.4k listings", img: imgBuyer.url },
-  { name: "Fashion", count: "3.1k listings", img: imgSeller.url },
-  { name: "Phones", count: "1.8k listings", img: imgHero.url },
-  { name: "Cars", count: "620 listings", img: imgDelivery.url },
-  { name: "Property", count: "410 listings", img: imgWallet.url },
-  { name: "Services", count: "990 listings", img: imgSeller.url },
-  { name: "Food", count: "1.2k listings", img: imgBuyer.url },
-  { name: "Beauty", count: "870 listings", img: imgHero.url },
-  { name: "Gaming", count: "540 listings", img: imgDelivery.url },
-  { name: "Home & Garden", count: "1.5k listings", img: imgWallet.url },
+  { name: "Electronics", count: "2.4k listings", img: imgBuyer },
+  { name: "Fashion", count: "3.1k listings", img: imgSeller },
+  { name: "Phones", count: "1.8k listings", img: imgHero },
+  { name: "Cars", count: "620 listings", img: imgDelivery },
+  { name: "Property", count: "410 listings", img: imgWallet },
+  { name: "Services", count: "990 listings", img: imgSeller },
+  { name: "Food", count: "1.2k listings", img: imgBuyer },
+  { name: "Beauty", count: "870 listings", img: imgHero },
+  { name: "Gaming", count: "540 listings", img: imgDelivery },
+  { name: "Home & Garden", count: "1.5k listings", img: imgWallet },
 ];
 
 function Categories() {
@@ -188,12 +188,12 @@ function Categories() {
 }
 
 const products = [
-  { name: "Wireless Earbuds Pro", price: "NLE 890", seller: "AudioMax SL", rating: 4.8, img: imgBuyer.url },
-  { name: "Silk Wrap Dress", price: "NLE 1,250", seller: "Freetown Threads", rating: 4.7, img: imgSeller.url },
-  { name: "Smart Watch S9", price: "NLE 2,150", seller: "TechHub", rating: 4.9, img: imgHero.url },
-  { name: "Solar Home Kit", price: "NLE 4,800", seller: "GreenPower SL", rating: 4.6, img: imgWallet.url },
-  { name: "Fresh Cassava (10kg)", price: "NLE 120", seller: "Farm Direct", rating: 4.5, img: imgDelivery.url },
-  { name: "Leather Backpack", price: "NLE 980", seller: "Kono Leather Co", rating: 4.8, img: imgSeller.url },
+  { name: "Wireless Earbuds Pro", price: "NLE 890", seller: "AudioMax SL", rating: 4.8, img: imgBuyer },
+  { name: "Silk Wrap Dress", price: "NLE 1,250", seller: "Freetown Threads", rating: 4.7, img: imgSeller },
+  { name: "Smart Watch S9", price: "NLE 2,150", seller: "TechHub", rating: 4.9, img: imgHero },
+  { name: "Solar Home Kit", price: "NLE 4,800", seller: "GreenPower SL", rating: 4.6, img: imgWallet },
+  { name: "Fresh Cassava (10kg)", price: "NLE 120", seller: "Farm Direct", rating: 4.5, img: imgDelivery },
+  { name: "Leather Backpack", price: "NLE 980", seller: "Kono Leather Co", rating: 4.8, img: imgSeller },
 ];
 
 function FeaturedProducts() {
@@ -258,7 +258,7 @@ function InvestOpps() {
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {top.map((i) => (
-            <Link key={i.slug} to="/investments/$slug" params={{ slug: i.slug }} className="surface-card surface-card-hover overflow-hidden">
+            <Link key={i.slug} to="/investments" className="surface-card surface-card-hover overflow-hidden">
               <img src={i.image} alt={i.title} loading="lazy" className="aspect-[16/10] w-full object-cover" />
               <div className="p-5">
                 <div className="flex items-center gap-2 text-xs">
@@ -283,9 +283,9 @@ function InvestOpps() {
 }
 
 const lessons = [
-  { title: "Understanding ROI", difficulty: "Beginner", duration: "6 min", img: imgWallet.url },
-  { title: "Diversification 101", difficulty: "Intermediate", duration: "9 min", img: imgHero.url },
-  { title: "Reading a fund prospectus", difficulty: "Advanced", duration: "12 min", img: imgSeller.url },
+  { title: "Understanding ROI", difficulty: "Beginner", duration: "6 min", img: imgWallet },
+  { title: "Diversification 101", difficulty: "Intermediate", duration: "9 min", img: imgHero },
+  { title: "Reading a fund prospectus", difficulty: "Advanced", duration: "12 min", img: imgSeller },
 ];
 
 function LearnTrading() {
@@ -337,7 +337,7 @@ function WhyChoose() {
       <div className="container-pro grid gap-10 lg:grid-cols-2 lg:items-center">
         <div className="relative">
           <div className="overflow-hidden rounded-3xl border border-border shadow-elevated">
-            <img src={imgSeller.url} alt="Market360 seller experience" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            <img src={imgSeller} alt="Market360 seller experience" loading="lazy" className="aspect-[4/5] w-full object-cover" />
           </div>
           <div className="absolute -bottom-4 -right-4 rounded-2xl border border-border bg-card p-4 shadow-elevated">
             <p className="text-xs text-muted-foreground">This month</p>
@@ -365,9 +365,9 @@ function WhyChoose() {
 }
 
 const appFeatures = [
-  { title: "The marketplace in your pocket", body: "Browse thousands of listings, chat with sellers, and place orders in seconds.", img: imgBuyer.url, icon: ShoppingBag },
-  { title: "Your Market360 Wallet", body: "Get paid, send money, and pay merchants — instantly, with full audit trails.", img: imgWallet.url, icon: Wallet },
-  { title: "Grow your money", body: "Explore curated investments and monitor your portfolio right from the app.", img: imgHero.url, icon: TrendingUp },
+  { title: "The marketplace in your pocket", body: "Browse thousands of listings, chat with sellers, and place orders in seconds.", img: imgBuyer, icon: ShoppingBag },
+  { title: "Your Market360 Wallet", body: "Get paid, send money, and pay merchants — instantly, with full audit trails.", img: imgWallet, icon: Wallet },
+  { title: "Grow your money", body: "Explore curated investments and monitor your portfolio right from the app.", img: imgHero, icon: TrendingUp },
 ];
 
 function AppFeatures() {
@@ -433,7 +433,7 @@ function DownloadCta() {
             </div>
             <div className="relative mx-auto max-w-xs">
               <div className="rounded-[2rem] border-8 border-foreground/90 bg-foreground overflow-hidden shadow-elevated">
-                <img src={imgHero.url} alt="Market360 app" loading="lazy" className="aspect-[9/16] w-full object-cover" />
+                <img src={imgHero} alt="Market360 app" loading="lazy" className="aspect-[9/16] w-full object-cover" />
               </div>
               <div className="absolute -right-4 top-8 rounded-2xl border border-border bg-card p-3 shadow-elevated">
                 <div className="grid h-20 w-20 place-items-center rounded-lg bg-white">
@@ -489,11 +489,11 @@ function Stats() {
 }
 
 const testimonials = [
-  { name: "Aminata K.", role: "Seller · Freetown Threads", rating: 5, quote: "Market360 helped me triple my orders in three months. The wallet is a game-changer — no more waiting days for payments.", img: imgSeller.url },
-  { name: "Mohamed S.", role: "Buyer · Bo", rating: 5, quote: "I ordered a phone from Freetown and it arrived in 48 hours. Everything felt safe from start to finish.", img: imgBuyer.url },
-  { name: "Fatmata J.", role: "Investor", rating: 5, quote: "The Retail Growth Fund pays out monthly like clockwork. I love seeing exactly which stores my money is helping.", img: imgHero.url },
-  { name: "Ibrahim T.", role: "Rider · Delivery Partner", rating: 5, quote: "As a delivery partner, I get more orders and reliable pay through the wallet every week.", img: imgDelivery.url },
-  { name: "Isatu B.", role: "Buyer · Makeni", rating: 5, quote: "Best online shopping experience in Sierra Leone. The verified seller badge gives me peace of mind.", img: imgSeller.url },
+  { name: "Aminata K.", role: "Seller · Freetown Threads", rating: 5, quote: "Market360 helped me triple my orders in three months. The wallet is a game-changer — no more waiting days for payments.", img: imgSeller },
+  { name: "Mohamed S.", role: "Buyer · Bo", rating: 5, quote: "I ordered a phone from Freetown and it arrived in 48 hours. Everything felt safe from start to finish.", img: imgBuyer },
+  { name: "Fatmata J.", role: "Investor", rating: 5, quote: "The Retail Growth Fund pays out monthly like clockwork. I love seeing exactly which stores my money is helping.", img: imgHero },
+  { name: "Ibrahim T.", role: "Rider · Delivery Partner", rating: 5, quote: "As a delivery partner, I get more orders and reliable pay through the wallet every week.", img: imgDelivery },
+  { name: "Isatu B.", role: "Buyer · Makeni", rating: 5, quote: "Best online shopping experience in Sierra Leone. The verified seller badge gives me peace of mind.", img: imgSeller },
 ];
 
 function Testimonials() {
@@ -654,7 +654,7 @@ function FinalCta() {
             </div>
             <div className="relative mx-auto hidden max-w-xs lg:block">
               <div className="rounded-[2rem] border-8 border-foreground/80 bg-foreground overflow-hidden shadow-elevated rotate-3">
-                <img src={imgWallet.url} alt="" loading="lazy" className="aspect-[9/16] w-full object-cover" />
+                <img src={imgWallet} alt="" loading="lazy" className="aspect-[9/16] w-full object-cover" />
               </div>
             </div>
           </div>

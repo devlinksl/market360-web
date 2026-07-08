@@ -1,8 +1,8 @@
-import imgWallet from "@/assets/img-wallet.jpg.asset.json";
-import imgSeller from "@/assets/img-seller.jpg.asset.json";
-import imgDelivery from "@/assets/img-delivery.jpg.asset.json";
-import imgHero from "@/assets/img-hero.jpg.asset.json";
-import imgBuyer from "@/assets/img-buyer.jpg.asset.json";
+const imgWallet = "/brand/img-wallet.jpg";
+const imgSeller = "/brand/img-seller.jpg";
+const imgDelivery = "/brand/img-delivery.jpg";
+const imgHero = "/brand/img-hero.jpg";
+const imgBuyer = "/brand/img-buyer.jpg";
 
 export type Risk = "Low" | "Medium" | "High";
 
@@ -33,7 +33,7 @@ export const investments: Investment[] = [
     title: "Freetown Retail Growth Fund",
     tagline: "Back a curated basket of Freetown's fastest-growing retail stores.",
     category: "Retail",
-    image: imgSeller.url,
+    image: imgSeller,
     roi: 18,
     durationMonths: 12,
     minInvestment: 500,
@@ -72,7 +72,7 @@ export const investments: Investment[] = [
     title: "Wallet Liquidity Pool",
     tagline: "Earn stable yield by supporting instant transfers on Market360 Wallet.",
     category: "Fintech",
-    image: imgWallet.url,
+    image: imgWallet,
     roi: 11,
     durationMonths: 6,
     minInvestment: 250,
@@ -109,7 +109,7 @@ export const investments: Investment[] = [
     title: "Last-Mile Logistics Fleet",
     tagline: "Fund the next 40 delivery riders serving greater Freetown.",
     category: "Logistics",
-    image: imgDelivery.url,
+    image: imgDelivery,
     roi: 22,
     durationMonths: 18,
     minInvestment: 1000,
@@ -144,7 +144,7 @@ export const investments: Investment[] = [
     title: "Agri Supply Chain Note",
     tagline: "Short-term financing for verified agricultural sellers.",
     category: "Agriculture",
-    image: imgHero.url,
+    image: imgHero,
     roi: 14,
     durationMonths: 4,
     minInvestment: 300,
@@ -173,7 +173,7 @@ export const investments: Investment[] = [
     title: "Electronics Inventory Fund",
     tagline: "Finance seasonal electronics stock for top-rated stores.",
     category: "Retail",
-    image: imgBuyer.url,
+    image: imgBuyer,
     roi: 16,
     durationMonths: 9,
     minInvestment: 500,
@@ -201,7 +201,7 @@ export const investments: Investment[] = [
     title: "Seller Academy Scholarship",
     tagline: "Impact-linked note funding training for 100 new sellers.",
     category: "Education",
-    image: imgSeller.url,
+    image: imgSeller,
     roi: 9,
     durationMonths: 24,
     minInvestment: 200,

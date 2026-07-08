@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 import { newsPosts } from "@/lib/news-data";
-import { investments } from "@/lib/investments-data";
 
 const BASE_URL = "https://market360.shop";
 const NOW = new Date().toISOString().slice(0, 10);
@@ -73,15 +72,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           images: p.image ? [{ loc: p.image.startsWith("http") ? p.image : `${BASE_URL}${p.image}`, title: p.title, caption: p.excerpt }] : undefined,
         }));
 
-        const investmentEntries: SitemapEntry[] = investments.map((i) => ({
-          path: `/investments/${i.slug}`,
-          changefreq: "weekly",
-          priority: "0.8",
-          lastmod: NOW,
-          images: i.image ? [{ loc: i.image.startsWith("http") ? i.image : `${BASE_URL}${i.image}`, title: i.title, caption: i.tagline }] : undefined,
-        }));
-
-        const entries = [...PAGE_ENTRIES, ...newsEntries, ...investmentEntries];
+        const entries = [...PAGE_ENTRIES, ...newsEntries];
         const urls = entries.map(urlBlock).join("\n");
         const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>`;
 
