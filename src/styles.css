@@ -160,6 +160,22 @@
   border-radius: 9999px;
 }
 
+@utility input-pro {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.95rem;
+  color: var(--color-foreground);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input-pro:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px oklch(0.72 0.17 152 / 0.15); }
+
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+
 @utility grid-bg {
   background-image:
     linear-gradient(oklch(0.72 0.17 152 / 0.07) 1px, transparent 1px),
