@@ -3,46 +3,26 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { HScroll } from "@/components/home/HScroll";
 import { Counter } from "@/components/home/Counter";
 import { Marquee } from "@/components/home/Marquee";
-import { investments } from "@/lib/investments-data";
 import { newsPosts } from "@/lib/news-data";
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
   Smartphone, ShoppingBag, Wallet, TrendingUp, PlayCircle,
   Star, Heart, ChevronDown, Truck, MessageCircle, BarChart3,
   Bell, CheckCircle2, Download as DownloadIcon, Send, PiggyBank,
-  Lock, Layers, Compass, ArrowUpRight, QrCode, HeartHandshake,
+  Lock, Layers, Compass, QrCode, HeartHandshake,
 } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode, type ComponentType } from "react";
 
 // ---------------------------------------------------------------------------
-// Images
-// All imagery lives under /public/images/home so it can be swapped from the
-// GitHub repo without touching component code. Replace these files with real
-// photography/illustrations at the same paths — aspect ratios are preserved
-// via the ImgFade wrapper below, so there is no layout shift when you do.
+// Images — using your existing brand assets from /public/brand/.
+// Swap the files at these paths directly in the repo to update imagery
+// anywhere on the page; nothing in the component code needs to change.
 // ---------------------------------------------------------------------------
-const img = {
-  heroApp: "/images/home/hero-app.jpg",
-  heroBuyer: "/images/home/buyer-unboxing.jpg",
-  seller: "/images/home/seller-workshop.jpg",
-  wallet: "/images/home/wallet-transfer.jpg",
-  delivery: "/images/home/rider-delivery.jpg",
-  invest: "/images/home/investor-dashboard.jpg",
-  categoryElectronics: "/images/home/category-electronics.jpg",
-  categoryFashion: "/images/home/category-fashion.jpg",
-  categoryPhones: "/images/home/category-phones.jpg",
-  categoryCars: "/images/home/category-cars.jpg",
-  categoryProperty: "/images/home/category-property.jpg",
-  categoryFood: "/images/home/category-food.jpg",
-  productEarbuds: "/images/home/product-earbuds.jpg",
-  productDress: "/images/home/product-dress.jpg",
-  productWatch: "/images/home/product-watch.jpg",
-  productSolar: "/images/home/product-solar.jpg",
-  testimonialSeller: "/images/home/testimonial-seller.jpg",
-  testimonialBuyer: "/images/home/testimonial-buyer.jpg",
-  testimonialInvestor: "/images/home/testimonial-investor.jpg",
-  testimonialRider: "/images/home/testimonial-rider.jpg",
-};
+const imgHero = "/brand/img-hero.jpg";
+const imgBuyer = "/brand/img-buyer.jpg";
+const imgSeller = "/brand/img-seller.jpg";
+const imgWallet = "/brand/img-wallet.jpg";
+const imgDelivery = "/brand/img-delivery.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -59,7 +39,7 @@ export const Route = createFileRoute("/")({
 });
 
 /* =============================================================================
-   Shared primitives — scroll reveals, count-up-on-view, skeleton image loader
+   Shared primitives — scroll reveals and a skeleton-loading image
    ============================================================================= */
 
 function useInView<T extends HTMLElement>(threshold = 0.15) {
@@ -90,7 +70,7 @@ function useInView<T extends HTMLElement>(threshold = 0.15) {
 function Reveal({
   children,
   delay = 0,
-  y = 24,
+  y = 18,
   className = "",
 }: {
   children: ReactNode;
@@ -113,7 +93,7 @@ function Reveal({
   );
 }
 
-/** Image with a shimmering skeleton placeholder — no layout shift, graceful fade-in. */
+/** Image with a subtle skeleton placeholder — no layout shift, quiet fade-in. */
 function ImgFade({
   src,
   alt,
@@ -143,8 +123,37 @@ function ImgFade({
   );
 }
 
+/** Consistent section header — small label, confident statement, one line of support. Left-aligned by default. */
+function SectionHead({
+  eyebrow,
+  icon: Icon,
+  title,
+  support,
+  center = false,
+}: {
+  eyebrow: string;
+  icon: ComponentType<{ className?: string }>;
+  title: ReactNode;
+  support?: string;
+  center?: boolean;
+}) {
+  return (
+    <div className={center ? "text-center" : ""}>
+      <span className="eyebrow">
+        <Icon className="h-3 w-3" /> {eyebrow}
+      </span>
+      <h2 className={`mt-3 text-3xl font-bold tracking-tight md:text-4xl ${center ? "mx-auto max-w-2xl" : "max-w-xl"}`}>
+        {title}
+      </h2>
+      {support && (
+        <p className={`mt-3 text-muted-foreground ${center ? "mx-auto max-w-xl" : "max-w-lg"}`}>{support}</p>
+      )}
+    </div>
+  );
+}
+
 /* =============================================================================
-   Hero — the thesis: one app, three verbs, real proof underneath
+   Hero — one thesis, one image, minimal chrome
    ============================================================================= */
 
 function Hero() {
@@ -169,8 +178,8 @@ function Hero() {
           <Reveal delay={140}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
               Market360 brings the marketplace, a real‑time wallet, and vetted investment
-              opportunities into a single app — built for how Sierra Leone actually trades,
-              pays, and grows money.
+              opportunities into a single app — built for how Sierra Leone trades, pays, and
+              grows money.
             </p>
           </Reveal>
           <Reveal delay={200}>
@@ -198,16 +207,16 @@ function Hero() {
           </Reveal>
         </div>
 
-        {/* Right — mockup + floating proof cards */}
+        {/* Right — a single confident mockup, two supporting proof points (not three) */}
         <Reveal delay={160} className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative aspect-[9/16] max-w-sm mx-auto overflow-hidden rounded-[2.5rem] border-8 border-foreground/90 bg-foreground shadow-elevated">
-            <ImgFade src={img.heroApp} alt="The Market360 app showing the marketplace home feed" className="h-full w-full" loading="eager" />
+            <ImgFade src={imgHero} alt="The Market360 app showing the marketplace home feed" className="h-full w-full" loading="eager" />
             <div className="absolute inset-x-0 top-0 flex justify-center pt-2">
               <span className="h-1.5 w-16 rounded-full bg-background/40" />
             </div>
           </div>
 
-          <div className="absolute -left-3 top-14 hidden sm:block rounded-2xl border border-border bg-card/95 p-3 shadow-elevated backdrop-blur float-y">
+          <div className="absolute -left-3 top-16 hidden sm:block rounded-2xl border border-border bg-card/95 p-3 shadow-elevated backdrop-blur float-y">
             <div className="flex items-center gap-2">
               <div className="grid h-9 w-9 place-items-center rounded-xl bg-accent">
                 <Wallet className="h-4 w-4 text-primary" />
@@ -220,8 +229,8 @@ function Hero() {
           </div>
 
           <div
-            className="absolute -right-2 top-40 hidden sm:block rounded-2xl border border-border bg-card/95 p-3 shadow-elevated backdrop-blur float-y"
-            style={{ animationDelay: "1s" }}
+            className="absolute -right-3 bottom-10 hidden sm:block rounded-2xl border border-border bg-card/95 p-3 shadow-elevated backdrop-blur float-y"
+            style={{ animationDelay: "1.2s" }}
           >
             <div className="flex items-center gap-2">
               <div className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-50">
@@ -233,21 +242,6 @@ function Hero() {
               </div>
             </div>
           </div>
-
-          <div
-            className="absolute -bottom-3 left-6 hidden sm:block rounded-2xl border border-border bg-card/95 p-3 shadow-elevated backdrop-blur float-y"
-            style={{ animationDelay: "2s" }}
-          >
-            <div className="flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-accent">
-                <BadgeCheck className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Order</p>
-                <p className="text-sm font-bold">Delivered to Bo ✓</p>
-              </div>
-            </div>
-          </div>
         </Reveal>
       </div>
     </section>
@@ -255,17 +249,15 @@ function Hero() {
 }
 
 /* =============================================================================
-   Live Ledger — signature strip. Market360's whole pitch is that money and
-   goods actually move on this platform, in real time. Show it, don't say it.
+   Live Ledger — a quiet, precise proof strip. Real activity, not icon soup.
    ============================================================================= */
 
 const ledgerEvents = [
   { icon: Wallet, text: "Aminata K. received NLE 450 from a Freetown Threads sale" },
-  { icon: TrendingUp, text: "Retail Growth Fund just crossed 92% funded" },
   { icon: ShoppingBag, text: "New order placed for a Smart Watch S9 in Bo" },
   { icon: Send, text: "Ibrahim T. cashed out NLE 1,200 to Orange Money" },
   { icon: BadgeCheck, text: "GreenPower SL just became a Verified Seller" },
-  { icon: TrendingUp, text: "A Logistics Fund II payout landed in an investor's wallet" },
+  { icon: TrendingUp, text: "A monthly payout landed in an investor's wallet" },
   { icon: Truck, text: "An order from Freetown arrived in Makeni in 48 hours" },
 ];
 
@@ -295,28 +287,13 @@ function LiveLedger() {
 }
 
 /* =============================================================================
-   How it works — a genuine 3-step sequence, so numbering earns its place
+   How it works — a genuine 3-step sequence
    ============================================================================= */
 
 const journeySteps = [
-  {
-    n: "01",
-    icon: Compass,
-    title: "Explore",
-    body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.",
-  },
-  {
-    n: "02",
-    icon: Zap,
-    title: "Pay instantly",
-    body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.",
-  },
-  {
-    n: "03",
-    icon: TrendingUp,
-    title: "Grow your money",
-    body: "Put idle wallet balance to work in curated, vetted opportunities and watch your portfolio move with you.",
-  },
+  { n: "01", icon: Compass, title: "Explore", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app." },
+  { n: "02", icon: Zap, title: "Pay instantly", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds." },
+  { n: "03", icon: TrendingUp, title: "Grow your money", body: "Put idle wallet balance to work in curated, vetted opportunities and watch your portfolio move with you." },
 ];
 
 function HowItWorks() {
@@ -324,16 +301,11 @@ function HowItWorks() {
     <section className="section-pad">
       <div className="container-pro">
         <Reveal>
-          <span className="eyebrow">
-            <Layers className="h-3 w-3" /> How Market360 works
-          </span>
-          <h2 className="mt-3 max-w-2xl text-3xl font-bold tracking-tight md:text-4xl">
-            One app carries you from browsing to owning.
-          </h2>
+          <SectionHead eyebrow="How Market360 works" icon={Layers} title="One app carries you from browsing to owning." />
         </Reveal>
 
         <div className="relative mt-12 grid gap-8 md:grid-cols-3">
-          <div className="pointer-events-none absolute top-10 left-[16.66%] right-[16.66%] hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" aria-hidden />
+          <div className="pointer-events-none absolute top-7 left-[16.66%] right-[16.66%] hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" aria-hidden />
           {journeySteps.map((s, i) => (
             <Reveal key={s.title} delay={i * 120}>
               <div className="relative">
@@ -344,7 +316,7 @@ function HowItWorks() {
                   <span className="text-4xl font-black tracking-tight text-border">{s.n}</span>
                 </div>
                 <h3 className="mt-5 text-xl font-bold">{s.title}</h3>
-                <p className="mt-2 max-w-sm text-muted-foreground">{s.body}</p>
+                <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">{s.body}</p>
               </div>
             </Reveal>
           ))}
@@ -355,23 +327,23 @@ function HowItWorks() {
 }
 
 /* =============================================================================
-   Marketplace — categories + trending products, one cohesive discovery block
+   Marketplace — categories + trending products
    ============================================================================= */
 
 const categories = [
-  { name: "Electronics", count: "2.4k listings", img: img.categoryElectronics },
-  { name: "Fashion", count: "3.1k listings", img: img.categoryFashion },
-  { name: "Phones & Tablets", count: "1.8k listings", img: img.categoryPhones },
-  { name: "Vehicles", count: "620 listings", img: img.categoryCars },
-  { name: "Property", count: "410 listings", img: img.categoryProperty },
-  { name: "Food & Groceries", count: "1.2k listings", img: img.categoryFood },
+  { name: "Electronics", count: "2.4k listings", img: imgBuyer },
+  { name: "Fashion", count: "3.1k listings", img: imgSeller },
+  { name: "Phones & Tablets", count: "1.8k listings", img: imgHero },
+  { name: "Vehicles", count: "620 listings", img: imgDelivery },
+  { name: "Property", count: "410 listings", img: imgWallet },
+  { name: "Food & Groceries", count: "1.2k listings", img: imgBuyer },
 ];
 
 const products = [
-  { name: "Wireless Earbuds Pro", price: "NLE 890", seller: "AudioMax SL", rating: 4.8, img: img.productEarbuds },
-  { name: "Silk Wrap Dress", price: "NLE 1,250", seller: "Freetown Threads", rating: 4.7, img: img.productDress },
-  { name: "Smart Watch S9", price: "NLE 2,150", seller: "TechHub", rating: 4.9, img: img.productWatch },
-  { name: "Solar Home Kit", price: "NLE 4,800", seller: "GreenPower SL", rating: 4.6, img: img.productSolar },
+  { name: "Wireless Earbuds Pro", price: "NLE 890", seller: "AudioMax SL", rating: 4.8, img: imgBuyer },
+  { name: "Silk Wrap Dress", price: "NLE 1,250", seller: "Freetown Threads", rating: 4.7, img: imgSeller },
+  { name: "Smart Watch S9", price: "NLE 2,150", seller: "TechHub", rating: 4.9, img: imgHero },
+  { name: "Solar Home Kit", price: "NLE 4,800", seller: "GreenPower SL", rating: 4.6, img: imgWallet },
 ];
 
 function Marketplace() {
@@ -380,14 +352,12 @@ function Marketplace() {
       <div className="container-pro">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <Reveal>
-            <span className="eyebrow">
-              <LayoutGrid className="h-3 w-3" /> Marketplace
-            </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">Discover the marketplace</h2>
-            <p className="mt-2 max-w-xl text-muted-foreground">
-              Every category, every corner of Sierra Leone — from Freetown workshops to Bo farms — listed by
-              sellers who've been through ID and business verification.
-            </p>
+            <SectionHead
+              eyebrow="Marketplace"
+              icon={LayoutGrid}
+              title="Discover the marketplace"
+              support="Every category, every corner of Sierra Leone — listed by sellers who've been through ID and business verification."
+            />
           </Reveal>
           <Link to="/features" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
             Browse all categories <ArrowRight className="h-4 w-4" />
@@ -400,9 +370,9 @@ function Marketplace() {
               <Link
                 key={c.name}
                 to="/features"
-                className="snap-card group w-52 overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elevated sm:w-56"
+                className="snap-card group w-52 overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated sm:w-56"
               >
-                <ImgFade src={c.img} alt={c.name} className="aspect-[4/3] transition-transform duration-500 group-hover:scale-110" />
+                <ImgFade src={c.img} alt={c.name} className="aspect-[4/3] transition-transform duration-500 group-hover:scale-105" />
                 <div className="flex items-center justify-between p-4">
                   <div>
                     <p className="font-semibold">{c.name}</p>
@@ -427,7 +397,7 @@ function Marketplace() {
               {products.map((p) => (
                 <div
                   key={p.name}
-                  className="snap-card group w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elevated"
+                  className="snap-card group w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated"
                 >
                   <div className="relative">
                     <ImgFade src={p.img} alt={p.name} className="aspect-square" />
@@ -480,16 +450,12 @@ function WalletShowcase() {
     <section id="wallet" className="section-pad">
       <div className="container-pro grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         <Reveal className="order-2 lg:order-1">
-          <span className="eyebrow">
-            <Wallet className="h-3 w-3" /> Market360 Wallet
-          </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-            Your money moves as fast as your business does.
-          </h2>
-          <p className="mt-4 max-w-lg text-muted-foreground">
-            The wallet is what turns Market360 from an app into an economy — every sale, transfer, and
-            payout settles in real time, without a bank branch in sight.
-          </p>
+          <SectionHead
+            eyebrow="Market360 Wallet"
+            icon={Wallet}
+            title="Your money moves as fast as your business does."
+            support="The wallet is what turns Market360 from an app into an economy — every sale, transfer, and payout settles in real time, without a bank branch in sight."
+          />
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {walletFeatures.map(({ icon: Icon, title, body }, i) => (
               <Reveal key={title} delay={i * 90} className="surface-card p-5">
@@ -508,7 +474,7 @@ function WalletShowcase() {
 
         <Reveal delay={120} className="relative order-1 mx-auto max-w-xs lg:order-2 lg:max-w-sm">
           <div className="rounded-[2rem] border-8 border-foreground/90 bg-foreground shadow-elevated overflow-hidden">
-            <ImgFade src={img.wallet} alt="A Market360 user sending a wallet transfer" className="aspect-[9/16]" />
+            <ImgFade src={imgWallet} alt="A Market360 user sending a wallet transfer" className="aspect-[9/16]" />
           </div>
           <div className="absolute -left-6 bottom-10 hidden rounded-2xl border border-border bg-card p-4 shadow-elevated sm:block">
             <p className="text-xs text-muted-foreground">Transfer sent</p>
@@ -521,75 +487,49 @@ function WalletShowcase() {
 }
 
 /* =============================================================================
-   Investment overview — grow tab, revamped
+   Invest — a lean, confident CTA band. No cards, no clutter: state the
+   opportunity, prove it with a few hard numbers, point to /investments.
    ============================================================================= */
 
-function InvestmentOverview() {
-  const top = investments.slice(0, 3);
-  const investStats = [
-    { value: 1200, suffix: "+", label: "Investments funded" },
-    { value: 14, suffix: "%", label: "Average projected ROI" },
-    { value: 6, suffix: "", label: "Vetted sectors" },
-  ];
+const investStats = [
+  { value: 14, suffix: "%", label: "Average projected ROI" },
+  { value: 1200, suffix: "+", label: "Investments funded" },
+  { value: 6, suffix: "", label: "Vetted sectors" },
+];
+
+function InvestCta() {
   return (
-    <section id="invest" className="section-pad bg-surface border-y border-border">
+    <section id="invest" className="section-pad bg-foreground text-background">
       <div className="container-pro">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
           <Reveal>
-            <span className="eyebrow">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/80">
               <TrendingUp className="h-3 w-3" /> Invest
             </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">Make your money do more.</h2>
-            <p className="mt-4 max-w-lg text-muted-foreground">
-              Curated opportunities across retail, fintech, and logistics — vetted by our credit and legal
-              teams, funded and settled straight through your Market360 Wallet.
+            <h2 className="mt-4 max-w-xl text-3xl font-bold tracking-tight md:text-4xl">
+              Put your money to work — without leaving Market360.
+            </h2>
+            <p className="mt-3 max-w-lg text-white/70">
+              Curated opportunities across retail, fintech, and logistics — vetted by our credit and
+              legal teams, funded and settled straight through your wallet.
             </p>
-            <div className="mt-8 grid grid-cols-3 gap-4">
-              {investStats.map((s) => (
-                <div key={s.label} className="surface-card p-4 text-center">
-                  <p className="text-2xl font-bold text-primary md:text-3xl">
-                    <Counter to={s.value} suffix={s.suffix} />
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
-                </div>
-              ))}
-            </div>
-            <Link to="/investments" className="btn-primary mt-8">
-              Explore investments <ArrowRight className="h-4 w-4" />
+            <Link
+              to="/investments"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-semibold text-foreground transition-opacity hover:opacity-90"
+            >
+              Explore investment opportunities <ArrowRight className="h-4 w-4" />
             </Link>
           </Reveal>
 
-          <Reveal delay={120}>
-            <div className="grid gap-5 sm:grid-cols-2">
-              {top.map((inv, i) => (
-                <Link
-                  key={inv.slug}
-                  to="/investments"
-                  className={`surface-card surface-card-hover overflow-hidden ${i === 0 ? "sm:col-span-2" : ""}`}
-                >
-                  <ImgFade src={inv.image} alt={inv.title} className={i === 0 ? "aspect-[21/9]" : "aspect-[16/10]"} />
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 text-xs">
-                      <span className="rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary">{inv.roi}% ROI</span>
-                      <span className="text-muted-foreground">
-                        · {inv.durationMonths} mo · {inv.risk} risk
-                      </span>
-                    </div>
-                    <h3 className="mt-3 font-bold">{inv.title}</h3>
-                    <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-primary to-primary-glow transition-all duration-1000"
-                        style={{ width: `${inv.fundingProgress}%` }}
-                      />
-                    </div>
-                    <div className="mt-4 flex items-center justify-between">
-                      <span className="text-sm font-semibold text-primary">Invest now</span>
-                      <ArrowUpRight className="h-4 w-4 text-primary" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+          <Reveal delay={120} className="grid grid-cols-3 gap-4 lg:gap-6">
+            {investStats.map((s) => (
+              <div key={s.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center lg:p-6">
+                <p className="text-2xl font-bold md:text-3xl">
+                  <Counter to={s.value} suffix={s.suffix} />
+                </p>
+                <p className="mt-1 text-xs text-white/60">{s.label}</p>
+              </div>
+            ))}
           </Reveal>
         </div>
       </div>
@@ -598,7 +538,7 @@ function InvestmentOverview() {
 }
 
 /* =============================================================================
-   Why Market360 — bento grid of differentiators (single, non-repetitive)
+   Why Market360 — one bento grid, no repeats
    ============================================================================= */
 
 function WhyMarket360() {
@@ -606,12 +546,7 @@ function WhyMarket360() {
     <section className="section-pad">
       <div className="container-pro">
         <Reveal>
-          <span className="eyebrow">
-            <Sparkles className="h-3 w-3" /> Why Market360
-          </span>
-          <h2 className="mt-3 max-w-2xl text-3xl font-bold tracking-tight md:text-4xl">
-            Built differently, for how Sierra Leone actually trades.
-          </h2>
+          <SectionHead eyebrow="Why Market360" icon={Sparkles} title="Built differently, for how Sierra Leone actually trades." />
         </Reveal>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3 md:grid-rows-2">
@@ -625,7 +560,7 @@ function WhyMarket360() {
               fraudulent sellers off the platform, so buyers can trust every purchase.
             </p>
             <div className="mt-6 overflow-hidden rounded-2xl border border-border">
-              <ImgFade src={img.seller} alt="A verified Market360 seller preparing an order" className="aspect-[16/9]" />
+              <ImgFade src={imgSeller} alt="A verified Market360 seller preparing an order" className="aspect-[16/9]" />
             </div>
           </Reveal>
 
@@ -680,22 +615,19 @@ function Stats() {
     { value: 2400000, suffix: "+", label: "Marketplace transactions" },
   ];
   return (
-    <section className="section-pad bg-foreground text-background">
+    <section className="section-pad bg-surface border-y border-border">
       <div className="container-pro">
-        <Reveal className="text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/80">
-            <BarChart3 className="h-3 w-3" /> By the numbers
-          </span>
-          <h2 className="mt-4 text-3xl font-bold md:text-4xl">Trusted at scale.</h2>
+        <Reveal>
+          <SectionHead eyebrow="By the numbers" icon={BarChart3} title="Trusted at scale." center />
         </Reveal>
         <div className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 60} className="text-center">
-              <p className="text-3xl font-bold md:text-4xl">
+              <p className="text-3xl font-bold text-primary md:text-4xl">
                 <Counter to={s.value} suffix={s.suffix} />
               </p>
-              <p className="mt-1 text-sm text-white/70">{s.label}</p>
-              {s.note && <p className="text-xs text-white/50">{s.note}</p>}
+              <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+              {s.note && <p className="text-xs text-muted-foreground/70">{s.note}</p>}
             </Reveal>
           ))}
         </div>
@@ -709,10 +641,10 @@ function Stats() {
    ============================================================================= */
 
 const testimonials = [
-  { name: "Aminata K.", role: "Seller · Freetown Threads", rating: 5, quote: "Market360 helped me triple my orders in three months. The wallet means I'm never waiting days to get paid.", img: img.testimonialSeller },
-  { name: "Mohamed S.", role: "Buyer · Bo", rating: 5, quote: "I ordered a phone from Freetown and it arrived in 48 hours. Everything felt safe from start to finish.", img: img.testimonialBuyer },
-  { name: "Fatmata J.", role: "Investor", rating: 5, quote: "The Retail Growth Fund pays out monthly like clockwork. I love seeing exactly which stores my money supports.", img: img.testimonialInvestor },
-  { name: "Ibrahim T.", role: "Rider · Delivery Partner", rating: 5, quote: "As a delivery partner, I get more orders and reliable pay through the wallet every single week.", img: img.testimonialRider },
+  { name: "Aminata K.", role: "Seller · Freetown Threads", rating: 5, quote: "Market360 helped me triple my orders in three months. The wallet means I'm never waiting days to get paid.", img: imgSeller },
+  { name: "Mohamed S.", role: "Buyer · Bo", rating: 5, quote: "I ordered a phone from Freetown and it arrived in 48 hours. Everything felt safe from start to finish.", img: imgBuyer },
+  { name: "Fatmata J.", role: "Investor", rating: 5, quote: "The Retail Growth Fund pays out monthly like clockwork. I love seeing exactly which stores my money supports.", img: imgHero },
+  { name: "Ibrahim T.", role: "Rider · Delivery Partner", rating: 5, quote: "As a delivery partner, I get more orders and reliable pay through the wallet every single week.", img: imgDelivery },
 ];
 
 function Testimonials() {
@@ -720,10 +652,7 @@ function Testimonials() {
     <section className="section-pad">
       <div className="container-pro">
         <Reveal>
-          <span className="eyebrow">
-            <Star className="h-3 w-3" /> Loved by users
-          </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">What people are saying.</h2>
+          <SectionHead eyebrow="Loved by users" icon={Star} title="What people are saying." />
         </Reveal>
         <Reveal delay={100} className="mt-8">
           <HScroll ariaLabel="Customer testimonials">
@@ -792,10 +721,7 @@ function LatestNews() {
       <div className="container-pro">
         <div className="flex items-end justify-between gap-4">
           <Reveal>
-            <span className="eyebrow">
-              <Bell className="h-3 w-3" /> News
-            </span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">From the newsroom</h2>
+            <SectionHead eyebrow="News" icon={Bell} title="From the newsroom" />
           </Reveal>
           <Link to="/news" className="hidden items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
             All news <ArrowRight className="h-4 w-4" />
@@ -846,11 +772,8 @@ function FAQ() {
   return (
     <section className="section-pad bg-surface border-y border-border">
       <div className="container-pro max-w-3xl">
-        <Reveal className="text-center">
-          <span className="eyebrow">
-            <MessageCircle className="h-3 w-3" /> FAQ
-          </span>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">Frequently asked questions</h2>
+        <Reveal>
+          <SectionHead eyebrow="FAQ" icon={MessageCircle} title="Frequently asked questions" center />
         </Reveal>
         <div className="mt-8 space-y-3">
           {faqs.map((f, idx) => {
@@ -933,7 +856,7 @@ function DownloadApp() {
             </div>
             <div className="relative mx-auto max-w-xs">
               <div className="overflow-hidden rounded-[2rem] border-8 border-foreground/90 bg-foreground shadow-elevated">
-                <ImgFade src={img.heroBuyer} alt="A Market360 buyer unboxing an order" className="aspect-[9/16]" />
+                <ImgFade src={imgHero} alt="Market360 app" className="aspect-[9/16]" />
               </div>
               <div className="absolute -right-4 top-8 rounded-2xl border border-border bg-card p-3 shadow-elevated">
                 <div className="grid h-20 w-20 place-items-center rounded-lg bg-white">
@@ -983,8 +906,8 @@ function FinalCta() {
 }
 
 /* =============================================================================
-   Root — the journey: understand → marketplace → wallet → invest →
-   differentiate → prove it → convert.
+   Root — understand → marketplace → wallet → invest (CTA) → differentiate →
+   prove it → convert.
    ============================================================================= */
 
 function Home() {
@@ -995,7 +918,7 @@ function Home() {
       <HowItWorks />
       <Marketplace />
       <WalletShowcase />
-      <InvestmentOverview />
+      <InvestCta />
       <WhyMarket360 />
       <Stats />
       <Testimonials />
