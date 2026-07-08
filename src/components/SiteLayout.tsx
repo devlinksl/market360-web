@@ -8,7 +8,7 @@ import {
 const logoAsset = "/brand/market360-logo.png";
 
 const mobileTiles = [
-  { to: "/investments", label: "Investments", desc: "Grow your money", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
+  { to: "/investments", label: "Investors", desc: "Invest in Market360", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
   { to: "/seller-solutions", label: "Sell on Market360", desc: "Tools for stores", Icon: Store, accent: "from-green-100 to-emerald-50", legal: false },
   { to: "/download", label: "Get the App", desc: "iOS & Android", Icon: Download, accent: "from-lime-100 to-emerald-50", legal: false },
   { to: "/news", label: "News & Updates", desc: "Product changelog", Icon: Newspaper, accent: "from-emerald-50 to-white", legal: false },
