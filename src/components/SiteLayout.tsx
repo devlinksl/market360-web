@@ -258,9 +258,9 @@ function Footer() {
       { to: "/tester", label: "Become a Tester" },
       { to: "/contact", label: "Contact" },
     ]},
-    { title: "Investments", links: [
-      { to: "/investments", label: "Opportunities" },
-      { to: "/help", label: "Investment Academy" },
+    { title: "Investors", links: [
+      { to: "/investments", label: "Investor Relations" },
+      { to: "/investments", label: "Funding Rounds" },
     ]},
     { title: "Resources", links: [
       { to: "/help", label: "Help Center" },
