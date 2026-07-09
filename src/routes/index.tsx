@@ -6,10 +6,11 @@ import { Marquee } from "@/components/home/Marquee";
 import { newsPosts } from "@/lib/news-data";
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
-  Smartphone, ShoppingBag, Wallet, TrendingUp, PlayCircle,
-  Star, Heart, ChevronDown, Truck, MessageCircle, BarChart3,
+  ShoppingBag, Wallet, TrendingUp,
+  Star, ChevronDown, Truck, MessageCircle, BarChart3,
   Bell, CheckCircle2, Download as DownloadIcon, Send, PiggyBank,
   Lock, Layers, Compass, QrCode, HeartHandshake,
+  Image as ImageIcon, Copy, Check, Tag, Percent,
 } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode, type ComponentType } from "react";
 
@@ -105,20 +106,29 @@ function ImgFade({
   className?: string;
   loading?: "lazy" | "eager";
 }) {
-  const [loaded, setLoaded] = useState(false);
+  const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
   return (
     <div className={`relative overflow-hidden bg-secondary ${className}`}>
-      {!loaded && (
+      {status === "loading" && (
         <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,theme(colors.secondary)_8%,theme(colors.border)_18%,theme(colors.secondary)_33%)] bg-[length:200%_100%]" />
       )}
-      <img
-        src={src}
-        alt={alt}
-        loading={loading}
-        decoding="async"
-        onLoad={() => setLoaded(true)}
-        className={`h-full w-full object-cover transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}
-      />
+      {status === "error" ? (
+        // Graceful fallback: if the file at `src` is missing/404s, never show a
+        // broken image or a stuck skeleton — show a tasteful branded tile instead.
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent to-secondary">
+          <ImageIcon className="h-7 w-7 text-primary/50" />
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          loading={loading}
+          decoding="async"
+          onLoad={() => setStatus("loaded")}
+          onError={() => setStatus("error")}
+          className={`h-full w-full object-cover transition-opacity duration-700 ${status === "loaded" ? "opacity-100" : "opacity-0"}`}
+        />
+      )}
     </div>
   );
 }
@@ -167,7 +177,7 @@ function Hero() {
         <div>
           <Reveal>
             <span className="eyebrow">
-              <Sparkles className="h-3 w-3" /> Sierra Leone's all‑in‑one commerce platform
+              <Sparkles className="h-3 w-3" /> Sierra Leone's #1 online Marketplace
             </span>
           </Reveal>
           <Reveal delay={80}>
@@ -327,26 +337,19 @@ function HowItWorks() {
 }
 
 /* =============================================================================
-   Marketplace — categories + trending products
+   Categories — a single premium bento grid. Replaces the old category rail +
+   "trending products" scroller with one confident, image-led showcase.
    ============================================================================= */
 
 const categories = [
-  { name: "Electronics", count: "2.4k listings", img: imgBuyer },
+  { name: "Electronics", count: "2.4k listings", img: imgBuyer, big: true },
   { name: "Fashion", count: "3.1k listings", img: imgSeller },
   { name: "Phones & Tablets", count: "1.8k listings", img: imgHero },
   { name: "Vehicles", count: "620 listings", img: imgDelivery },
   { name: "Property", count: "410 listings", img: imgWallet },
-  { name: "Food & Groceries", count: "1.2k listings", img: imgBuyer },
 ];
 
-const products = [
-  { name: "Wireless Earbuds Pro", price: "NLE 890", seller: "AudioMax SL", rating: 4.8, img: imgBuyer },
-  { name: "Silk Wrap Dress", price: "NLE 1,250", seller: "Freetown Threads", rating: 4.7, img: imgSeller },
-  { name: "Smart Watch S9", price: "NLE 2,150", seller: "TechHub", rating: 4.9, img: imgHero },
-  { name: "Solar Home Kit", price: "NLE 4,800", seller: "GreenPower SL", rating: 4.6, img: imgWallet },
-];
-
-function Marketplace() {
+function CategoriesShowcase() {
   return (
     <section id="marketplace" className="section-pad bg-surface border-y border-border">
       <div className="container-pro">
@@ -355,8 +358,8 @@ function Marketplace() {
             <SectionHead
               eyebrow="Marketplace"
               icon={LayoutGrid}
-              title="Discover the marketplace"
-              support="Every category, every corner of Sierra Leone — listed by sellers who've been through ID and business verification."
+              title="Explore every category"
+              support="From electronics to property — listed by sellers who've been through ID and business verification."
             />
           </Reveal>
           <Link to="/features" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
@@ -364,71 +367,110 @@ function Marketplace() {
           </Link>
         </div>
 
-        <Reveal delay={100} className="mt-8">
-          <HScroll ariaLabel="Marketplace categories">
-            {categories.map((c) => (
+        <div className="mt-10 grid gap-5 md:grid-cols-3 md:grid-rows-2">
+          {categories.map((c, i) => (
+            <Reveal key={c.name} delay={i * 80} className={c.big ? "md:col-span-2 md:row-span-2" : ""}>
               <Link
-                key={c.name}
                 to="/features"
-                className="snap-card group w-52 overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated sm:w-56"
+                className="surface-card surface-card-hover group relative block h-full overflow-hidden"
               >
-                <ImgFade src={c.img} alt={c.name} className="aspect-[4/3] transition-transform duration-500 group-hover:scale-105" />
-                <div className="flex items-center justify-between p-4">
+                <ImgFade
+                  src={c.img}
+                  alt={c.name}
+                  className={`${c.big ? "aspect-[16/9] md:aspect-auto md:h-full" : "aspect-[4/3]"} transition-transform duration-500 group-hover:scale-105`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
                   <div>
-                    <p className="font-semibold">{c.name}</p>
-                    <p className="text-xs text-muted-foreground">{c.count}</p>
+                    <p className={`font-bold text-white ${c.big ? "text-2xl" : "text-lg"}`}>{c.name}</p>
+                    <p className="text-sm text-white/75">{c.count}</p>
                   </div>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/90 text-foreground transition-transform group-hover:translate-x-0.5">
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
                 </div>
               </Link>
-            ))}
-          </HScroll>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-        <Reveal delay={160} className="mt-14">
-          <div className="flex items-end justify-between gap-4">
-            <h3 className="text-xl font-bold tracking-tight">Trending right now</h3>
-            <Link to="/download" className="hidden items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
-              Shop the app <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="mt-5">
-            <HScroll ariaLabel="Trending products">
-              {products.map((p) => (
-                <div
-                  key={p.name}
-                  className="snap-card group w-64 overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated"
-                >
-                  <div className="relative">
-                    <ImgFade src={p.img} alt={p.name} className="aspect-square" />
-                    <button
-                      aria-label="Save to favorites"
-                      className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-muted-foreground shadow-soft transition-colors hover:text-rose-500"
-                    >
-                      <Heart className="h-4 w-4" />
-                    </button>
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-center gap-1 text-xs text-amber-500">
-                      <Star className="h-3.5 w-3.5 fill-amber-400" /> {p.rating}
-                    </div>
-                    <p className="mt-1 font-semibold leading-tight line-clamp-2">{p.name}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">by {p.seller}</p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <p className="font-bold text-primary">{p.price}</p>
-                      <Link
-                        to="/download"
-                        className="rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-transform hover:brightness-105 group-hover:scale-105"
-                      >
-                        Buy now
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </HScroll>
-          </div>
+/* =============================================================================
+   Promo codes — real, tap-to-copy codes. A tangible reason to open the app.
+   ============================================================================= */
+
+const promoCodes = [
+  { code: "WELCOME20", desc: "20% off your first marketplace order", tag: "New users", expires: "Ends 31 Aug" },
+  { code: "WALLET10", desc: "NLE 10 bonus on your first wallet top‑up", tag: "Wallet", expires: "Ends 31 Aug" },
+  { code: "FREESHIP", desc: "Free delivery on orders over NLE 500", tag: "Marketplace", expires: "Ongoing" },
+  { code: "INVEST50", desc: "NLE 50 bonus on your first investment", tag: "Invest", expires: "New investors" },
+];
+
+function PromoCard({ code, desc, tag, expires }: { code: string; desc: string; tag: string; expires: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Clipboard API unavailable — fail silently, code is still visible to copy by hand.
+    }
+  }
+
+  return (
+    <div className="surface-card relative overflow-hidden p-6">
+      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-primary/10" aria-hidden />
+      <div className="relative flex items-start justify-between gap-3">
+        <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+          <Tag className="h-3 w-3" /> {tag}
+        </span>
+        <span className="text-[11px] text-muted-foreground">{expires}</span>
+      </div>
+
+      <button
+        type="button"
+        onClick={handleCopy}
+        aria-label={`Copy promo code ${code}`}
+        className="relative mt-4 flex w-full items-center justify-between gap-3 rounded-xl border border-dashed border-primary/40 bg-primary/5 px-4 py-3 text-left transition-colors hover:bg-primary/10"
+      >
+        <span className="font-mono text-lg font-bold tracking-widest text-primary">{code}</span>
+        <span className="flex items-center gap-1.5 text-xs font-semibold text-primary">
+          {copied ? (
+            <>
+              <Check className="h-4 w-4" /> Copied
+            </>
+          ) : (
+            <>
+              <Copy className="h-4 w-4" /> Copy
+            </>
+          )}
+        </span>
+      </button>
+
+      <p className="relative mt-3 text-sm text-muted-foreground">{desc}</p>
+    </div>
+  );
+}
+
+function PromoCodes() {
+  return (
+    <section className="section-pad">
+      <div className="container-pro">
+        <Reveal>
+          <SectionHead eyebrow="Promo codes" icon={Percent} title="Codes you can actually use" support="Copy a code below and apply it at checkout in the app — no sign-up required to see them." />
         </Reveal>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {promoCodes.map((p, i) => (
+            <Reveal key={p.code} delay={i * 90}>
+              <PromoCard {...p} />
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -804,6 +846,105 @@ function FAQ() {
 }
 
 /* =============================================================================
+   Store badges — original inline SVG marks (no external logo assets required)
+   and a real, scannable QR code that deep-links straight to the Play listing.
+   ============================================================================= */
+
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=app.market360.devlink";
+const qrCodeSrc = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=${encodeURIComponent(PLAY_STORE_URL)}`;
+
+function AppleGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M12.9 4.3c.3-1 1.15-1.8 2.2-2 .16 1.05-.24 2.15-.85 2.85-.58.72-1.55 1.28-2.45 1.2-.15-1 .27-1.6 1.1-2.05Z" />
+      <path d="M17.7 9.6c-1-1.2-2.35-1.85-3.8-1.85-1.05 0-1.85.5-2.6.5-.75 0-1.65-.5-2.7-.5-1.85 0-3.75 1.45-4.4 3.55-1.05 3.1.3 7.6 1.95 9.65.8 1 1.65 2.05 2.8 2 1.1 0 1.45-.65 2.7-.65s1.65.65 2.8.65c1.15 0 1.9-1 2.7-2.05.65-.95 1.05-1.85 1.35-2.7-2.9-1.15-3.3-5.3-.6-7.35-.78-.68-1.35-.97-2.1-1.25Z" />
+    </svg>
+  );
+}
+
+function PlaySymbol({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <defs>
+        <linearGradient id="market360-play-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#00D4FF" />
+          <stop offset="35%" stopColor="#12D18E" />
+          <stop offset="68%" stopColor="#FFC93C" />
+          <stop offset="100%" stopColor="#FF5A5F" />
+        </linearGradient>
+      </defs>
+      <path d="M4 3.3v17.4a1 1 0 0 0 1.53.85l14.2-8.7a1 1 0 0 0 0-1.7L5.53 2.45A1 1 0 0 0 4 3.3Z" fill="url(#market360-play-grad)" />
+    </svg>
+  );
+}
+
+function AppStoreButton() {
+  return (
+    <a
+      href="#"
+      onClick={(e) => e.preventDefault()}
+      aria-disabled="true"
+      title="Coming soon to the App Store"
+      className="inline-flex cursor-not-allowed items-center gap-3 rounded-2xl border border-border bg-secondary px-5 py-3 text-muted-foreground"
+    >
+      <AppleGlyph className="h-7 w-7 shrink-0" />
+      <span>
+        <span className="block text-[10px] uppercase tracking-wider opacity-70">Coming soon on the</span>
+        <span className="block text-base font-semibold leading-tight">App Store</span>
+      </span>
+    </a>
+  );
+}
+
+function PlayStoreButton() {
+  return (
+    <a
+      href={PLAY_STORE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-3 rounded-2xl bg-foreground px-5 py-3 text-background transition-opacity hover:opacity-90"
+    >
+      <PlaySymbol className="h-7 w-7 shrink-0" />
+      <span>
+        <span className="block text-[10px] uppercase tracking-wider opacity-70">GET IT ON</span>
+        <span className="block text-base font-semibold leading-tight">Google Play</span>
+      </span>
+    </a>
+  );
+}
+
+/** A real, scannable QR — and the whole tile is also a tap target on mobile. */
+function InstallQr() {
+  const [broken, setBroken] = useState(false);
+  return (
+    <a
+      href={PLAY_STORE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Scan or tap to install Market360 from Google Play"
+      className="absolute -right-4 top-8 block rounded-2xl border border-border bg-card p-3 shadow-elevated transition-transform hover:-translate-y-0.5"
+    >
+      {broken ? (
+        <div className="grid h-20 w-20 place-items-center rounded-lg bg-white">
+          <QrCode className="h-12 w-12 text-foreground" strokeWidth={1.25} />
+        </div>
+      ) : (
+        <img
+          src={qrCodeSrc}
+          alt="QR code linking to the Market360 Google Play listing"
+          width={80}
+          height={80}
+          loading="lazy"
+          onError={() => setBroken(true)}
+          className="h-20 w-20 rounded-lg bg-white object-contain p-1"
+        />
+      )}
+      <p className="mt-2 text-center text-[10px] font-semibold text-muted-foreground">Scan or tap to install</p>
+    </a>
+  );
+}
+
+/* =============================================================================
    Download app
    ============================================================================= */
 
@@ -830,40 +971,15 @@ function DownloadApp() {
                 ))}
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="https://play.google.com/store/apps/details?id=app.market360.devlink"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 rounded-2xl bg-foreground px-5 py-3 text-background transition-opacity hover:opacity-90"
-                >
-                  <PlayCircle className="h-6 w-6" />
-                  <span>
-                    <span className="block text-[10px] uppercase tracking-wider opacity-70">Get it on</span>
-                    <span className="block text-base font-semibold">Google Play</span>
-                  </span>
-                </a>
-                <button
-                  disabled
-                  className="inline-flex cursor-not-allowed items-center gap-3 rounded-2xl border border-border bg-secondary px-5 py-3 text-muted-foreground"
-                >
-                  <Smartphone className="h-6 w-6" />
-                  <span>
-                    <span className="block text-[10px] uppercase tracking-wider opacity-70">Coming soon on</span>
-                    <span className="block text-base font-semibold">App Store</span>
-                  </span>
-                </button>
+                <PlayStoreButton />
+                <AppStoreButton />
               </div>
             </div>
             <div className="relative mx-auto max-w-xs">
               <div className="overflow-hidden rounded-[2rem] border-8 border-foreground/90 bg-foreground shadow-elevated">
                 <ImgFade src={imgHero} alt="Market360 app" className="aspect-[9/16]" />
               </div>
-              <div className="absolute -right-4 top-8 rounded-2xl border border-border bg-card p-3 shadow-elevated">
-                <div className="grid h-20 w-20 place-items-center rounded-lg bg-white">
-                  <QrCode className="h-14 w-14 text-foreground" strokeWidth={1.25} />
-                </div>
-                <p className="mt-2 text-center text-[10px] font-semibold text-muted-foreground">Scan to install</p>
-              </div>
+              <InstallQr />
             </div>
           </div>
         </Reveal>
@@ -871,6 +987,9 @@ function DownloadApp() {
     </section>
   );
 }
+
+/* =============================================================================
+   Final CTA
 
 /* =============================================================================
    Final CTA
@@ -916,7 +1035,7 @@ function Home() {
       <Hero />
       <LiveLedger />
       <HowItWorks />
-      <Marketplace />
+      <CategoriesShowcase />
       <WalletShowcase />
       <InvestCta />
       <WhyMarket360 />
@@ -925,6 +1044,7 @@ function Home() {
       <Partners />
       <LatestNews />
       <FAQ />
+      <PromoCodes />
       <DownloadApp />
       <FinalCta />
     </SiteLayout>
