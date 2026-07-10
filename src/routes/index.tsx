@@ -522,13 +522,15 @@ function PromoCodes() {
         <Reveal>
           <SectionHead eyebrow="Promo codes" icon={Percent} title="Codes you can actually use" support="Copy a code below and apply it at checkout in the app — no sign-up required to see them." />
         </Reveal>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {promoCodes.map((p, i) => (
-            <Reveal key={p.code} delay={i * 90}>
-              <PromoCard {...p} />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal delay={80} className="mt-10">
+          <HScroll ariaLabel="Market360 promo codes">
+            {promoCodes.map((p) => (
+              <div key={p.code} className="snap-start shrink-0 w-[85%] sm:w-80">
+                <PromoCard {...p} />
+              </div>
+            ))}
+          </HScroll>
+        </Reveal>
       </div>
     </section>
   );
