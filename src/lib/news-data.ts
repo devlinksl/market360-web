@@ -1,7 +1,10 @@
-const flyerEndless = "/brand/flyer-endless.png";
-const flyerDownload = "/brand/flyer-download.png";
-const flyerEverything = "/brand/flyer-everything.png";
-const flyerBuysell = "/brand/flyer-buysell.png";
+const imgTester = "/brand/news-tester-launch.jpg";
+const imgWallet = "/brand/news-wallet.jpg";
+const imgSearch = "/brand/news-search.jpg";
+const imgRoadmap = "/brand/news-roadmap.jpg";
+const imgFraud = "/brand/news-fraud.jpg";
+const imgCommunity = "/brand/news-community.jpg";
+const imgDashboard = "/brand/news-dashboard.jpg";
 
 export interface NewsPost {
   slug: string;
