@@ -19,11 +19,16 @@ import { useEffect, useRef, useState, type ReactNode, type ComponentType } from 
 // Swap the files at these paths directly in the repo to update imagery
 // anywhere on the page; nothing in the component code needs to change.
 // ---------------------------------------------------------------------------
-const imgHero = "/brand/img-hero.jpg";
+const imgHero = "/brand/hero-buysellgrow.png";
 const imgBuyer = "/brand/img-buyer.jpg";
 const imgSeller = "/brand/img-seller.jpg";
 const imgWallet = "/brand/img-wallet.jpg";
 const imgDelivery = "/brand/img-delivery.jpg";
+const imgCatElectronics = "/brand/cat-electronics.jpg";
+const imgCatFashion = "/brand/cat-fashion.jpg";
+const imgCatPhones = "/brand/cat-phones.jpg";
+const imgCatVehicles = "/brand/cat-vehicles.jpg";
+const imgCatProperty = "/brand/cat-property.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -342,11 +347,11 @@ function HowItWorks() {
    ============================================================================= */
 
 const categories = [
-  { name: "Electronics", count: "2.4k listings", img: imgBuyer, big: true },
-  { name: "Fashion", count: "3.1k listings", img: imgSeller },
-  { name: "Phones & Tablets", count: "1.8k listings", img: imgHero },
-  { name: "Vehicles", count: "620 listings", img: imgDelivery },
-  { name: "Property", count: "410 listings", img: imgWallet },
+  { name: "Electronics", count: "2.4k listings", img: imgCatElectronics, big: true },
+  { name: "Fashion", count: "3.1k listings", img: imgCatFashion },
+  { name: "Phones & Tablets", count: "1.8k listings", img: imgCatPhones },
+  { name: "Vehicles", count: "620 listings", img: imgCatVehicles },
+  { name: "Property", count: "410 listings", img: imgCatProperty },
 ];
 
 function CategoriesShowcase() {
