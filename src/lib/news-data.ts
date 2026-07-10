@@ -58,7 +58,7 @@ export const newsPosts: NewsPost[] = [
     date: "May 22, 2026",
     author: "Product",
     readTime: "3 min read",
-    image: imgDashboard,
+    image: imgSearch,
     body: [
       { paragraph: "Search now understands what you mean, not just what you type. Whether you spell it 'kafutay' or 'kaftan', Market360 will surface the right results." },
       { heading: "Under the hood", paragraph: "We've added typo tolerance, synonym expansion for local terms, and a relevance model trained on millions of real Sierra Leone queries. Filters are faster, and category suggestions appear as you type." },
@@ -116,7 +116,7 @@ export const newsPosts: NewsPost[] = [
     date: "Apr 02, 2026",
     author: "Design",
     readTime: "3 min read",
-    image: imgSearch,
+    image: imgDashboard,
     body: [
       { paragraph: "The seller dashboard just got a major design refresh — focused on speed, clarity, and the workflows sellers tell us they touch most often." },
       { heading: "Top changes", paragraph: "A new sticky sidebar, a redesigned overview with live KPIs, faster order management, and a 40% reduction in time-to-first-paint on mid-range Android devices." },
