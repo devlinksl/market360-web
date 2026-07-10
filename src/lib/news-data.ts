@@ -58,7 +58,7 @@ export const newsPosts: NewsPost[] = [
     date: "May 22, 2026",
     author: "Product",
     readTime: "3 min read",
-    image: imgSearch,
+    image: imgDashboard,
     body: [
       { paragraph: "Search now understands what you mean, not just what you type. Whether you spell it 'kafutay' or 'kaftan', Market360 will surface the right results." },
       { heading: "Under the hood", paragraph: "We've added typo tolerance, synonym expansion for local terms, and a relevance model trained on millions of real Sierra Leone queries. Filters are faster, and category suggestions appear as you type." },
@@ -81,14 +81,14 @@ export const newsPosts: NewsPost[] = [
     ],
   },
   {
-    slug: "fraud-protection-update",
+    slug:"fraud-protection-update",
     category: "Trust",
     title: "New fraud protection layer goes live",
     excerpt: "Our updated AI model flags risky activity in real-time.",
     date: "Apr 28, 2026",
     author: "Trust & Safety",
     readTime: "4 min read",
-    image: imgWallet,
+    image: imgFraud,
     body: [
       { paragraph: "We've deployed a new fraud-detection model that scores every transaction in milliseconds — blocking suspicious activity before money moves." },
       { heading: "What's new", paragraph: "The model evaluates dozens of behavioural signals: device fingerprint, location consistency, account age, and unusual purchase patterns. Combined, they catch roughly 98% of fraud attempts in the test set with under 0.2% false positives." },
@@ -102,7 +102,7 @@ export const newsPosts: NewsPost[] = [
     date: "Apr 15, 2026",
     author: "Community",
     readTime: "5 min read",
-    image: imgTester,
+    image: imgCommunity,
     body: [
       { paragraph: "Our tester community has reported over 800 bugs and suggested more than 200 improvements in the last six months. Today we're shining a light on five of the people behind that work." },
       { heading: "Why we share these stories", paragraph: "Building a marketplace is a team sport. Every tip, every reproduction step, every UX nit pushes the platform forward. We want the wider community to see who they have to thank." },
