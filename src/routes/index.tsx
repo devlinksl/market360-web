@@ -366,7 +366,45 @@ const categories = [
   { name: "Property", count: "410 listings", img: imgCatProperty },
 ];
 
+function DownloadPromptModal({ open, onClose, category }: { open: boolean; onClose: () => void; category: string | null }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-[100] grid place-items-center p-4" role="dialog" aria-modal="true" aria-labelledby="dl-title">
+      <div className="absolute inset-0 bg-foreground/60 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose} />
+      <div className="relative w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-elevated animate-in zoom-in-95 duration-300">
+        <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-glow">
+          <DownloadIcon className="h-7 w-7" />
+        </div>
+        <h3 id="dl-title" className="mt-5 text-center text-2xl font-bold">Download Market360 to browse {category ?? "this category"}</h3>
+        <p className="mt-3 text-center text-sm text-muted-foreground">
+          The full catalogue, seller messaging, wallet payments and delivery tracking all live inside the Market360 app.
+        </p>
+        <div className="mt-6 flex flex-col gap-3">
+          <Link to="/download" onClick={onClose} className="btn-primary w-full justify-center">
+            <DownloadIcon className="h-4 w-4" /> Get the app
+          </Link>
+          <button type="button" onClick={onClose} className="btn-ghost w-full justify-center">
+            Maybe later
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CategoriesShowcase() {
+  const [open, setOpen] = useState<string | null>(null);
   return (
     <section id="marketplace" className="section-pad bg-surface border-y border-border">
       <div className="container-pro">
@@ -379,17 +417,19 @@ function CategoriesShowcase() {
               support="From electronics to property — listed by sellers who've been through ID and business verification."
             />
           </Reveal>
-          <Link to="/features" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
+          <button type="button" onClick={() => setOpen("all categories")} className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
             Browse all categories <ArrowRight className="h-4 w-4" />
-          </Link>
+          </button>
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3 md:grid-rows-2">
           {categories.map((c, i) => (
             <Reveal key={c.name} delay={i * 80} className={c.big ? "md:col-span-2 md:row-span-2" : ""}>
-              <Link
-                to="/features"
-                className="surface-card surface-card-hover group relative block h-full overflow-hidden"
+              <button
+                type="button"
+                onClick={() => setOpen(c.name)}
+                aria-label={`Open ${c.name} — download app`}
+                className="surface-card surface-card-hover group relative block h-full w-full overflow-hidden text-left"
               >
                 <ImgFade
                   src={c.img}
@@ -406,11 +446,12 @@ function CategoriesShowcase() {
                     <ArrowRight className="h-4 w-4" />
                   </span>
                 </div>
-              </Link>
+              </button>
             </Reveal>
           ))}
         </div>
       </div>
+      <DownloadPromptModal open={open !== null} onClose={() => setOpen(null)} category={open} />
     </section>
   );
 }
