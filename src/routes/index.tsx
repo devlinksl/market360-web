@@ -112,6 +112,18 @@ function ImgFade({
   loading?: "lazy" | "eager";
 }) {
   const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  // If the browser already has this image cached, the `load` event can fire
+  // (or may already have fired) before React attaches the onLoad handler
+  // below — that race is what made images "sometimes" fail to appear.
+  // Checking `.complete` on mount/ref-attach catches that case every time.
+  useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setStatus("loaded");
+    }
+  }, [src]);
+
   return (
     <div className={`relative overflow-hidden bg-secondary ${className}`}>
       {status === "loading" && (
@@ -125,6 +137,12 @@ function ImgFade({
         </div>
       ) : (
         <img
+          ref={(node) => {
+            imgRef.current = node;
+            // Handles the case where the image is already complete by the
+            // time this ref callback runs (e.g. instant cache hit).
+            if (node?.complete && node.naturalWidth > 0) setStatus("loaded");
+          }}
           src={src}
           alt={alt}
           loading={loading}
