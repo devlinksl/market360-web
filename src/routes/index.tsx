@@ -306,36 +306,48 @@ function LiveLedger() {
    ============================================================================= */
 
 const journeySteps = [
-  { n: "01", icon: Compass, title: "Explore", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app." },
-  { n: "02", icon: Zap, title: "Pay instantly", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds." },
-  { n: "03", icon: TrendingUp, title: "Grow your money", body: "Put idle wallet balance to work in curated, vetted opportunities and watch your portfolio move with you." },
+  { n: "01", icon: Compass, title: "Explore the marketplace", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.", img: imgCatElectronics },
+  { n: "02", icon: Zap, title: "Pay instantly with Wallet", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.", img: imgWallet },
+  { n: "03", icon: Truck, title: "Ship & track", body: "Nationwide delivery with real‑time tracking — from Freetown to Bo, Makeni and beyond, in as little as 48 hours.", img: imgDelivery },
+  { n: "04", icon: TrendingUp, title: "Grow your money", body: "Put idle wallet balance to work in curated, vetted opportunities and watch your portfolio move with you.", img: imgSeller },
 ];
 
 function HowItWorks() {
   return (
     <section className="section-pad">
       <div className="container-pro">
-        <Reveal>
-          <SectionHead eyebrow="How Market360 works" icon={Layers} title="One app carries you from browsing to owning." />
-        </Reveal>
-
-        <div className="relative mt-12 grid gap-8 md:grid-cols-3">
-          <div className="pointer-events-none absolute top-7 left-[16.66%] right-[16.66%] hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" aria-hidden />
-          {journeySteps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 120}>
-              <div className="relative">
-                <div className="flex items-center gap-4">
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-glow">
-                    <s.icon className="h-6 w-6" />
-                  </div>
-                  <span className="text-4xl font-black tracking-tight text-border">{s.n}</span>
-                </div>
-                <h3 className="mt-5 text-xl font-bold">{s.title}</h3>
-                <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <Reveal>
+            <SectionHead eyebrow="How Market360 works" icon={Layers} title="One app carries you from browsing to owning." support="Swipe through the journey — every step happens inside a single Market360 experience." />
+          </Reveal>
         </div>
+
+        <Reveal delay={100} className="mt-10">
+          <HScroll ariaLabel="How Market360 works — journey steps">
+            {journeySteps.map((s, i) => (
+              <article
+                key={s.title}
+                className="snap-start shrink-0 w-[85%] sm:w-[420px] rounded-2xl border border-border bg-card shadow-soft overflow-hidden flex flex-col"
+                style={{ transitionDelay: `${i * 60}ms` }}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-surface">
+                  <ImgFade src={s.img} alt={s.title} className="h-full w-full" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" aria-hidden />
+                  <span className="absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1 text-xs font-black tracking-wider text-primary">STEP {s.n}</span>
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-glow">
+                      <s.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="text-lg font-bold">{s.title}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </div>
+              </article>
+            ))}
+          </HScroll>
+        </Reveal>
       </div>
     </section>
   );
