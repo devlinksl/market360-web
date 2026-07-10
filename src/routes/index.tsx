@@ -19,11 +19,16 @@ import { useEffect, useRef, useState, type ReactNode, type ComponentType } from 
 // Swap the files at these paths directly in the repo to update imagery
 // anywhere on the page; nothing in the component code needs to change.
 // ---------------------------------------------------------------------------
-const imgHero = "/brand/img-hero.jpg";
+const imgHero = "/brand/hero-buysellgrow.png";
 const imgBuyer = "/brand/img-buyer.jpg";
 const imgSeller = "/brand/img-seller.jpg";
 const imgWallet = "/brand/img-wallet.jpg";
 const imgDelivery = "/brand/img-delivery.jpg";
+const imgCatElectronics = "/brand/cat-electronics.jpg";
+const imgCatFashion = "/brand/cat-fashion.jpg";
+const imgCatPhones = "/brand/cat-phones.jpg";
+const imgCatVehicles = "/brand/cat-vehicles.jpg";
+const imgCatProperty = "/brand/cat-property.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -301,36 +306,48 @@ function LiveLedger() {
    ============================================================================= */
 
 const journeySteps = [
-  { n: "01", icon: Compass, title: "Explore", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app." },
-  { n: "02", icon: Zap, title: "Pay instantly", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds." },
-  { n: "03", icon: TrendingUp, title: "Grow your money", body: "Put idle wallet balance to work in curated, vetted opportunities and watch your portfolio move with you." },
+  { n: "01", icon: Compass, title: "Explore the marketplace", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.", img: imgCatElectronics },
+  { n: "02", icon: Zap, title: "Pay instantly with Wallet", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.", img: imgWallet },
+  { n: "03", icon: Truck, title: "Ship & track", body: "Nationwide delivery with real‑time tracking — from Freetown to Bo, Makeni and beyond, in as little as 48 hours.", img: imgDelivery },
+  { n: "04", icon: TrendingUp, title: "Grow your money", body: "Put idle wallet balance to work in curated, vetted opportunities and watch your portfolio move with you.", img: imgSeller },
 ];
 
 function HowItWorks() {
   return (
     <section className="section-pad">
       <div className="container-pro">
-        <Reveal>
-          <SectionHead eyebrow="How Market360 works" icon={Layers} title="One app carries you from browsing to owning." />
-        </Reveal>
-
-        <div className="relative mt-12 grid gap-8 md:grid-cols-3">
-          <div className="pointer-events-none absolute top-7 left-[16.66%] right-[16.66%] hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" aria-hidden />
-          {journeySteps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 120}>
-              <div className="relative">
-                <div className="flex items-center gap-4">
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-glow">
-                    <s.icon className="h-6 w-6" />
-                  </div>
-                  <span className="text-4xl font-black tracking-tight text-border">{s.n}</span>
-                </div>
-                <h3 className="mt-5 text-xl font-bold">{s.title}</h3>
-                <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <Reveal>
+            <SectionHead eyebrow="How Market360 works" icon={Layers} title="One app carries you from browsing to owning." support="Swipe through the journey — every step happens inside a single Market360 experience." />
+          </Reveal>
         </div>
+
+        <Reveal delay={100} className="mt-10">
+          <HScroll ariaLabel="How Market360 works — journey steps">
+            {journeySteps.map((s, i) => (
+              <article
+                key={s.title}
+                className="snap-start shrink-0 w-[85%] sm:w-[420px] rounded-2xl border border-border bg-card shadow-soft overflow-hidden flex flex-col"
+                style={{ transitionDelay: `${i * 60}ms` }}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-surface">
+                  <ImgFade src={s.img} alt={s.title} className="h-full w-full" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" aria-hidden />
+                  <span className="absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1 text-xs font-black tracking-wider text-primary">STEP {s.n}</span>
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-glow">
+                      <s.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="text-lg font-bold">{s.title}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </div>
+              </article>
+            ))}
+          </HScroll>
+        </Reveal>
       </div>
     </section>
   );
@@ -342,14 +359,52 @@ function HowItWorks() {
    ============================================================================= */
 
 const categories = [
-  { name: "Electronics", count: "2.4k listings", img: imgBuyer, big: true },
-  { name: "Fashion", count: "3.1k listings", img: imgSeller },
-  { name: "Phones & Tablets", count: "1.8k listings", img: imgHero },
-  { name: "Vehicles", count: "620 listings", img: imgDelivery },
-  { name: "Property", count: "410 listings", img: imgWallet },
+  { name: "Electronics", count: "2.4k listings", img: imgCatElectronics, big: true },
+  { name: "Fashion", count: "3.1k listings", img: imgCatFashion },
+  { name: "Phones & Tablets", count: "1.8k listings", img: imgCatPhones },
+  { name: "Vehicles", count: "620 listings", img: imgCatVehicles },
+  { name: "Property", count: "410 listings", img: imgCatProperty },
 ];
 
+function DownloadPromptModal({ open, onClose, category }: { open: boolean; onClose: () => void; category: string | null }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-[100] grid place-items-center p-4" role="dialog" aria-modal="true" aria-labelledby="dl-title">
+      <div className="absolute inset-0 bg-foreground/60 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose} />
+      <div className="relative w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-elevated animate-in zoom-in-95 duration-300">
+        <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-glow">
+          <DownloadIcon className="h-7 w-7" />
+        </div>
+        <h3 id="dl-title" className="mt-5 text-center text-2xl font-bold">Download Market360 to browse {category ?? "this category"}</h3>
+        <p className="mt-3 text-center text-sm text-muted-foreground">
+          The full catalogue, seller messaging, wallet payments and delivery tracking all live inside the Market360 app.
+        </p>
+        <div className="mt-6 flex flex-col gap-3">
+          <Link to="/download" onClick={onClose} className="btn-primary w-full justify-center">
+            <DownloadIcon className="h-4 w-4" /> Get the app
+          </Link>
+          <button type="button" onClick={onClose} className="btn-ghost w-full justify-center">
+            Maybe later
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CategoriesShowcase() {
+  const [open, setOpen] = useState<string | null>(null);
   return (
     <section id="marketplace" className="section-pad bg-surface border-y border-border">
       <div className="container-pro">
@@ -362,17 +417,19 @@ function CategoriesShowcase() {
               support="From electronics to property — listed by sellers who've been through ID and business verification."
             />
           </Reveal>
-          <Link to="/features" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
+          <button type="button" onClick={() => setOpen("all categories")} className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
             Browse all categories <ArrowRight className="h-4 w-4" />
-          </Link>
+          </button>
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3 md:grid-rows-2">
           {categories.map((c, i) => (
             <Reveal key={c.name} delay={i * 80} className={c.big ? "md:col-span-2 md:row-span-2" : ""}>
-              <Link
-                to="/features"
-                className="surface-card surface-card-hover group relative block h-full overflow-hidden"
+              <button
+                type="button"
+                onClick={() => setOpen(c.name)}
+                aria-label={`Open ${c.name} — download app`}
+                className="surface-card surface-card-hover group relative block h-full w-full overflow-hidden text-left"
               >
                 <ImgFade
                   src={c.img}
@@ -389,11 +446,12 @@ function CategoriesShowcase() {
                     <ArrowRight className="h-4 w-4" />
                   </span>
                 </div>
-              </Link>
+              </button>
             </Reveal>
           ))}
         </div>
       </div>
+      <DownloadPromptModal open={open !== null} onClose={() => setOpen(null)} category={open} />
     </section>
   );
 }
@@ -464,13 +522,15 @@ function PromoCodes() {
         <Reveal>
           <SectionHead eyebrow="Promo codes" icon={Percent} title="Codes you can actually use" support="Copy a code below and apply it at checkout in the app — no sign-up required to see them." />
         </Reveal>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {promoCodes.map((p, i) => (
-            <Reveal key={p.code} delay={i * 90}>
-              <PromoCard {...p} />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal delay={80} className="mt-10">
+          <HScroll ariaLabel="Market360 promo codes">
+            {promoCodes.map((p) => (
+              <div key={p.code} className="snap-start shrink-0 w-[85%] sm:w-80">
+                <PromoCard {...p} />
+              </div>
+            ))}
+          </HScroll>
+        </Reveal>
       </div>
     </section>
   );

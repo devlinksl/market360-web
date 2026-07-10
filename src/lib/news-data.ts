@@ -1,7 +1,10 @@
-const flyerEndless = "/brand/flyer-endless.png";
-const flyerDownload = "/brand/flyer-download.png";
-const flyerEverything = "/brand/flyer-everything.png";
-const flyerBuysell = "/brand/flyer-buysell.png";
+const imgTester = "/brand/news-tester-launch.jpg";
+const imgWallet = "/brand/news-wallet.jpg";
+const imgSearch = "/brand/news-search.jpg";
+const imgRoadmap = "/brand/news-roadmap.jpg";
+const imgFraud = "/brand/news-fraud.jpg";
+const imgCommunity = "/brand/news-community.jpg";
+const imgDashboard = "/brand/news-dashboard.jpg";
 
 export interface NewsPost {
   slug: string;
@@ -24,7 +27,7 @@ export const newsPosts: NewsPost[] = [
     date: "Jun 12, 2026",
     author: "Market360 Team",
     readTime: "4 min read",
-    image: flyerEverything,
+    image: imgTester,
     body: [
       { paragraph: "Today we're opening up the Market360 Tester Program to the public. After months of running it privately with a small group of sellers and power-buyers, we're ready to invite anyone in Sierra Leone who wants to help shape what comes next." },
       { heading: "Why we're doing this", paragraph: "The best products are built with the people who use them. Our private testers caught dozens of bugs, suggested the redesigned checkout flow, and helped us prioritise wallet improvements over flashier features. Opening the program means we can capture even more of that wisdom." },
@@ -40,7 +43,7 @@ export const newsPosts: NewsPost[] = [
     date: "Jun 04, 2026",
     author: "Engineering",
     readTime: "5 min read",
-    image: flyerBuysell,
+    image: imgWallet,
     body: [
       { paragraph: "Wallet 2.0 is now rolling out to every Market360 account. The headline change: payouts land in your linked mobile money account in under three minutes on average — down from up to 24 hours." },
       { heading: "What changed", paragraph: "We rebuilt the settlement layer end-to-end. Instead of batching withdrawals overnight, they now stream as they're requested. We've also cut internal transfer fees to zero and reduced merchant withdrawal fees by roughly 30%." },
@@ -55,7 +58,7 @@ export const newsPosts: NewsPost[] = [
     date: "May 22, 2026",
     author: "Product",
     readTime: "3 min read",
-    image: flyerEndless,
+    image: imgSearch,
     body: [
       { paragraph: "Search now understands what you mean, not just what you type. Whether you spell it 'kafutay' or 'kaftan', Market360 will surface the right results." },
       { heading: "Under the hood", paragraph: "We've added typo tolerance, synonym expansion for local terms, and a relevance model trained on millions of real Sierra Leone queries. Filters are faster, and category suggestions appear as you type." },
@@ -69,7 +72,7 @@ export const newsPosts: NewsPost[] = [
     date: "May 10, 2026",
     author: "Market360 Team",
     readTime: "6 min read",
-    image: flyerDownload,
+    image: imgRoadmap,
     body: [
       { paragraph: "Here's a peek at what the team is building over the next three months." },
       { heading: "Storefront 2.0", paragraph: "Branded storefronts with custom banners, featured collections, and shareable links that work great on WhatsApp and Instagram." },
@@ -78,14 +81,14 @@ export const newsPosts: NewsPost[] = [
     ],
   },
   {
-    slug: "fraud-protection-update",
+    slug:"fraud-protection-update",
     category: "Trust",
     title: "New fraud protection layer goes live",
     excerpt: "Our updated AI model flags risky activity in real-time.",
     date: "Apr 28, 2026",
     author: "Trust & Safety",
     readTime: "4 min read",
-    image: flyerBuysell,
+    image: imgFraud,
     body: [
       { paragraph: "We've deployed a new fraud-detection model that scores every transaction in milliseconds — blocking suspicious activity before money moves." },
       { heading: "What's new", paragraph: "The model evaluates dozens of behavioural signals: device fingerprint, location consistency, account age, and unusual purchase patterns. Combined, they catch roughly 98% of fraud attempts in the test set with under 0.2% false positives." },
@@ -99,7 +102,7 @@ export const newsPosts: NewsPost[] = [
     date: "Apr 15, 2026",
     author: "Community",
     readTime: "5 min read",
-    image: flyerEverything,
+    image: imgCommunity,
     body: [
       { paragraph: "Our tester community has reported over 800 bugs and suggested more than 200 improvements in the last six months. Today we're shining a light on five of the people behind that work." },
       { heading: "Why we share these stories", paragraph: "Building a marketplace is a team sport. Every tip, every reproduction step, every UX nit pushes the platform forward. We want the wider community to see who they have to thank." },
@@ -113,7 +116,7 @@ export const newsPosts: NewsPost[] = [
     date: "Apr 02, 2026",
     author: "Design",
     readTime: "3 min read",
-    image: flyerEndless,
+    image: imgDashboard,
     body: [
       { paragraph: "The seller dashboard just got a major design refresh — focused on speed, clarity, and the workflows sellers tell us they touch most often." },
       { heading: "Top changes", paragraph: "A new sticky sidebar, a redesigned overview with live KPIs, faster order management, and a 40% reduction in time-to-first-paint on mid-range Android devices." },
