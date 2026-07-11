@@ -64,12 +64,12 @@ const imgCatProperty = IMAGES.catProperty;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Market360 — Sierra Leone's #1 Online Shopping Marketplace" },
-      { name: "description", content: "Market360 is Sierra Leone's #1 online shopping marketplace. Buy and sell electronics, fashion, phones, vehicles, and more — with a built-in wallet, secure payments, delivery, and verified sellers, all in one app." },
-      { property: "og:title", content: "Market360 — Buy. Sell. Pay. Grow." },
-      { property: "og:description", content: "Sierra Leone's #1 online shopping marketplace — thousands of listings, secure payments, delivery, and a built-in wallet." },
+      { title: "Market360 Sl" },
+      { name: "description", content: "Sierra Leone's #1 online marketplace" },
+      { property: "og:title", content: "Market360 Sl" },
+      { property: "og:description", content: "Sierra Leone's #1 online marketplace" },
       { property: "og:url", content: "https://market360-web.lovable.app/" },
-      { property: "og:image", content: "https://market360-web.lovable.app/brand/hero-image.jpg" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/uaTGTTTP6CZvDiW0j9X2wXr0ezW2/social-images/social-1783796844307-5448f48a-5176-48e7-8f87-50bf9c4934e5-1_all_31722.webp" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
