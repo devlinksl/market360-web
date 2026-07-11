@@ -19,7 +19,8 @@ import { useEffect, useRef, useState, type ReactNode, type ComponentType } from 
 // Swap the files at these paths directly in the repo to update imagery
 // anywhere on the page; nothing in the component code needs to change.
 // ---------------------------------------------------------------------------
-const imgHero = "/brand/hero-buysellgrow.png";
+const imgHero = "/brand/hero-image.jpg";
+const imgHeroSecondary = "/brand/hero-buysellgrow.png";
 const imgBuyer = "/brand/img-buyer.jpg";
 const imgSeller = "/brand/img-seller.jpg";
 const imgWallet = "/brand/img-wallet.jpg";
@@ -33,11 +34,12 @@ const imgCatProperty = "/brand/cat-property.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Market360 — Sierra Leone's Marketplace, Wallet & Investment Platform" },
-      { name: "description", content: "Market360 is Sierra Leone's all-in-one marketplace, digital wallet, and investment platform. Buy, sell, pay, and grow your money — in one app, one country, one movement." },
-      { property: "og:title", content: "Market360 — Buy. Pay. Grow." },
-      { property: "og:description", content: "The marketplace, wallet, and investment platform trusted across Sierra Leone." },
-      { property: "og:url", content: "/" },
+      { title: "Market360 — Sierra Leone's #1 Online Shopping Marketplace" },
+      { name: "description", content: "Market360 is Sierra Leone's #1 online shopping marketplace. Buy and sell electronics, fashion, phones, vehicles, and more — with a built-in wallet, secure payments, delivery, and verified sellers, all in one app." },
+      { property: "og:title", content: "Market360 — Buy. Sell. Pay. Grow." },
+      { property: "og:description", content: "Sierra Leone's #1 online shopping marketplace — thousands of listings, secure payments, delivery, and a built-in wallet." },
+      { property: "og:url", content: "https://market360-web.lovable.app/" },
+      { property: "og:image", content: "https://market360-web.lovable.app/brand/hero-image.jpg" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -1039,10 +1041,10 @@ function DownloadApp() {
               </span>
               <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">Download Market360</h2>
               <p className="mt-3 max-w-lg text-muted-foreground">
-                The complete marketplace, wallet, and investment platform for Sierra Leone — free to download.
+                The complete marketplace app for Sierra Leone — buy, sell, pay and get delivery in one place. Free to download.
               </p>
               <ul className="mt-6 space-y-2 text-sm">
-                {["Instant wallet transfers", "Verified sellers & buyer protection", "Curated investment opportunities", "Delivery across the country"].map((b) => (
+                {["Instant wallet transfers", "Verified sellers & buyer protection", "Thousands of live listings", "Delivery across the country"].map((b) => (
                   <li key={b} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-primary" /> {b}
                   </li>
@@ -1055,7 +1057,7 @@ function DownloadApp() {
             </div>
             <div className="relative mx-auto max-w-xs">
               <div className="overflow-hidden rounded-[2rem] border-8 border-foreground/90 bg-foreground shadow-elevated">
-                <ImgFade src={imgHero} alt="Market360 app" className="aspect-[9/16]" />
+                <ImgFade src={imgHeroSecondary} alt="Market360 app" className="aspect-[9/16]" />
               </div>
               <InstallQr />
             </div>

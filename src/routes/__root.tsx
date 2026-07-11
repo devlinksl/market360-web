@@ -61,7 +61,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 const SITE_URL = "https://market360.shop";
-const SITE_DESC = "Market360 is Sierra Leone's #1 online marketplace to buy, sell, pay and grow — with a built-in wallet, secure payments, storefronts, delivery and analytics.";
+const SITE_DESC = "Market360 is Sierra Leone's #1 online shopping marketplace to buy and sell electronics, fashion, phones, vehicles, and more — with a built-in wallet, secure payments, verified sellers, and delivery.";
 const OG_IMAGE = `${SITE_URL}/brand/flyer-endless.png`;
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({

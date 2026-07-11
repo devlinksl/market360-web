@@ -12,17 +12,41 @@ export const Route = createFileRoute("/news/$slug")({
   head: ({ loaderData }) => {
     const post = loaderData?.post;
     if (!post) return {};
+    const BASE = "https://market360-web.lovable.app";
+    const url = `${BASE}/news/${post.slug}`;
+    const img = post.image.startsWith("http") ? post.image : `${BASE}${post.image}`;
     return {
       meta: [
         { title: `${post.title} — Market360 News` },
         { name: "description", content: post.excerpt },
+        { name: "author", content: post.author },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.excerpt },
-        { property: "og:image", content: post.image },
-        { property: "og:url", content: `/news/${post.slug}` },
+        { property: "og:image", content: img },
+        { property: "og:url", content: url },
         { property: "og:type", content: "article" },
+        { property: "article:published_time", content: post.date },
+        { property: "article:section", content: post.category },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: img },
       ],
-      links: [{ rel: "canonical", href: `/news/${post.slug}` }],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [{
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          headline: post.title,
+          description: post.excerpt,
+          image: [img],
+          datePublished: post.date,
+          dateModified: post.date,
+          author: { "@type": "Organization", name: post.author },
+          publisher: { "@type": "Organization", name: "Market360", logo: { "@type": "ImageObject", url: `${BASE}/brand/market360-logo.png` } },
+          mainEntityOfPage: { "@type": "WebPage", "@id": url },
+          articleSection: post.category,
+        }),
+      }],
     };
   },
   notFoundComponent: () => (
