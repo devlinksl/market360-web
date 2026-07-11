@@ -26,7 +26,7 @@ const IMAGES = {
   // --- Hero — the phone mockup carousel at the very top of the page ---------
   // Portrait, ~9:16. Add/remove entries to change how many slides rotate.
   heroSlides: [
-    { src: "/brand/hero-image.jpg", alt: "The Market360 app showing the marketplace home feed" },
+    { src: "/brand/img-hero.jpg", alt: "The Market360 app showing the marketplace home feed" },
     { src: "/brand/img-wallet.jpg", alt: "The Market360 wallet screen with a live balance" },
     { src: "/brand/img-seller.jpg", alt: "A verified Market360 seller managing their store" },
   ],
