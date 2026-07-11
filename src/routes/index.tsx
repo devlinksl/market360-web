@@ -1041,10 +1041,10 @@ function DownloadApp() {
               </span>
               <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">Download Market360</h2>
               <p className="mt-3 max-w-lg text-muted-foreground">
-                The complete marketplace, wallet, and investment platform for Sierra Leone — free to download.
+                The complete marketplace app for Sierra Leone — buy, sell, pay and get delivery in one place. Free to download.
               </p>
               <ul className="mt-6 space-y-2 text-sm">
-                {["Instant wallet transfers", "Verified sellers & buyer protection", "Curated investment opportunities", "Delivery across the country"].map((b) => (
+                {["Instant wallet transfers", "Verified sellers & buyer protection", "Thousands of live listings", "Delivery across the country"].map((b) => (
                   <li key={b} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-primary" /> {b}
                   </li>
@@ -1057,7 +1057,7 @@ function DownloadApp() {
             </div>
             <div className="relative mx-auto max-w-xs">
               <div className="overflow-hidden rounded-[2rem] border-8 border-foreground/90 bg-foreground shadow-elevated">
-                <ImgFade src={imgHero} alt="Market360 app" className="aspect-[9/16]" />
+                <ImgFade src={imgHeroSecondary} alt="Market360 app" className="aspect-[9/16]" />
               </div>
               <InstallQr />
             </div>
