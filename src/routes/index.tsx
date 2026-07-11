@@ -28,7 +28,7 @@ const IMAGES = {
   heroSlides: [
     { src: "/brand/img-hero.jpg", alt: "The Market360 app showing the marketplace home feed" },
     { src: "/brand/img-wallet.jpg", alt: "The Market360 wallet screen with a live balance" },
-    { src: "/brand/img-seller.jpg", alt: "A verified Market360 seller managing their store" },
+    { src: "/brand/img-hero-2.png", alt: "A verified Market360 seller managing their store" },
   ],
   // Phone mockup used in the "Download the app" section. Portrait, ~9:16.
   heroSecondary: "/brand/hero-buysellgrow.png",
