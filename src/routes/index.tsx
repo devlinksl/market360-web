@@ -19,7 +19,8 @@ import { useEffect, useRef, useState, type ReactNode, type ComponentType } from 
 // Swap the files at these paths directly in the repo to update imagery
 // anywhere on the page; nothing in the component code needs to change.
 // ---------------------------------------------------------------------------
-const imgHero = "/brand/hero-buysellgrow.png";
+const imgHero = "/brand/hero-image.jpg";
+const imgHeroSecondary = "/brand/hero-buysellgrow.png";
 const imgBuyer = "/brand/img-buyer.jpg";
 const imgSeller = "/brand/img-seller.jpg";
 const imgWallet = "/brand/img-wallet.jpg";
@@ -33,11 +34,12 @@ const imgCatProperty = "/brand/cat-property.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Market360 — Sierra Leone's Marketplace, Wallet & Investment Platform" },
-      { name: "description", content: "Market360 is Sierra Leone's all-in-one marketplace, digital wallet, and investment platform. Buy, sell, pay, and grow your money — in one app, one country, one movement." },
-      { property: "og:title", content: "Market360 — Buy. Pay. Grow." },
-      { property: "og:description", content: "The marketplace, wallet, and investment platform trusted across Sierra Leone." },
-      { property: "og:url", content: "/" },
+      { title: "Market360 — Sierra Leone's #1 Online Shopping Marketplace" },
+      { name: "description", content: "Market360 is Sierra Leone's #1 online shopping marketplace. Buy and sell electronics, fashion, phones, vehicles, and more — with a built-in wallet, secure payments, delivery, and verified sellers, all in one app." },
+      { property: "og:title", content: "Market360 — Buy. Sell. Pay. Grow." },
+      { property: "og:description", content: "Sierra Leone's #1 online shopping marketplace — thousands of listings, secure payments, delivery, and a built-in wallet." },
+      { property: "og:url", content: "https://market360-web.lovable.app/" },
+      { property: "og:image", content: "https://market360-web.lovable.app/brand/hero-image.jpg" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
