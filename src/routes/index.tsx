@@ -1,35 +1,65 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { HScroll } from "@/components/home/HScroll";
 import { Counter } from "@/components/home/Counter";
 import { Marquee } from "@/components/home/Marquee";
 import { newsPosts } from "@/lib/news-data";
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
   ShoppingBag, Wallet, TrendingUp,
-  Star, ChevronDown, Truck, MessageCircle, BarChart3,
+  Star, ChevronDown, ChevronLeft, ChevronRight, Truck, MessageCircle, BarChart3,
   Bell, CheckCircle2, Download as DownloadIcon, Send, PiggyBank,
   Lock, Layers, Compass, QrCode, HeartHandshake,
   Image as ImageIcon, Copy, Check, Tag, Percent,
 } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode, type ComponentType } from "react";
 
-// ---------------------------------------------------------------------------
-// Images — using your existing brand assets from /public/brand/.
-// Swap the files at these paths directly in the repo to update imagery
-// anywhere on the page; nothing in the component code needs to change.
-// ---------------------------------------------------------------------------
-const imgHero = "/brand/hero-image.jpg";
-const imgHeroSecondary = "/brand/hero-buysellgrow.png";
-const imgBuyer = "/brand/img-buyer.jpg";
-const imgSeller = "/brand/img-seller.jpg";
-const imgWallet = "/brand/img-wallet.jpg";
-const imgDelivery = "/brand/img-delivery.jpg";
-const imgCatElectronics = "/brand/cat-electronics.jpg";
-const imgCatFashion = "/brand/cat-fashion.jpg";
-const imgCatPhones = "/brand/cat-phones.jpg";
-const imgCatVehicles = "/brand/cat-vehicles.jpg";
-const imgCatProperty = "/brand/cat-property.jpg";
+// =============================================================================
+// IMAGES — every image on this page lives here, and only here.
+// To change any picture on the site, just edit the src string below —
+// nothing else in the file needs to change.
+//   e.g. hero: "/brand/hero-image.jpg"  →  hero: "/brand/my-new-hero.jpg"
+// Drop new files in /public/brand/ (or point at a full https:// URL) and
+// update the matching line. Keep the same aspect ratio as the original
+// for the best fit (see the note next to each image).
+// =============================================================================
+const IMAGES = {
+  // --- Hero — the phone mockup carousel at the very top of the page ---------
+  // Portrait, ~9:16. Add/remove entries to change how many slides rotate.
+  heroSlides: [
+    { src: "/brand/hero-image.jpg", alt: "The Market360 app showing the marketplace home feed" },
+    { src: "/brand/img-wallet.jpg", alt: "The Market360 wallet screen with a live balance" },
+    { src: "/brand/img-seller.jpg", alt: "A verified Market360 seller managing their store" },
+  ],
+  // Phone mockup used in the "Download the app" section. Portrait, ~9:16.
+  heroSecondary: "/brand/hero-buysellgrow.png",
+
+  // --- People / lifestyle shots — used in "How it works", Wallet, Why -------
+  buyer: "/brand/img-buyer.jpg",       // 4:3 or 16:9 — a buyer using the app
+  seller: "/brand/img-seller.jpg",     // 16:9 — a verified seller at work
+  wallet: "/brand/img-wallet.jpg",     // 9:16 — wallet / transfer screen
+  delivery: "/brand/img-delivery.jpg", // 16:10 — delivery / logistics shot
+
+  // --- Category tiles — the bento grid in "Explore every category" ---------
+  catElectronics: "/brand/cat-electronics.jpg", // 16:9 (this one is the big tile)
+  catFashion: "/brand/cat-fashion.jpg",         // 4:3
+  catPhones: "/brand/cat-phones.jpg",           // 4:3
+  catVehicles: "/brand/cat-vehicles.jpg",       // 4:3
+  catProperty: "/brand/cat-property.jpg",       // 4:3
+} as const;
+
+// Back-compat aliases so the rest of the page reads naturally — these just
+// point at the IMAGES object above, so you still only ever edit one place.
+const imgHero = IMAGES.heroSlides[0].src;
+const imgHeroSecondary = IMAGES.heroSecondary;
+const imgBuyer = IMAGES.buyer;
+const imgSeller = IMAGES.seller;
+const imgWallet = IMAGES.wallet;
+const imgDelivery = IMAGES.delivery;
+const imgCatElectronics = IMAGES.catElectronics;
+const imgCatFashion = IMAGES.catFashion;
+const imgCatPhones = IMAGES.catPhones;
+const imgCatVehicles = IMAGES.catVehicles;
+const imgCatProperty = IMAGES.catProperty;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -188,6 +218,150 @@ function SectionHead({
 }
 
 /* =============================================================================
+   Carousel — a real carousel: arrow controls on desktop, swipe on touch,
+   dot indicators everywhere, and snap-scrolling so it never lands mid-card.
+   Drop-in replacement for the old bare-scroll HScroll: pass the same
+   pre-wrapped snap-item children, plus a `count` so dots/arrows know how
+   many stops there are.
+   ============================================================================= */
+
+function Carousel({
+  ariaLabel,
+  count,
+  children,
+  className = "",
+}: {
+  ariaLabel: string;
+  count: number;
+  children: ReactNode;
+  className?: string;
+}) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [active, setActive] = useState(0);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(count > 1);
+
+  const updateEdges = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setCanPrev(el.scrollLeft > 8);
+    setCanNext(el.scrollLeft < max - 8);
+    setActive(max > 0 ? Math.round((el.scrollLeft / max) * (count - 1)) : 0);
+  };
+
+  useEffect(() => {
+    updateEdges();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
+
+  function scrollByDir(dir: 1 | -1) {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: el.clientWidth * 0.85 * dir, behavior: "smooth" });
+  }
+
+  function scrollToIndex(i: number) {
+    const el = trackRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    el.scrollTo({ left: max * (i / Math.max(count - 1, 1)), behavior: "smooth" });
+  }
+
+  return (
+    <div className={`relative ${className}`}>
+      <div
+        ref={trackRef}
+        onScroll={updateEdges}
+        role="region"
+        aria-label={ariaLabel}
+        tabIndex={0}
+        className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {children}
+      </div>
+
+      {count > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => scrollByDir(-1)}
+            disabled={!canPrev}
+            aria-label="Scroll to previous"
+            className="absolute -left-4 top-[calc(50%-1rem)] hidden -translate-y-1/2 rounded-full border border-border bg-card p-2.5 shadow-elevated transition-all hover:bg-accent disabled:pointer-events-none disabled:opacity-0 lg:grid lg:place-items-center"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollByDir(1)}
+            disabled={!canNext}
+            aria-label="Scroll to next"
+            className="absolute -right-4 top-[calc(50%-1rem)] hidden -translate-y-1/2 rounded-full border border-border bg-card p-2.5 shadow-elevated transition-all hover:bg-accent disabled:pointer-events-none disabled:opacity-0 lg:grid lg:place-items-center"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          <div className="mt-4 flex justify-center gap-1.5 lg:hidden">
+            {Array.from({ length: count }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => scrollToIndex(i)}
+                aria-label={`Go to item ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all ${i === active ? "w-6 bg-primary" : "w-1.5 bg-border"}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/** Auto-advancing crossfade carousel for the hero phone mockup. Pure CSS
+ *  opacity transitions (no layout shift), pauses for reduced-motion users,
+ *  and exposes tap-to-jump dots so it's never just a passive slideshow. */
+function HeroCarousel({ slides }: { slides: { src: string; alt: string }[] }) {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => setActive((a) => (a + 1) % slides.length), 4500);
+    return () => window.clearInterval(id);
+  }, [slides.length]);
+
+  return (
+    <div className="relative h-full w-full bg-secondary">
+      {slides.map((s, i) => (
+        <img
+          key={s.src}
+          src={s.src}
+          alt={s.alt}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === active ? "opacity-100" : "opacity-0"}`}
+        />
+      ))}
+      {slides.length > 1 && (
+        <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center gap-1.5">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`Show slide ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all ${i === active ? "w-5 bg-white" : "w-1.5 bg-white/50"}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* =============================================================================
    Hero — one thesis, one image, minimal chrome
    ============================================================================= */
 
@@ -245,8 +419,8 @@ function Hero() {
         {/* Right — a single confident mockup, two supporting proof points (not three) */}
         <Reveal delay={160} className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative aspect-[9/16] max-w-sm mx-auto overflow-hidden rounded-[2.5rem] border-8 border-foreground/90 bg-foreground shadow-elevated">
-            <ImgFade src={imgHero} alt="The Market360 app showing the marketplace home feed" className="h-full w-full" loading="eager" />
-            <div className="absolute inset-x-0 top-0 flex justify-center pt-2">
+            <HeroCarousel slides={[...IMAGES.heroSlides]} />
+            <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-2">
               <span className="h-1.5 w-16 rounded-full bg-background/40" />
             </div>
           </div>
@@ -343,7 +517,7 @@ function HowItWorks() {
         </div>
 
         <Reveal delay={100} className="mt-10">
-          <HScroll ariaLabel="How Market360 works — journey steps">
+          <Carousel ariaLabel="How Market360 works — journey steps" count={journeySteps.length}>
             {journeySteps.map((s, i) => (
               <article
                 key={s.title}
@@ -366,7 +540,7 @@ function HowItWorks() {
                 </div>
               </article>
             ))}
-          </HScroll>
+          </Carousel>
         </Reveal>
       </div>
     </section>
@@ -543,13 +717,13 @@ function PromoCodes() {
           <SectionHead eyebrow="Promo codes" icon={Percent} title="Codes you can actually use" support="Copy a code below and apply it at checkout in the app — no sign-up required to see them." />
         </Reveal>
         <Reveal delay={80} className="mt-10">
-          <HScroll ariaLabel="Market360 promo codes">
+          <Carousel ariaLabel="Market360 promo codes" count={promoCodes.length}>
             {promoCodes.map((p) => (
               <div key={p.code} className="snap-start shrink-0 w-[85%] sm:w-80">
                 <PromoCard {...p} />
               </div>
             ))}
-          </HScroll>
+          </Carousel>
         </Reveal>
       </div>
     </section>
@@ -777,9 +951,9 @@ function Testimonials() {
           <SectionHead eyebrow="Loved by users" icon={Star} title="What people are saying." />
         </Reveal>
         <Reveal delay={100} className="mt-8">
-          <HScroll ariaLabel="Customer testimonials">
+          <Carousel ariaLabel="Customer testimonials" count={testimonials.length}>
             {testimonials.map((t) => (
-              <div key={t.name} className="snap-card w-80 rounded-2xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-elevated">
+              <div key={t.name} className="snap-start shrink-0 w-80 rounded-2xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-elevated">
                 <div className="flex items-center gap-3">
                   <ImgFade src={t.img} alt="" className="h-12 w-12 rounded-full" />
                   <div>
@@ -795,7 +969,7 @@ function Testimonials() {
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">"{t.quote}"</p>
               </div>
             ))}
-          </HScroll>
+          </Carousel>
         </Reveal>
       </div>
     </section>
