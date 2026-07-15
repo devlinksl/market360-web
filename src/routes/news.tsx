@@ -1,0 +1,165 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { SiteLayout } from "@/components/SiteLayout";
+import { PageHero } from "@/components/PageHero";
+import { ArrowRight } from "lucide-react";
+
+/* =============================================================================
+   News index — all articles listed here.
+   To add an article: create a new file src/routes/news.<slug>.tsx
+   and add a matching entry below. No shared data file, no dynamic route.
+   ============================================================================= */
+
+const ARTICLES = [
+  {
+    slug: "tester-program-launch",
+    category: "Announcement",
+    title: "Market360 opens its public tester program",
+    excerpt: "We're inviting the community to help shape the next era of Market360 — with early access, perks, and direct influence on the roadmap.",
+    date: "Jun 12, 2026",
+    readTime: "4 min read",
+    image: "/brand/news-tester-launch.jpg",
+  },
+  {
+    slug: "wallet-2-launch",
+    category: "Product",
+    title: "Wallet 2.0 ships: faster settlements, lower fees",
+    excerpt: "Get paid in minutes with our re-engineered wallet.",
+    date: "Jun 04, 2026",
+    readTime: "5 min read",
+    image: "/brand/news-wallet.jpg",
+  },
+  {
+    slug: "smarter-search",
+    category: "Update",
+    title: "Smarter search rolls out to all users",
+    excerpt: "A redesigned discovery engine helps buyers find exactly what they want.",
+    date: "May 22, 2026",
+    readTime: "3 min read",
+    image: "/brand/news-search.jpg",
+  },
+  {
+    slug: "roadmap-q3",
+    category: "Roadmap",
+    title: "What's coming this quarter",
+    excerpt: "Storefronts, bulk uploads, smarter analytics, and more.",
+    date: "May 10, 2026",
+    readTime: "6 min read",
+    image: "/brand/news-roadmap.jpg",
+  },
+  {
+    slug: "fraud-protection-update",
+    category: "Trust",
+    title: "New fraud protection layer goes live",
+    excerpt: "Our updated AI model flags risky activity in real-time.",
+    date: "Apr 28, 2026",
+    readTime: "4 min read",
+    image: "/brand/news-fraud.jpg",
+  },
+  {
+    slug: "tester-spotlights",
+    category: "Community",
+    title: "Tester spotlights: meet 5 of our top contributors",
+    excerpt: "The people helping us ship better, faster.",
+    date: "Apr 15, 2026",
+    readTime: "5 min read",
+    image: "/brand/news-community.jpg",
+  },
+  {
+    slug: "seller-dashboard-refresh",
+    category: "Product",
+    title: "Seller dashboard gets a refresh",
+    excerpt: "Cleaner layout, faster insights, smoother workflows.",
+    date: "Apr 02, 2026",
+    readTime: "3 min read",
+    image: "/brand/news-dashboard.jpg",
+  },
+] as const;
+
+type Slug =
+  | "tester-program-launch"
+  | "wallet-2-launch"
+  | "smarter-search"
+  | "roadmap-q3"
+  | "fraud-protection-update"
+  | "tester-spotlights"
+  | "seller-dashboard-refresh";
+
+export const Route = createFileRoute("/news")({
+  head: () => ({
+    meta: [
+      { title: "News & Updates — Market360" },
+      { name: "description", content: "Latest product updates, announcements, and roadmap news from the Market360 marketplace team." },
+      { property: "og:title", content: "Market360 News & Updates" },
+      { property: "og:description", content: "Stay in the loop with the latest from Market360." },
+      { property: "og:url", content: "https://market360-web.lovable.app/news" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [{ rel: "canonical", href: "https://market360-web.lovable.app/news" }],
+  }),
+  component: NewsPage,
+});
+
+function NewsPage() {
+  const [featured, ...rest] = ARTICLES;
+  return (
+    <SiteLayout>
+      <PageHero
+        eyebrow="News & Updates"
+        title={<>Fresh from <span className="gradient-text">Market360.</span></>}
+        description="Announcements, product updates, and what's next."
+      />
+
+      <section className="section-pad">
+        <div className="container-pro">
+          <Link
+            to="/news/$slug"
+            params={{ slug: featured.slug as Slug }}
+            className="block surface-card surface-card-hover overflow-hidden p-0"
+          >
+            <div className="grid md:grid-cols-[1.2fr_1fr]">
+              <div className="relative aspect-[16/10] md:aspect-auto overflow-hidden bg-surface">
+                <img src={featured.image} alt={featured.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
+              </div>
+              <div className="p-7 md:p-10 flex flex-col justify-center">
+                <span className="text-xs font-semibold uppercase tracking-wider text-primary">Featured · {featured.category}</span>
+                <h2 className="mt-3 text-2xl md:text-3xl font-bold leading-tight">{featured.title}</h2>
+                <p className="mt-3 text-muted-foreground">{featured.excerpt}</p>
+                <div className="mt-5 flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground">{featured.date} · {featured.readTime}</p>
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">Read more <ArrowRight className="h-4 w-4" /></span>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold">All updates</h2>
+            <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {rest.map((p) => (
+                <Link
+                  key={p.slug}
+                  to="/news/$slug"
+                  params={{ slug: p.slug as Slug }}
+                  className="surface-card surface-card-hover overflow-hidden p-0 flex flex-col"
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden bg-surface">
+                    <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" decoding="async" />
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-primary">{p.category}</span>
+                    <h3 className="mt-2 font-semibold text-lg leading-snug">{p.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground flex-1">{p.excerpt}</p>
+                    <div className="mt-4 flex items-center justify-between">
+                      <p className="text-xs text-muted-foreground">{p.date}</p>
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">Read <ArrowRight className="h-3.5 w-3.5" /></span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </SiteLayout>
+  );
+}

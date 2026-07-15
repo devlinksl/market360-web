@@ -26,7 +26,6 @@ import { Route as DownloadRouteImport } from './routes/download'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as ApiPublicInvestorInterestRouteImport } from './routes/api/public/investor-interest'
 
 const WalletRoute = WalletRouteImport.update({
@@ -114,11 +113,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsSlugRoute = NewsSlugRouteImport.update({
-  id: '/news/$slug',
-  path: '/news/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiPublicInvestorInterestRoute =
   ApiPublicInvestorInterestRouteImport.update({
     id: '/api/public/investor-interest',
@@ -144,7 +138,6 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
 export interface FileRoutesByTo {
@@ -165,7 +158,6 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
 export interface FileRoutesById {
@@ -187,7 +179,6 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
 export interface FileRouteTypes {
@@ -210,7 +201,6 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
-    | '/news/$slug'
     | '/api/public/investor-interest'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -231,7 +221,6 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
-    | '/news/$slug'
     | '/api/public/investor-interest'
   id:
     | '__root__'
@@ -252,7 +241,6 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
-    | '/news/$slug'
     | '/api/public/investor-interest'
   fileRoutesById: FileRoutesById
 }
@@ -274,7 +262,6 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TesterRoute: typeof TesterRoute
   WalletRoute: typeof WalletRoute
-  NewsSlugRoute: typeof NewsSlugRoute
   ApiPublicInvestorInterestRoute: typeof ApiPublicInvestorInterestRoute
 }
 
@@ -399,13 +386,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/news/$slug': {
-      id: '/news/$slug'
-      path: '/news/$slug'
-      fullPath: '/news/$slug'
-      preLoaderRoute: typeof NewsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/investor-interest': {
       id: '/api/public/investor-interest'
       path: '/api/public/investor-interest'
@@ -434,7 +414,6 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TesterRoute: TesterRoute,
   WalletRoute: WalletRoute,
-  NewsSlugRoute: NewsSlugRoute,
   ApiPublicInvestorInterestRoute: ApiPublicInvestorInterestRoute,
 }
 export const routeTree = rootRouteImport
