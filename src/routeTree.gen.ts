@@ -17,6 +17,7 @@ import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.
 import { Route as SellerSolutionsRouteImport } from './routes/seller-solutions'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as InvestmentsRouteImport } from './routes/investments'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as ForSellersRouteImport } from './routes/for-sellers'
@@ -66,6 +67,11 @@ const SafetyRoute = SafetyRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InvestmentsRoute = InvestmentsRouteImport.update({
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
+  '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByTo {
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
+  '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
+  '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
@@ -193,6 +202,7 @@ export interface FileRouteTypes {
     | '/for-sellers'
     | '/help'
     | '/investments'
+    | '/news'
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/for-sellers'
     | '/help'
     | '/investments'
+    | '/news'
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/for-sellers'
     | '/help'
     | '/investments'
+    | '/news'
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
@@ -254,6 +266,7 @@ export interface RootRouteChildren {
   ForSellersRoute: typeof ForSellersRoute
   HelpRoute: typeof HelpRoute
   InvestmentsRoute: typeof InvestmentsRoute
+  NewsRoute: typeof NewsRoute
   PrivacyRoute: typeof PrivacyRoute
   SafetyRoute: typeof SafetyRoute
   SellerSolutionsRoute: typeof SellerSolutionsRoute
@@ -321,6 +334,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/investments': {
@@ -406,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForSellersRoute: ForSellersRoute,
   HelpRoute: HelpRoute,
   InvestmentsRoute: InvestmentsRoute,
+  NewsRoute: NewsRoute,
   PrivacyRoute: PrivacyRoute,
   SafetyRoute: SafetyRoute,
   SellerSolutionsRoute: SellerSolutionsRoute,
