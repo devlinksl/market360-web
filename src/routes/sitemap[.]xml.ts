@@ -1,7 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-import { newsPosts } from "@/lib/news-data";
+// News articles — mirror this list when adding a new news.<slug>.tsx file.
+const newsPosts = [
+  { slug: "tester-program-launch", title: "Market360 opens its public tester program", excerpt: "Public tester program is now open.", date: "Jun 12, 2026", image: "/brand/news-tester-launch.jpg" },
+  { slug: "wallet-2-launch", title: "Wallet 2.0 ships: faster settlements, lower fees", excerpt: "Get paid in minutes.", date: "Jun 04, 2026", image: "/brand/news-wallet.jpg" },
+  { slug: "smarter-search", title: "Smarter search rolls out to all users", excerpt: "A redesigned discovery engine.", date: "May 22, 2026", image: "/brand/news-search.jpg" },
+  { slug: "roadmap-q3", title: "What's coming this quarter", excerpt: "Storefronts, bulk uploads, analytics.", date: "May 10, 2026", image: "/brand/news-roadmap.jpg" },
+  { slug: "fraud-protection-update", title: "New fraud protection layer goes live", excerpt: "AI model flags risky activity in real-time.", date: "Apr 28, 2026", image: "/brand/news-fraud.jpg" },
+  { slug: "tester-spotlights", title: "Tester spotlights: meet 5 of our top contributors", excerpt: "People helping us ship better.", date: "Apr 15, 2026", image: "/brand/news-community.jpg" },
+  { slug: "seller-dashboard-refresh", title: "Seller dashboard gets a refresh", excerpt: "Cleaner layout, faster insights.", date: "Apr 02, 2026", image: "/brand/news-dashboard.jpg" },
+];
 
 const BASE_URL = "https://market360.shop";
 const NOW = new Date().toISOString().slice(0, 10);
@@ -64,7 +73,7 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const newsEntries: SitemapEntry[] = newsPosts.map((p) => ({
+        const newsEntries: SitemapEntry[] = newsPosts.map((p: typeof newsPosts[number]) => ({
           path: `/news/${p.slug}`,
           changefreq: "monthly",
           priority: "0.6",

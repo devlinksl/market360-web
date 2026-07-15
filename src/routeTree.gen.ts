@@ -34,7 +34,6 @@ import { Route as NewsSmarterSearchRouteImport } from './routes/news.smarter-sea
 import { Route as NewsSellerDashboardRefreshRouteImport } from './routes/news.seller-dashboard-refresh'
 import { Route as NewsRoadmapQ3RouteImport } from './routes/news.roadmap-q3'
 import { Route as NewsFraudProtectionUpdateRouteImport } from './routes/news.fraud-protection-update'
-import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as ApiPublicInvestorInterestRouteImport } from './routes/api/public/investor-interest'
 
 const WalletRoute = WalletRouteImport.update({
@@ -164,11 +163,6 @@ const NewsFraudProtectionUpdateRoute =
     path: '/fraud-protection-update',
     getParentRoute: () => NewsRoute,
   } as any)
-const NewsSlugRoute = NewsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => NewsRoute,
-} as any)
 const ApiPublicInvestorInterestRoute =
   ApiPublicInvestorInterestRouteImport.update({
     id: '/api/public/investor-interest',
@@ -195,7 +189,6 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -224,7 +217,6 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -254,7 +246,6 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
-  '/news/$slug': typeof NewsSlugRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -285,7 +276,6 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
-    | '/news/$slug'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -314,7 +304,6 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
-    | '/news/$slug'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -343,7 +332,6 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
-    | '/news/$slug'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -553,13 +541,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsFraudProtectionUpdateRouteImport
       parentRoute: typeof NewsRoute
     }
-    '/news/$slug': {
-      id: '/news/$slug'
-      path: '/$slug'
-      fullPath: '/news/$slug'
-      preLoaderRoute: typeof NewsSlugRouteImport
-      parentRoute: typeof NewsRoute
-    }
     '/api/public/investor-interest': {
       id: '/api/public/investor-interest'
       path: '/api/public/investor-interest'
@@ -571,7 +552,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface NewsRouteChildren {
-  NewsSlugRoute: typeof NewsSlugRoute
   NewsFraudProtectionUpdateRoute: typeof NewsFraudProtectionUpdateRoute
   NewsRoadmapQ3Route: typeof NewsRoadmapQ3Route
   NewsSellerDashboardRefreshRoute: typeof NewsSellerDashboardRefreshRoute
@@ -582,7 +562,6 @@ interface NewsRouteChildren {
 }
 
 const NewsRouteChildren: NewsRouteChildren = {
-  NewsSlugRoute: NewsSlugRoute,
   NewsFraudProtectionUpdateRoute: NewsFraudProtectionUpdateRoute,
   NewsRoadmapQ3Route: NewsRoadmapQ3Route,
   NewsSellerDashboardRefreshRoute: NewsSellerDashboardRefreshRoute,
