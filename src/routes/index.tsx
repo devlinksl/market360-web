@@ -2,7 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Counter } from "@/components/home/Counter";
 import { Marquee } from "@/components/home/Marquee";
-import { newsPosts } from "@/lib/news-data";
+// Latest news cards — edit slugs/titles/images directly here.
+const newsPosts = [
+  { slug: "tester-program-launch" as const, category: "Announcement", title: "Market360 opens its public tester program", excerpt: "We're inviting the community to help shape the next era of Market360.", date: "Jun 12, 2026", readTime: "4 min read", image: "/brand/news-tester-launch.jpg" },
+  { slug: "wallet-2-launch" as const, category: "Product", title: "Wallet 2.0 ships: faster settlements, lower fees", excerpt: "Get paid in minutes with our re-engineered wallet.", date: "Jun 04, 2026", readTime: "5 min read", image: "/brand/news-wallet.jpg" },
+  { slug: "smarter-search" as const, category: "Update", title: "Smarter search rolls out to all users", excerpt: "A redesigned discovery engine helps buyers find exactly what they want.", date: "May 22, 2026", readTime: "3 min read", image: "/brand/news-search.jpg" },
+];
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
   ShoppingBag, Wallet, TrendingUp,
@@ -1025,7 +1030,7 @@ function LatestNews() {
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {posts.map((p, i) => (
+          {posts.map((p: typeof newsPosts[number], i: number) => (
             <Reveal key={p.slug} delay={i * 90}>
               <Link to="/news/$slug" params={{ slug: p.slug }} className="surface-card surface-card-hover block overflow-hidden">
                 <ImgFade src={p.image} alt={p.title} className="aspect-[16/10]" />
