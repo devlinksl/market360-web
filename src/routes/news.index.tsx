@@ -11,7 +11,7 @@ import { ArrowRight } from "lucide-react";
 
 const ARTICLES = [
   {
-    slug: "tester-program-launch",
+    to: "/news/tester-program-launch",
     category: "Announcement",
     title: "Market360 opens its public tester program",
     excerpt: "We're inviting the community to help shape the next era of Market360 — with early access, perks, and direct influence on the roadmap.",
@@ -20,7 +20,7 @@ const ARTICLES = [
     image: "/brand/news-tester-launch.jpg",
   },
   {
-    slug: "wallet-2-launch",
+    to: "/news/wallet-2-launch",
     category: "Product",
     title: "Wallet 2.0 ships: faster settlements, lower fees",
     excerpt: "Get paid in minutes with our re-engineered wallet.",
@@ -29,7 +29,7 @@ const ARTICLES = [
     image: "/brand/news-wallet.jpg",
   },
   {
-    slug: "smarter-search",
+    to: "/news/smarter-search",
     category: "Update",
     title: "Smarter search rolls out to all users",
     excerpt: "A redesigned discovery engine helps buyers find exactly what they want.",
@@ -38,7 +38,7 @@ const ARTICLES = [
     image: "/brand/news-search.jpg",
   },
   {
-    slug: "roadmap-q3",
+    to: "/news/roadmap-q3",
     category: "Roadmap",
     title: "What's coming this quarter",
     excerpt: "Storefronts, bulk uploads, smarter analytics, and more.",
@@ -47,7 +47,7 @@ const ARTICLES = [
     image: "/brand/news-roadmap.jpg",
   },
   {
-    slug: "fraud-protection-update",
+    to: "/news/fraud-protection-update",
     category: "Trust",
     title: "New fraud protection layer goes live",
     excerpt: "Our updated AI model flags risky activity in real-time.",
@@ -56,7 +56,7 @@ const ARTICLES = [
     image: "/brand/news-fraud.jpg",
   },
   {
-    slug: "tester-spotlights",
+    to: "/news/tester-spotlights",
     category: "Community",
     title: "Tester spotlights: meet 5 of our top contributors",
     excerpt: "The people helping us ship better, faster.",
@@ -65,7 +65,7 @@ const ARTICLES = [
     image: "/brand/news-community.jpg",
   },
   {
-    slug: "seller-dashboard-refresh",
+    to: "/news/seller-dashboard-refresh",
     category: "Product",
     title: "Seller dashboard gets a refresh",
     excerpt: "Cleaner layout, faster insights, smoother workflows.",
@@ -74,15 +74,6 @@ const ARTICLES = [
     image: "/brand/news-dashboard.jpg",
   },
 ] as const;
-
-type Slug =
-  | "tester-program-launch"
-  | "wallet-2-launch"
-  | "smarter-search"
-  | "roadmap-q3"
-  | "fraud-protection-update"
-  | "tester-spotlights"
-  | "seller-dashboard-refresh";
 
 export const Route = createFileRoute("/news/")({
   head: () => ({
@@ -112,8 +103,7 @@ function NewsPage() {
       <section className="section-pad">
         <div className="container-pro">
           <Link
-            to="/news/$slug"
-            params={{ slug: featured.slug as Slug }}
+            to={featured.to}
             className="block surface-card surface-card-hover overflow-hidden p-0"
           >
             <div className="grid md:grid-cols-[1.2fr_1fr]">
@@ -137,9 +127,8 @@ function NewsPage() {
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {rest.map((p) => (
                 <Link
-                  key={p.slug}
-                  to="/news/$slug"
-                  params={{ slug: p.slug as Slug }}
+                  key={p.to}
+                  to={p.to}
                   className="surface-card surface-card-hover overflow-hidden p-0 flex flex-col"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden bg-surface">

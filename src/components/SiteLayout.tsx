@@ -1,11 +1,11 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useState, useEffect, type ReactNode } from "react";
 import { Drawer } from "vaul";
 import {
   Menu, ShoppingBag, Mail, MapPin, Twitter, Facebook, Instagram, Linkedin,
   Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, TrendingUp,
 } from "lucide-react";
-const logoAsset = "/brand/market360-logo.png";
+const logoAsset = "/brand/market360-logo.webp";
 
 const mobileTiles = [
   { to: "/investments", label: "Investors", desc: "Invest in Market360", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
@@ -33,16 +33,6 @@ const navLinks = [
 export function Logo({ className = "h-9 w-9" }: { className?: string }) {
   return (
     <img src={logoAsset} alt="Market360 logo" className={className} width={40} height={40} loading="eager" decoding="async" />
-  );
-}
-
-function PageLoader() {
-  const isLoading = useRouterState({ select: (s) => s.isLoading || s.isTransitioning });
-  if (!isLoading) return null;
-  return (
-    <div className="fixed inset-0 z-[100] grid place-items-center bg-background/60 backdrop-blur-sm" aria-busy="true">
-      <div className="page-spinner" />
-    </div>
   );
 }
 
@@ -99,7 +89,7 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
             >
               {/* Background image */}
               <img
-                src="https://i.imghippo.com/files/VXVd7259LE.png"
+                src="/brand/news-tester-launch.jpg"
                 alt="Join the Market360 Tester Program"
                 aria-hidden="true"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -334,7 +324,6 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="flex min-h-dvh flex-col">
-      <PageLoader />
       <Header onOpen={() => setMenuOpen(true)} />
       <MobileDrawer open={menuOpen} onOpenChange={setMenuOpen} />
       <TesterPopup />
