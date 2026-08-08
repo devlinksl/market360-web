@@ -84,7 +84,7 @@ type Slug =
   | "tester-spotlights"
   | "seller-dashboard-refresh";
 
-export const Route = createFileRoute("/news")({
+export const Route = createFileRoute("/news/")({
   head: () => ({
     meta: [
       { title: "News & Updates — Market360" },
