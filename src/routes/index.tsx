@@ -10,7 +10,7 @@ const newsPosts = [
 ];
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
-  ShoppingBag, Wallet,
+  ShoppingBag, Wallet, Store,
   Star, ChevronDown, ChevronLeft, ChevronRight, Truck, MessageCircle, BarChart3,
   Bell, CheckCircle2, Download as DownloadIcon, Send, PiggyBank,
   Lock, Layers, Compass, QrCode, HeartHandshake,
