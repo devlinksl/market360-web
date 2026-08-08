@@ -25,9 +25,9 @@ interface SitemapEntry {
 
 // Public pages with per-page imagery for image sitemap discovery
 const HOMEPAGE_IMAGES = [
-  { loc: `${BASE_URL}/brand/market360-logo.png`, title: "Market360 logo", caption: "Market360 — Sierra Leone's #1 online marketplace" },
+  { loc: `${BASE_URL}/brand/market360-logo.webp`, title: "Market360 logo", caption: "Market360 — Sierra Leone's #1 online marketplace" },
   { loc: `${BASE_URL}/brand/img-hero.jpg`, title: "Market360 marketplace hero", caption: "Buy, sell, pay, and grow with Market360" },
-  { loc: `${BASE_URL}/brand/flyer-endless.png`, title: "One App. Endless Opportunities.", caption: "Discover thousands of listings on Market360" },
+  { loc: `${BASE_URL}/brand/flyer-endless.webp`, title: "One App. Endless Opportunities.", caption: "Discover thousands of listings on Market360" },
   { loc: `${BASE_URL}/brand/flyer-download.png`, title: "Download Market360 Today", caption: "Available on Google Play and the App Store" },
   { loc: `${BASE_URL}/brand/flyer-everything.png`, title: "Everything you need. One powerful marketplace.", caption: "Delivery, wallet, storefronts and more" },
   { loc: `${BASE_URL}/brand/flyer-buysell.png`, title: "Buy. Sell. Pay. Grow.", caption: "The Market360 digital wallet and seller dashboard" },

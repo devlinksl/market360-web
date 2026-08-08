@@ -17,7 +17,6 @@ import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.
 import { Route as SellerSolutionsRouteImport } from './routes/seller-solutions'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as NewsRouteImport } from './routes/news'
 import { Route as InvestmentsRouteImport } from './routes/investments'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as ForSellersRouteImport } from './routes/for-sellers'
@@ -27,6 +26,7 @@ import { Route as DownloadRouteImport } from './routes/download'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsWallet2LaunchRouteImport } from './routes/news.wallet-2-launch'
 import { Route as NewsTesterSpotlightsRouteImport } from './routes/news.tester-spotlights'
 import { Route as NewsTesterProgramLaunchRouteImport } from './routes/news.tester-program-launch'
@@ -76,11 +76,6 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsRoute = NewsRouteImport.update({
-  id: '/news',
-  path: '/news',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const InvestmentsRoute = InvestmentsRouteImport.update({
   id: '/investments',
   path: '/investments',
@@ -126,42 +121,47 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewsIndexRoute = NewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsWallet2LaunchRoute = NewsWallet2LaunchRouteImport.update({
-  id: '/wallet-2-launch',
-  path: '/wallet-2-launch',
-  getParentRoute: () => NewsRoute,
+  id: '/news/wallet-2-launch',
+  path: '/news/wallet-2-launch',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const NewsTesterSpotlightsRoute = NewsTesterSpotlightsRouteImport.update({
-  id: '/tester-spotlights',
-  path: '/tester-spotlights',
-  getParentRoute: () => NewsRoute,
+  id: '/news/tester-spotlights',
+  path: '/news/tester-spotlights',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const NewsTesterProgramLaunchRoute = NewsTesterProgramLaunchRouteImport.update({
-  id: '/tester-program-launch',
-  path: '/tester-program-launch',
-  getParentRoute: () => NewsRoute,
+  id: '/news/tester-program-launch',
+  path: '/news/tester-program-launch',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const NewsSmarterSearchRoute = NewsSmarterSearchRouteImport.update({
-  id: '/smarter-search',
-  path: '/smarter-search',
-  getParentRoute: () => NewsRoute,
+  id: '/news/smarter-search',
+  path: '/news/smarter-search',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const NewsSellerDashboardRefreshRoute =
   NewsSellerDashboardRefreshRouteImport.update({
-    id: '/seller-dashboard-refresh',
-    path: '/seller-dashboard-refresh',
-    getParentRoute: () => NewsRoute,
+    id: '/news/seller-dashboard-refresh',
+    path: '/news/seller-dashboard-refresh',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const NewsRoadmapQ3Route = NewsRoadmapQ3RouteImport.update({
-  id: '/roadmap-q3',
-  path: '/roadmap-q3',
-  getParentRoute: () => NewsRoute,
+  id: '/news/roadmap-q3',
+  path: '/news/roadmap-q3',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const NewsFraudProtectionUpdateRoute =
   NewsFraudProtectionUpdateRouteImport.update({
-    id: '/fraud-protection-update',
-    path: '/fraud-protection-update',
-    getParentRoute: () => NewsRoute,
+    id: '/news/fraud-protection-update',
+    path: '/news/fraud-protection-update',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicInvestorInterestRoute =
   ApiPublicInvestorInterestRouteImport.update({
@@ -180,7 +180,6 @@ export interface FileRoutesByFullPath {
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
-  '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
@@ -196,6 +195,7 @@ export interface FileRoutesByFullPath {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
 export interface FileRoutesByTo {
@@ -208,7 +208,6 @@ export interface FileRoutesByTo {
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
-  '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
@@ -224,6 +223,7 @@ export interface FileRoutesByTo {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/news': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
 export interface FileRoutesById {
@@ -237,7 +237,6 @@ export interface FileRoutesById {
   '/for-sellers': typeof ForSellersRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
-  '/news': typeof NewsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/safety': typeof SafetyRoute
   '/seller-solutions': typeof SellerSolutionsRoute
@@ -253,6 +252,7 @@ export interface FileRoutesById {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
 export interface FileRouteTypes {
@@ -267,7 +267,6 @@ export interface FileRouteTypes {
     | '/for-sellers'
     | '/help'
     | '/investments'
-    | '/news'
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
@@ -283,6 +282,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/news/'
     | '/api/public/investor-interest'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -295,7 +295,6 @@ export interface FileRouteTypes {
     | '/for-sellers'
     | '/help'
     | '/investments'
-    | '/news'
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
@@ -311,6 +310,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/news'
     | '/api/public/investor-interest'
   id:
     | '__root__'
@@ -323,7 +323,6 @@ export interface FileRouteTypes {
     | '/for-sellers'
     | '/help'
     | '/investments'
-    | '/news'
     | '/privacy'
     | '/safety'
     | '/seller-solutions'
@@ -339,6 +338,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/news/'
     | '/api/public/investor-interest'
   fileRoutesById: FileRoutesById
 }
@@ -352,7 +352,6 @@ export interface RootRouteChildren {
   ForSellersRoute: typeof ForSellersRoute
   HelpRoute: typeof HelpRoute
   InvestmentsRoute: typeof InvestmentsRoute
-  NewsRoute: typeof NewsRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   SafetyRoute: typeof SafetyRoute
   SellerSolutionsRoute: typeof SellerSolutionsRoute
@@ -361,6 +360,14 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TesterRoute: typeof TesterRoute
   WalletRoute: typeof WalletRoute
+  NewsFraudProtectionUpdateRoute: typeof NewsFraudProtectionUpdateRoute
+  NewsRoadmapQ3Route: typeof NewsRoadmapQ3Route
+  NewsSellerDashboardRefreshRoute: typeof NewsSellerDashboardRefreshRoute
+  NewsSmarterSearchRoute: typeof NewsSmarterSearchRoute
+  NewsTesterProgramLaunchRoute: typeof NewsTesterProgramLaunchRoute
+  NewsTesterSpotlightsRoute: typeof NewsTesterSpotlightsRoute
+  NewsWallet2LaunchRoute: typeof NewsWallet2LaunchRoute
+  NewsIndexRoute: typeof NewsIndexRoute
   ApiPublicInvestorInterestRoute: typeof ApiPublicInvestorInterestRoute
 }
 
@@ -420,13 +427,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news': {
-      id: '/news'
-      path: '/news'
-      fullPath: '/news'
-      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/investments': {
@@ -492,54 +492,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/': {
+      id: '/news/'
+      path: '/news'
+      fullPath: '/news/'
+      preLoaderRoute: typeof NewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news/wallet-2-launch': {
       id: '/news/wallet-2-launch'
-      path: '/wallet-2-launch'
+      path: '/news/wallet-2-launch'
       fullPath: '/news/wallet-2-launch'
       preLoaderRoute: typeof NewsWallet2LaunchRouteImport
-      parentRoute: typeof NewsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/news/tester-spotlights': {
       id: '/news/tester-spotlights'
-      path: '/tester-spotlights'
+      path: '/news/tester-spotlights'
       fullPath: '/news/tester-spotlights'
       preLoaderRoute: typeof NewsTesterSpotlightsRouteImport
-      parentRoute: typeof NewsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/news/tester-program-launch': {
       id: '/news/tester-program-launch'
-      path: '/tester-program-launch'
+      path: '/news/tester-program-launch'
       fullPath: '/news/tester-program-launch'
       preLoaderRoute: typeof NewsTesterProgramLaunchRouteImport
-      parentRoute: typeof NewsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/news/smarter-search': {
       id: '/news/smarter-search'
-      path: '/smarter-search'
+      path: '/news/smarter-search'
       fullPath: '/news/smarter-search'
       preLoaderRoute: typeof NewsSmarterSearchRouteImport
-      parentRoute: typeof NewsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/news/seller-dashboard-refresh': {
       id: '/news/seller-dashboard-refresh'
-      path: '/seller-dashboard-refresh'
+      path: '/news/seller-dashboard-refresh'
       fullPath: '/news/seller-dashboard-refresh'
       preLoaderRoute: typeof NewsSellerDashboardRefreshRouteImport
-      parentRoute: typeof NewsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/news/roadmap-q3': {
       id: '/news/roadmap-q3'
-      path: '/roadmap-q3'
+      path: '/news/roadmap-q3'
       fullPath: '/news/roadmap-q3'
       preLoaderRoute: typeof NewsRoadmapQ3RouteImport
-      parentRoute: typeof NewsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/news/fraud-protection-update': {
       id: '/news/fraud-protection-update'
-      path: '/fraud-protection-update'
+      path: '/news/fraud-protection-update'
       fullPath: '/news/fraud-protection-update'
       preLoaderRoute: typeof NewsFraudProtectionUpdateRouteImport
-      parentRoute: typeof NewsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/investor-interest': {
       id: '/api/public/investor-interest'
@@ -551,28 +558,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface NewsRouteChildren {
-  NewsFraudProtectionUpdateRoute: typeof NewsFraudProtectionUpdateRoute
-  NewsRoadmapQ3Route: typeof NewsRoadmapQ3Route
-  NewsSellerDashboardRefreshRoute: typeof NewsSellerDashboardRefreshRoute
-  NewsSmarterSearchRoute: typeof NewsSmarterSearchRoute
-  NewsTesterProgramLaunchRoute: typeof NewsTesterProgramLaunchRoute
-  NewsTesterSpotlightsRoute: typeof NewsTesterSpotlightsRoute
-  NewsWallet2LaunchRoute: typeof NewsWallet2LaunchRoute
-}
-
-const NewsRouteChildren: NewsRouteChildren = {
-  NewsFraudProtectionUpdateRoute: NewsFraudProtectionUpdateRoute,
-  NewsRoadmapQ3Route: NewsRoadmapQ3Route,
-  NewsSellerDashboardRefreshRoute: NewsSellerDashboardRefreshRoute,
-  NewsSmarterSearchRoute: NewsSmarterSearchRoute,
-  NewsTesterProgramLaunchRoute: NewsTesterProgramLaunchRoute,
-  NewsTesterSpotlightsRoute: NewsTesterSpotlightsRoute,
-  NewsWallet2LaunchRoute: NewsWallet2LaunchRoute,
-}
-
-const NewsRouteWithChildren = NewsRoute._addFileChildren(NewsRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -583,7 +568,6 @@ const rootRouteChildren: RootRouteChildren = {
   ForSellersRoute: ForSellersRoute,
   HelpRoute: HelpRoute,
   InvestmentsRoute: InvestmentsRoute,
-  NewsRoute: NewsRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   SafetyRoute: SafetyRoute,
   SellerSolutionsRoute: SellerSolutionsRoute,
@@ -592,6 +576,14 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TesterRoute: TesterRoute,
   WalletRoute: WalletRoute,
+  NewsFraudProtectionUpdateRoute: NewsFraudProtectionUpdateRoute,
+  NewsRoadmapQ3Route: NewsRoadmapQ3Route,
+  NewsSellerDashboardRefreshRoute: NewsSellerDashboardRefreshRoute,
+  NewsSmarterSearchRoute: NewsSmarterSearchRoute,
+  NewsTesterProgramLaunchRoute: NewsTesterProgramLaunchRoute,
+  NewsTesterSpotlightsRoute: NewsTesterSpotlightsRoute,
+  NewsWallet2LaunchRoute: NewsWallet2LaunchRoute,
+  NewsIndexRoute: NewsIndexRoute,
   ApiPublicInvestorInterestRoute: ApiPublicInvestorInterestRoute,
 }
 export const routeTree = rootRouteImport

@@ -10,7 +10,7 @@ const newsPosts = [
 ];
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
-  ShoppingBag, Wallet, TrendingUp,
+  ShoppingBag, Wallet, Store,
   Star, ChevronDown, ChevronLeft, ChevronRight, Truck, MessageCircle, BarChart3,
   Bell, CheckCircle2, Download as DownloadIcon, Send, PiggyBank,
   Lock, Layers, Compass, QrCode, HeartHandshake,
@@ -32,16 +32,16 @@ const IMAGES = {
   // Portrait, ~9:16. Add/remove entries to change how many slides rotate.
   heroSlides: [
     { src: "/brand/img-hero.jpg", alt: "The Market360 app showing the marketplace home feed" },
-    { src: "/brand/img-wallet.jpg", alt: "The Market360 wallet screen with a live balance" },
-    { src: "/brand/img-hero-2.png", alt: "A verified Market360 seller managing their store" },
+    { src: "/brand/img-wallet.webp", alt: "The Market360 wallet screen with a live balance" },
+    { src: "/brand/img-hero-2.webp", alt: "A verified Market360 seller managing their store" },
   ],
   // Phone mockup used in the "Download the app" section. Portrait, ~9:16.
-  heroSecondary: "/brand/hero-buysellgrow.png",
+  heroSecondary: "/brand/hero-buysellgrow.webp",
 
   // --- People / lifestyle shots — used in "How it works", Wallet, Why -------
   buyer: "/brand/img-buyer.jpg",       // 4:3 or 16:9 — a buyer using the app
-  seller: "/brand/img-seller.jpg",     // 16:9 — a verified seller at work
-  wallet: "/brand/img-wallet.jpg",     // 9:16 — wallet / transfer screen
+  seller: "/brand/img-seller.webp",     // 16:9 — a verified seller at work
+  wallet: "/brand/img-wallet.webp",     // 9:16 — wallet / transfer screen
   delivery: "/brand/img-delivery.jpg", // 16:10 — delivery / logistics shot
 
   // --- Category tiles — the bento grid in "Explore every category" ---------
@@ -391,9 +391,8 @@ function Hero() {
           </Reveal>
           <Reveal delay={140}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Market360 brings the marketplace, a real‑time wallet, and vetted investment
-              opportunities into a single app — built for how Sierra Leone trades, pays, and
-              grows money.
+              Market360 brings shopping, secure payments, verified sellers, and nationwide
+              delivery into one fast app — built for how Sierra Leone buys and sells.
             </p>
           </Reveal>
           <Reveal delay={200}>
@@ -448,11 +447,11 @@ function Hero() {
           >
             <div className="flex items-center gap-2">
               <div className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-50">
-                <TrendingUp className="h-4 w-4 text-emerald-600" />
+                <Truck className="h-4 w-4 text-emerald-600" />
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Portfolio</p>
-                <p className="text-sm font-bold text-emerald-600">+9.6% this month</p>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Delivery</p>
+                <p className="text-sm font-bold text-emerald-600">Order on the way</p>
               </div>
             </div>
           </div>
@@ -471,7 +470,7 @@ const ledgerEvents = [
   { icon: ShoppingBag, text: "New order placed for a Smart Watch S9 in Bo" },
   { icon: Send, text: "Ibrahim T. cashed out NLE 1,200 to Orange Money" },
   { icon: BadgeCheck, text: "GreenPower SL just became a Verified Seller" },
-  { icon: TrendingUp, text: "A monthly payout landed in an investor's wallet" },
+  { icon: ShieldCheck, text: "A protected payment was released after delivery" },
   { icon: Truck, text: "An order from Freetown arrived in Makeni in 48 hours" },
 ];
 
@@ -508,7 +507,7 @@ const journeySteps = [
   { n: "01", icon: Compass, title: "Explore the marketplace", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.", img: imgCatElectronics },
   { n: "02", icon: Zap, title: "Pay instantly with Wallet", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.", img: imgWallet },
   { n: "03", icon: Truck, title: "Ship & track", body: "Nationwide delivery with real‑time tracking — from Freetown to Bo, Makeni and beyond, in as little as 48 hours.", img: imgDelivery },
-  { n: "04", icon: TrendingUp, title: "Grow your money", body: "Put idle wallet balance to work in curated, vetted opportunities and watch your portfolio move with you.", img: imgSeller },
+  { n: "04", icon: Store, title: "Sell and grow", body: "Open a storefront, manage orders, and reach shoppers across Sierra Leone from one simple dashboard.", img: imgSeller },
 ];
 
 function HowItWorks() {
@@ -663,7 +662,7 @@ const promoCodes = [
   { code: "WELCOME20", desc: "20% off your first marketplace order", tag: "New users", expires: "Ends 31 Aug" },
   { code: "WALLET10", desc: "NLE 10 bonus on your first wallet top‑up", tag: "Wallet", expires: "Ends 31 Aug" },
   { code: "FREESHIP", desc: "Free delivery on orders over NLE 500", tag: "Marketplace", expires: "Ongoing" },
-  { code: "INVEST50", desc: "NLE 50 bonus on your first investment", tag: "Invest", expires: "New investors" },
+  { code: "SHOP50", desc: "NLE 50 off selected marketplace orders", tag: "Shopping", expires: "New buyers" },
 ];
 
 function PromoCard({ code, desc, tag, expires }: { code: string; desc: string; tag: string; expires: string }) {
@@ -788,57 +787,6 @@ function WalletShowcase() {
 }
 
 /* =============================================================================
-   Invest — a lean, confident CTA band. No cards, no clutter: state the
-   opportunity, prove it with a few hard numbers, point to /investments.
-   ============================================================================= */
-
-const investStats = [
-  { value: 14, suffix: "%", label: "Average projected ROI" },
-  { value: 1200, suffix: "+", label: "Investments funded" },
-  { value: 6, suffix: "", label: "Vetted sectors" },
-];
-
-function InvestCta() {
-  return (
-    <section id="invest" className="section-pad bg-foreground text-background">
-      <div className="container-pro">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/80">
-              <TrendingUp className="h-3 w-3" /> Invest
-            </span>
-            <h2 className="mt-4 max-w-xl text-3xl font-bold tracking-tight md:text-4xl">
-              Put your money to work — without leaving Market360.
-            </h2>
-            <p className="mt-3 max-w-lg text-white/70">
-              Curated opportunities across retail, fintech, and logistics — vetted by our credit and
-              legal teams, funded and settled straight through your wallet.
-            </p>
-            <Link
-              to="/investments"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-semibold text-foreground transition-opacity hover:opacity-90"
-            >
-              Explore investment opportunities <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Reveal>
-
-          <Reveal delay={120} className="grid grid-cols-3 gap-4 lg:gap-6">
-            {investStats.map((s) => (
-              <div key={s.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center lg:p-6">
-                <p className="text-2xl font-bold md:text-3xl">
-                  <Counter to={s.value} suffix={s.suffix} />
-                </p>
-                <p className="mt-1 text-xs text-white/60">{s.label}</p>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* =============================================================================
    Why Market360 — one bento grid, no repeats
    ============================================================================= */
 
@@ -910,7 +858,7 @@ function Stats() {
   const stats = [
     { value: 25000, suffix: "+", label: "Active users" },
     { value: 84000, suffix: "+", label: "Products listed" },
-    { value: 1200, suffix: "+", label: "Successful investments" },
+    { value: 1200, suffix: "+", label: "Verified sellers" },
     { value: 320000, suffix: "+", label: "Trades executed" },
     { value: 1, suffix: "", label: "Country served", note: "Sierra Leone" },
     { value: 2400000, suffix: "+", label: "Marketplace transactions" },
@@ -1062,7 +1010,7 @@ function LatestNews() {
 const faqs = [
   { q: "Is Market360 free to download?", a: "Yes — the app is 100% free to download on Google Play. An App Store version is coming soon." },
   { q: "How does the Market360 Wallet work?", a: "The wallet lets you store, send, receive, and pay in seconds. Settlements go through in real time and every transaction has a full audit trail." },
-  { q: "Are the investment opportunities regulated?", a: "Every opportunity is vetted by our credit and legal teams. Returns are projections, not guarantees, and full disclosures live on each opportunity's page." },
+  { q: "Are my purchases protected?", a: "Yes. Verified sellers, secure payment controls, order tracking, and dispute support help protect every eligible marketplace order." },
   { q: "How do you verify sellers?", a: "Every seller goes through ID and business verification before listing. Verified sellers earn a badge that appears on all their listings." },
   { q: "Which locations do you deliver to?", a: "We deliver across Sierra Leone, with the fastest turnaround in greater Freetown, Bo, and Makeni." },
   { q: "How do I contact support?", a: "Reach us through the in‑app help center, on the Contact page, or by email at hello@market360.shop." },
@@ -1264,8 +1212,7 @@ function FinalCta() {
             <div>
               <h2 className="text-3xl font-bold leading-tight md:text-5xl">Join Sierra Leone's #1 marketplace today.</h2>
               <p className="mt-4 max-w-xl text-white/85">
-                Download the app, browse the marketplace, or start growing your money — everything you need is
-                one tap away.
+                Download the app, discover trusted sellers, and shop across Sierra Leone — everything you need is one tap away.
               </p>
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
@@ -1296,7 +1243,6 @@ function Home() {
       <HowItWorks />
       <CategoriesShowcase />
       <WalletShowcase />
-      <InvestCta />
       <WhyMarket360 />
       <Stats />
       <Testimonials />

@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-const logoAsset = "/brand/market360-logo.png";
+const logoAsset = "/brand/market360-logo.webp";
 
 function NotFoundComponent() {
   return (
@@ -62,7 +62,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 const SITE_URL = "https://market360.shop";
 const SITE_DESC = "Market360 is Sierra Leone's #1 online shopping marketplace to buy and sell electronics, fashion, phones, vehicles, and more — with a built-in wallet, secure payments, verified sellers, and delivery.";
-const OG_IMAGE = `${SITE_URL}/brand/flyer-endless.png`;
+const OG_IMAGE = `${SITE_URL}/brand/flyer-endless.webp`;
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -96,20 +96,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: SITE_DESC },
       { name: "twitter:image", content: OG_IMAGE },
       { name: "format-detection", content: "telephone=no" },
-      { name: "description", content: "Sierra Leone's #1 online marketplace" },
-      { property: "og:description", content: "Sierra Leone's #1 online marketplace" },
-      { name: "twitter:description", content: "Sierra Leone's #1 online marketplace" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/uaTGTTTP6CZvDiW0j9X2wXr0ezW2/social-images/social-1783796844307-5448f48a-5176-48e7-8f87-50bf9c4934e5-1_all_31722.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/uaTGTTTP6CZvDiW0j9X2wXr0ezW2/social-images/social-1783796844307-5448f48a-5176-48e7-8f87-50bf9c4934e5-1_all_31722.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: logoAsset },
       { rel: "apple-touch-icon", href: logoAsset },
-      { rel: "canonical", href: SITE_URL },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" },
       { rel: "alternate", type: "application/xml", title: "Sitemap", href: `${SITE_URL}/sitemap.xml` },
     ],
     scripts: [
@@ -125,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               url: SITE_URL,
               logo: {
                 "@type": "ImageObject",
-                url: `${SITE_URL}/brand/market360-logo.png`,
+                url: `${SITE_URL}/brand/market360-logo.webp`,
                 width: 512,
                 height: 512,
               },
