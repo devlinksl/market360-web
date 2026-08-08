@@ -297,7 +297,7 @@ function Footer() {
               <h3 className="text-sm font-semibold text-foreground">{c.title}</h3>
               <ul className="mt-4 space-y-3">
                 {c.links.map((l) => (
-                  <li key={l.to}>
+                  <li key={`${l.to}-${l.label}`}>
                     {l.to.endsWith(".xml") ? (
                       <a href={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">{l.label}</a>
                     ) : (
