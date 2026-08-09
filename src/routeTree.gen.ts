@@ -37,6 +37,7 @@ import { Route as NewsRoadmapQ3RouteImport } from './routes/news.roadmap-q3'
 import { Route as NewsFraudProtectionUpdateRouteImport } from './routes/news.fraud-protection-update'
 import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
 import { Route as GiftCardsPlatinumRouteImport } from './routes/gift-cards.platinum'
+import { Route as GiftCardsM360SuperRouteImport } from './routes/gift-cards.m360-super'
 import { Route as GiftCardsGoldRouteImport } from './routes/gift-cards.gold'
 import { Route as GiftCardsDiamondRouteImport } from './routes/gift-cards.diamond'
 import { Route as GiftCardsBronzeRouteImport } from './routes/gift-cards.bronze'
@@ -184,6 +185,11 @@ const GiftCardsPlatinumRoute = GiftCardsPlatinumRouteImport.update({
   path: '/platinum',
   getParentRoute: () => GiftCardsRoute,
 } as any)
+const GiftCardsM360SuperRoute = GiftCardsM360SuperRouteImport.update({
+  id: '/m360-super',
+  path: '/m360-super',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const GiftCardsGoldRoute = GiftCardsGoldRouteImport.update({
   id: '/gold',
   path: '/gold',
@@ -228,6 +234,7 @@ export interface FileRoutesByFullPath {
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/gift-cards/diamond': typeof GiftCardsDiamondRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
@@ -262,6 +269,7 @@ export interface FileRoutesByTo {
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/gift-cards/diamond': typeof GiftCardsDiamondRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
@@ -297,6 +305,7 @@ export interface FileRoutesById {
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/gift-cards/diamond': typeof GiftCardsDiamondRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
@@ -333,6 +342,7 @@ export interface FileRouteTypes {
     | '/gift-cards/bronze'
     | '/gift-cards/diamond'
     | '/gift-cards/gold'
+    | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
     | '/news/fraud-protection-update'
@@ -367,6 +377,7 @@ export interface FileRouteTypes {
     | '/gift-cards/bronze'
     | '/gift-cards/diamond'
     | '/gift-cards/gold'
+    | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
     | '/news/fraud-protection-update'
@@ -401,6 +412,7 @@ export interface FileRouteTypes {
     | '/gift-cards/bronze'
     | '/gift-cards/diamond'
     | '/gift-cards/gold'
+    | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
     | '/news/fraud-protection-update'
@@ -642,6 +654,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GiftCardsPlatinumRouteImport
       parentRoute: typeof GiftCardsRoute
     }
+    '/gift-cards/m360-super': {
+      id: '/gift-cards/m360-super'
+      path: '/m360-super'
+      fullPath: '/gift-cards/m360-super'
+      preLoaderRoute: typeof GiftCardsM360SuperRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/gift-cards/gold': {
       id: '/gift-cards/gold'
       path: '/gold'
@@ -677,6 +696,7 @@ interface GiftCardsRouteChildren {
   GiftCardsBronzeRoute: typeof GiftCardsBronzeRoute
   GiftCardsDiamondRoute: typeof GiftCardsDiamondRoute
   GiftCardsGoldRoute: typeof GiftCardsGoldRoute
+  GiftCardsM360SuperRoute: typeof GiftCardsM360SuperRoute
   GiftCardsPlatinumRoute: typeof GiftCardsPlatinumRoute
   GiftCardsSilverRoute: typeof GiftCardsSilverRoute
 }
@@ -685,6 +705,7 @@ const GiftCardsRouteChildren: GiftCardsRouteChildren = {
   GiftCardsBronzeRoute: GiftCardsBronzeRoute,
   GiftCardsDiamondRoute: GiftCardsDiamondRoute,
   GiftCardsGoldRoute: GiftCardsGoldRoute,
+  GiftCardsM360SuperRoute: GiftCardsM360SuperRoute,
   GiftCardsPlatinumRoute: GiftCardsPlatinumRoute,
   GiftCardsSilverRoute: GiftCardsSilverRoute,
 }
