@@ -36,6 +36,7 @@ import { Route as NewsSellerDashboardRefreshRouteImport } from './routes/news.se
 import { Route as NewsRoadmapQ3RouteImport } from './routes/news.roadmap-q3'
 import { Route as NewsFraudProtectionUpdateRouteImport } from './routes/news.fraud-protection-update'
 import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
+import { Route as GiftCardsPlatinumRouteImport } from './routes/gift-cards.platinum'
 import { Route as GiftCardsGoldRouteImport } from './routes/gift-cards.gold'
 import { Route as GiftCardsBronzeRouteImport } from './routes/gift-cards.bronze'
 import { Route as ApiPublicInvestorInterestRouteImport } from './routes/api/public/investor-interest'
@@ -177,6 +178,11 @@ const GiftCardsSilverRoute = GiftCardsSilverRouteImport.update({
   path: '/silver',
   getParentRoute: () => GiftCardsRoute,
 } as any)
+const GiftCardsPlatinumRoute = GiftCardsPlatinumRouteImport.update({
+  id: '/platinum',
+  path: '/platinum',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const GiftCardsGoldRoute = GiftCardsGoldRouteImport.update({
   id: '/gold',
   path: '/gold',
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
@@ -247,6 +254,7 @@ export interface FileRoutesByTo {
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
@@ -280,6 +288,7 @@ export interface FileRoutesById {
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
@@ -314,6 +323,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/gift-cards/bronze'
     | '/gift-cards/gold'
+    | '/gift-cards/platinum'
     | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
@@ -346,6 +356,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/gift-cards/bronze'
     | '/gift-cards/gold'
+    | '/gift-cards/platinum'
     | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
@@ -378,6 +389,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/gift-cards/bronze'
     | '/gift-cards/gold'
+    | '/gift-cards/platinum'
     | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
@@ -611,6 +623,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GiftCardsSilverRouteImport
       parentRoute: typeof GiftCardsRoute
     }
+    '/gift-cards/platinum': {
+      id: '/gift-cards/platinum'
+      path: '/platinum'
+      fullPath: '/gift-cards/platinum'
+      preLoaderRoute: typeof GiftCardsPlatinumRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/gift-cards/gold': {
       id: '/gift-cards/gold'
       path: '/gold'
@@ -638,12 +657,14 @@ declare module '@tanstack/react-router' {
 interface GiftCardsRouteChildren {
   GiftCardsBronzeRoute: typeof GiftCardsBronzeRoute
   GiftCardsGoldRoute: typeof GiftCardsGoldRoute
+  GiftCardsPlatinumRoute: typeof GiftCardsPlatinumRoute
   GiftCardsSilverRoute: typeof GiftCardsSilverRoute
 }
 
 const GiftCardsRouteChildren: GiftCardsRouteChildren = {
   GiftCardsBronzeRoute: GiftCardsBronzeRoute,
   GiftCardsGoldRoute: GiftCardsGoldRoute,
+  GiftCardsPlatinumRoute: GiftCardsPlatinumRoute,
   GiftCardsSilverRoute: GiftCardsSilverRoute,
 }
 
