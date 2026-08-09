@@ -19,6 +19,7 @@ import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as InvestmentsRouteImport } from './routes/investments'
 import { Route as HelpRouteImport } from './routes/help'
+import { Route as GiftCardsRouteImport } from './routes/gift-cards'
 import { Route as ForSellersRouteImport } from './routes/for-sellers'
 import { Route as ForBuyersRouteImport } from './routes/for-buyers'
 import { Route as FeaturesRouteImport } from './routes/features'
@@ -27,6 +28,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as GiftCardsIndexRouteImport } from './routes/gift-cards.index'
 import { Route as NewsWallet2LaunchRouteImport } from './routes/news.wallet-2-launch'
 import { Route as NewsTesterSpotlightsRouteImport } from './routes/news.tester-spotlights'
 import { Route as NewsTesterProgramLaunchRouteImport } from './routes/news.tester-program-launch'
@@ -34,6 +36,12 @@ import { Route as NewsSmarterSearchRouteImport } from './routes/news.smarter-sea
 import { Route as NewsSellerDashboardRefreshRouteImport } from './routes/news.seller-dashboard-refresh'
 import { Route as NewsRoadmapQ3RouteImport } from './routes/news.roadmap-q3'
 import { Route as NewsFraudProtectionUpdateRouteImport } from './routes/news.fraud-protection-update'
+import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
+import { Route as GiftCardsPlatinumRouteImport } from './routes/gift-cards.platinum'
+import { Route as GiftCardsM360SuperRouteImport } from './routes/gift-cards.m360-super'
+import { Route as GiftCardsGoldRouteImport } from './routes/gift-cards.gold'
+import { Route as GiftCardsDiamondRouteImport } from './routes/gift-cards.diamond'
+import { Route as GiftCardsBronzeRouteImport } from './routes/gift-cards.bronze'
 import { Route as ApiPublicInvestorInterestRouteImport } from './routes/api/public/investor-interest'
 
 const WalletRoute = WalletRouteImport.update({
@@ -86,6 +94,11 @@ const HelpRoute = HelpRouteImport.update({
   path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GiftCardsRoute = GiftCardsRouteImport.update({
+  id: '/gift-cards',
+  path: '/gift-cards',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForSellersRoute = ForSellersRouteImport.update({
   id: '/for-sellers',
   path: '/for-sellers',
@@ -126,6 +139,11 @@ const NewsIndexRoute = NewsIndexRouteImport.update({
   path: '/news/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GiftCardsIndexRoute = GiftCardsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const NewsWallet2LaunchRoute = NewsWallet2LaunchRouteImport.update({
   id: '/news/wallet-2-launch',
   path: '/news/wallet-2-launch',
@@ -163,6 +181,36 @@ const NewsFraudProtectionUpdateRoute =
     path: '/news/fraud-protection-update',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GiftCardsSilverRoute = GiftCardsSilverRouteImport.update({
+  id: '/silver',
+  path: '/silver',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
+const GiftCardsPlatinumRoute = GiftCardsPlatinumRouteImport.update({
+  id: '/platinum',
+  path: '/platinum',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
+const GiftCardsM360SuperRoute = GiftCardsM360SuperRouteImport.update({
+  id: '/m360-super',
+  path: '/m360-super',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
+const GiftCardsGoldRoute = GiftCardsGoldRouteImport.update({
+  id: '/gold',
+  path: '/gold',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
+const GiftCardsDiamondRoute = GiftCardsDiamondRouteImport.update({
+  id: '/diamond',
+  path: '/diamond',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
+const GiftCardsBronzeRoute = GiftCardsBronzeRouteImport.update({
+  id: '/bronze',
+  path: '/bronze',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const ApiPublicInvestorInterestRoute =
   ApiPublicInvestorInterestRouteImport.update({
     id: '/api/public/investor-interest',
@@ -178,6 +226,7 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
+  '/gift-cards': typeof GiftCardsRouteWithChildren
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -188,6 +237,12 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/diamond': typeof GiftCardsDiamondRoute
+  '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
+  '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
+  '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -195,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
@@ -216,6 +272,12 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/diamond': typeof GiftCardsDiamondRoute
+  '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
+  '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
+  '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -223,6 +285,7 @@ export interface FileRoutesByTo {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/gift-cards': typeof GiftCardsIndexRoute
   '/news': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
@@ -235,6 +298,7 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
+  '/gift-cards': typeof GiftCardsRouteWithChildren
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -245,6 +309,12 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/diamond': typeof GiftCardsDiamondRoute
+  '/gift-cards/gold': typeof GiftCardsGoldRoute
+  '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
+  '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
+  '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -252,6 +322,7 @@ export interface FileRoutesById {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
@@ -265,6 +336,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/for-buyers'
     | '/for-sellers'
+    | '/gift-cards'
     | '/help'
     | '/investments'
     | '/privacy'
@@ -275,6 +347,12 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/gift-cards/bronze'
+    | '/gift-cards/diamond'
+    | '/gift-cards/gold'
+    | '/gift-cards/m360-super'
+    | '/gift-cards/platinum'
+    | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -282,6 +360,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
   fileRoutesByTo: FileRoutesByTo
@@ -303,6 +382,12 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/gift-cards/bronze'
+    | '/gift-cards/diamond'
+    | '/gift-cards/gold'
+    | '/gift-cards/m360-super'
+    | '/gift-cards/platinum'
+    | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -310,6 +395,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/gift-cards'
     | '/news'
     | '/api/public/investor-interest'
   id:
@@ -321,6 +407,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/for-buyers'
     | '/for-sellers'
+    | '/gift-cards'
     | '/help'
     | '/investments'
     | '/privacy'
@@ -331,6 +418,12 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/gift-cards/bronze'
+    | '/gift-cards/diamond'
+    | '/gift-cards/gold'
+    | '/gift-cards/m360-super'
+    | '/gift-cards/platinum'
+    | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -338,6 +431,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
   fileRoutesById: FileRoutesById
@@ -350,6 +444,7 @@ export interface RootRouteChildren {
   FeaturesRoute: typeof FeaturesRoute
   ForBuyersRoute: typeof ForBuyersRoute
   ForSellersRoute: typeof ForSellersRoute
+  GiftCardsRoute: typeof GiftCardsRouteWithChildren
   HelpRoute: typeof HelpRoute
   InvestmentsRoute: typeof InvestmentsRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -443,6 +538,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gift-cards': {
+      id: '/gift-cards'
+      path: '/gift-cards'
+      fullPath: '/gift-cards'
+      preLoaderRoute: typeof GiftCardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/for-sellers': {
       id: '/for-sellers'
       path: '/for-sellers'
@@ -499,6 +601,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gift-cards/': {
+      id: '/gift-cards/'
+      path: '/'
+      fullPath: '/gift-cards/'
+      preLoaderRoute: typeof GiftCardsIndexRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/news/wallet-2-launch': {
       id: '/news/wallet-2-launch'
       path: '/news/wallet-2-launch'
@@ -548,6 +657,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsFraudProtectionUpdateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gift-cards/silver': {
+      id: '/gift-cards/silver'
+      path: '/silver'
+      fullPath: '/gift-cards/silver'
+      preLoaderRoute: typeof GiftCardsSilverRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
+    '/gift-cards/platinum': {
+      id: '/gift-cards/platinum'
+      path: '/platinum'
+      fullPath: '/gift-cards/platinum'
+      preLoaderRoute: typeof GiftCardsPlatinumRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
+    '/gift-cards/m360-super': {
+      id: '/gift-cards/m360-super'
+      path: '/m360-super'
+      fullPath: '/gift-cards/m360-super'
+      preLoaderRoute: typeof GiftCardsM360SuperRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
+    '/gift-cards/gold': {
+      id: '/gift-cards/gold'
+      path: '/gold'
+      fullPath: '/gift-cards/gold'
+      preLoaderRoute: typeof GiftCardsGoldRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
+    '/gift-cards/diamond': {
+      id: '/gift-cards/diamond'
+      path: '/diamond'
+      fullPath: '/gift-cards/diamond'
+      preLoaderRoute: typeof GiftCardsDiamondRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
+    '/gift-cards/bronze': {
+      id: '/gift-cards/bronze'
+      path: '/bronze'
+      fullPath: '/gift-cards/bronze'
+      preLoaderRoute: typeof GiftCardsBronzeRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/api/public/investor-interest': {
       id: '/api/public/investor-interest'
       path: '/api/public/investor-interest'
@@ -558,6 +709,30 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface GiftCardsRouteChildren {
+  GiftCardsBronzeRoute: typeof GiftCardsBronzeRoute
+  GiftCardsDiamondRoute: typeof GiftCardsDiamondRoute
+  GiftCardsGoldRoute: typeof GiftCardsGoldRoute
+  GiftCardsM360SuperRoute: typeof GiftCardsM360SuperRoute
+  GiftCardsPlatinumRoute: typeof GiftCardsPlatinumRoute
+  GiftCardsSilverRoute: typeof GiftCardsSilverRoute
+  GiftCardsIndexRoute: typeof GiftCardsIndexRoute
+}
+
+const GiftCardsRouteChildren: GiftCardsRouteChildren = {
+  GiftCardsBronzeRoute: GiftCardsBronzeRoute,
+  GiftCardsDiamondRoute: GiftCardsDiamondRoute,
+  GiftCardsGoldRoute: GiftCardsGoldRoute,
+  GiftCardsM360SuperRoute: GiftCardsM360SuperRoute,
+  GiftCardsPlatinumRoute: GiftCardsPlatinumRoute,
+  GiftCardsSilverRoute: GiftCardsSilverRoute,
+  GiftCardsIndexRoute: GiftCardsIndexRoute,
+}
+
+const GiftCardsRouteWithChildren = GiftCardsRoute._addFileChildren(
+  GiftCardsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -566,6 +741,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesRoute: FeaturesRoute,
   ForBuyersRoute: ForBuyersRoute,
   ForSellersRoute: ForSellersRoute,
+  GiftCardsRoute: GiftCardsRouteWithChildren,
   HelpRoute: HelpRoute,
   InvestmentsRoute: InvestmentsRoute,
   PrivacyRoute: PrivacyRoute,

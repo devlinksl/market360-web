@@ -3,12 +3,13 @@ import { useState, useEffect, type ReactNode } from "react";
 import { Drawer } from "vaul";
 import {
   Menu, ShoppingBag, Mail, MapPin, Twitter, Facebook, Instagram, Linkedin,
-  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, TrendingUp,
+  Sparkles, Store, Download, FlaskConical, Newspaper, LifeBuoy, Info, ArrowRight, X, FileText, Lock, TrendingUp, Gift,
 } from "lucide-react";
 const logoAsset = "/brand/market360-logo.webp";
 
 const mobileTiles = [
   { to: "/investments", label: "Investor Relations", desc: "Company funding & reports", Icon: TrendingUp, accent: "from-emerald-100 to-emerald-50", legal: false },
+  { to: "/gift-cards", label: "E-Gift Cards", desc: "Give more. Share more.", Icon: Gift, accent: "from-emerald-100 to-lime-50", legal: false },
   { to: "/seller-solutions", label: "Sell on Market360", desc: "Tools for stores", Icon: Store, accent: "from-green-100 to-emerald-50", legal: false },
   { to: "/download", label: "Get the App", desc: "iOS & Android", Icon: Download, accent: "from-lime-100 to-emerald-50", legal: false },
   { to: "/news", label: "News & Updates", desc: "Product changelog", Icon: Newspaper, accent: "from-emerald-50 to-white", legal: false },
@@ -24,6 +25,7 @@ const navLinks = [
   { to: "/features", label: "Features" },
   { to: "/investments", label: "Investors" },
   { to: "/seller-solutions", label: "Sellers" },
+  { to: "/gift-cards", label: "Gift Cards" },
   { to: "/download", label: "Download" },
   { to: "/tester", label: "Tester Program" },
   { to: "/news", label: "News" },
@@ -239,6 +241,7 @@ function Footer() {
     { title: "Product", links: [
       { to: "/features", label: "Features" },
       { to: "/seller-solutions", label: "Seller Solutions" },
+      { to: "/gift-cards", label: "E-Gift Cards" },
       { to: "/download", label: "Download App" },
       { to: "/safety", label: "Marketplace Safety" },
     ]},

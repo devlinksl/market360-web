@@ -176,8 +176,9 @@ function TermsPage() {
               </p>
               <p className="mt-4">
                 These Terms incorporate by reference Market360's <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link>,{" "}
-                <Link to="/seller-policy" className="text-primary hover:underline">Seller Policy</Link>,{" "}
-                <Link to="/buyer-protection" className="text-primary hover:underline">Buyer Protection Policy</Link>, and any
+                <Link to="/seller-solutions" className="text-primary hover:underline">Seller Policy</Link>,{" "}
+                <Link to="/safety" className="text-primary hover:underline">Buyer Protection Policy</Link>, and any
+
                 additional guidelines, policies, and rules published by Market360 from time to time, all of which form part of
                 the agreement between you and Market360.
               </p>
