@@ -4,9 +4,10 @@ import { Counter } from "@/components/home/Counter";
 import { Marquee } from "@/components/home/Marquee";
 // Latest news cards — edit slugs/titles/images directly here.
 const newsPosts = [
-  { slug: "tester-program-launch" as const, category: "Announcement", title: "Market360 opens its public tester program", excerpt: "We're inviting the community to help shape the next era of Market360.", date: "Jun 12, 2026", readTime: "4 min read", image: "/brand/news-tester-launch.jpg" },
-  { slug: "wallet-2-launch" as const, category: "Product", title: "Wallet 2.0 ships: faster settlements, lower fees", excerpt: "Get paid in minutes with our re-engineered wallet.", date: "Jun 04, 2026", readTime: "5 min read", image: "/brand/news-wallet.jpg" },
-  { slug: "smarter-search" as const, category: "Update", title: "Smarter search rolls out to all users", excerpt: "A redesigned discovery engine helps buyers find exactly what they want.", date: "May 22, 2026", readTime: "3 min read", image: "/brand/news-search.jpg" },
+  { slug: "tester-program-launch" as const, href: "/news/tester-program-launch" as const, category: "Announcement", title: "Market360 opens its public tester program", excerpt: "We're inviting the community to help shape the next era of Market360.", date: "Jun 12, 2026", readTime: "4 min read", image: "/brand/news-tester-launch.jpg" },
+  { slug: "wallet-2-launch" as const, href: "/news/wallet-2-launch" as const, category: "Product", title: "Wallet 2.0 ships: faster settlements, lower fees", excerpt: "Get paid in minutes with our re-engineered wallet.", date: "Jun 04, 2026", readTime: "5 min read", image: "/brand/news-wallet.jpg" },
+  { slug: "smarter-search" as const, href: "/news/smarter-search" as const, category: "Update", title: "Smarter search rolls out to all users", excerpt: "A redesigned discovery engine helps buyers find exactly what they want.", date: "May 22, 2026", readTime: "3 min read", image: "/brand/news-search.jpg" },
+
 ];
 import {
   ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
