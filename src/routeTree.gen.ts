@@ -35,6 +35,7 @@ import { Route as NewsSmarterSearchRouteImport } from './routes/news.smarter-sea
 import { Route as NewsSellerDashboardRefreshRouteImport } from './routes/news.seller-dashboard-refresh'
 import { Route as NewsRoadmapQ3RouteImport } from './routes/news.roadmap-q3'
 import { Route as NewsFraudProtectionUpdateRouteImport } from './routes/news.fraud-protection-update'
+import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
 import { Route as GiftCardsBronzeRouteImport } from './routes/gift-cards.bronze'
 import { Route as ApiPublicInvestorInterestRouteImport } from './routes/api/public/investor-interest'
 
@@ -170,6 +171,11 @@ const NewsFraudProtectionUpdateRoute =
     path: '/news/fraud-protection-update',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GiftCardsSilverRoute = GiftCardsSilverRouteImport.update({
+  id: '/silver',
+  path: '/silver',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const GiftCardsBronzeRoute = GiftCardsBronzeRouteImport.update({
   id: '/bronze',
   path: '/bronze',
@@ -202,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -232,6 +239,7 @@ export interface FileRoutesByTo {
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -263,6 +271,7 @@ export interface FileRoutesById {
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -295,6 +304,7 @@ export interface FileRouteTypes {
     | '/tester'
     | '/wallet'
     | '/gift-cards/bronze'
+    | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -325,6 +335,7 @@ export interface FileRouteTypes {
     | '/tester'
     | '/wallet'
     | '/gift-cards/bronze'
+    | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -355,6 +366,7 @@ export interface FileRouteTypes {
     | '/tester'
     | '/wallet'
     | '/gift-cards/bronze'
+    | '/gift-cards/silver'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -580,6 +592,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsFraudProtectionUpdateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gift-cards/silver': {
+      id: '/gift-cards/silver'
+      path: '/silver'
+      fullPath: '/gift-cards/silver'
+      preLoaderRoute: typeof GiftCardsSilverRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/gift-cards/bronze': {
       id: '/gift-cards/bronze'
       path: '/bronze'
@@ -599,10 +618,12 @@ declare module '@tanstack/react-router' {
 
 interface GiftCardsRouteChildren {
   GiftCardsBronzeRoute: typeof GiftCardsBronzeRoute
+  GiftCardsSilverRoute: typeof GiftCardsSilverRoute
 }
 
 const GiftCardsRouteChildren: GiftCardsRouteChildren = {
   GiftCardsBronzeRoute: GiftCardsBronzeRoute,
+  GiftCardsSilverRoute: GiftCardsSilverRoute,
 }
 
 const GiftCardsRouteWithChildren = GiftCardsRoute._addFileChildren(
