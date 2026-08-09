@@ -981,7 +981,7 @@ function LatestNews() {
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {posts.map((p: typeof newsPosts[number], i: number) => (
             <Reveal key={p.slug} delay={i * 90}>
-              <Link to="/news/$slug" params={{ slug: p.slug }} className="surface-card surface-card-hover block overflow-hidden">
+              <Link to={p.href} className="surface-card surface-card-hover block overflow-hidden">
                 <ImgFade src={p.image} alt={p.title} className="aspect-[16/10]" />
                 <div className="p-5">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
