@@ -38,6 +38,7 @@ import { Route as NewsFraudProtectionUpdateRouteImport } from './routes/news.fra
 import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
 import { Route as GiftCardsPlatinumRouteImport } from './routes/gift-cards.platinum'
 import { Route as GiftCardsGoldRouteImport } from './routes/gift-cards.gold'
+import { Route as GiftCardsDiamondRouteImport } from './routes/gift-cards.diamond'
 import { Route as GiftCardsBronzeRouteImport } from './routes/gift-cards.bronze'
 import { Route as ApiPublicInvestorInterestRouteImport } from './routes/api/public/investor-interest'
 
@@ -188,6 +189,11 @@ const GiftCardsGoldRoute = GiftCardsGoldRouteImport.update({
   path: '/gold',
   getParentRoute: () => GiftCardsRoute,
 } as any)
+const GiftCardsDiamondRoute = GiftCardsDiamondRouteImport.update({
+  id: '/diamond',
+  path: '/diamond',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const GiftCardsBronzeRoute = GiftCardsBronzeRouteImport.update({
   id: '/bronze',
   path: '/bronze',
@@ -220,6 +226,7 @@ export interface FileRoutesByFullPath {
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/diamond': typeof GiftCardsDiamondRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
@@ -253,6 +260,7 @@ export interface FileRoutesByTo {
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/diamond': typeof GiftCardsDiamondRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
@@ -287,6 +295,7 @@ export interface FileRoutesById {
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
   '/gift-cards/bronze': typeof GiftCardsBronzeRoute
+  '/gift-cards/diamond': typeof GiftCardsDiamondRoute
   '/gift-cards/gold': typeof GiftCardsGoldRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
@@ -322,6 +331,7 @@ export interface FileRouteTypes {
     | '/tester'
     | '/wallet'
     | '/gift-cards/bronze'
+    | '/gift-cards/diamond'
     | '/gift-cards/gold'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/tester'
     | '/wallet'
     | '/gift-cards/bronze'
+    | '/gift-cards/diamond'
     | '/gift-cards/gold'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
@@ -388,6 +399,7 @@ export interface FileRouteTypes {
     | '/tester'
     | '/wallet'
     | '/gift-cards/bronze'
+    | '/gift-cards/diamond'
     | '/gift-cards/gold'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
@@ -637,6 +649,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GiftCardsGoldRouteImport
       parentRoute: typeof GiftCardsRoute
     }
+    '/gift-cards/diamond': {
+      id: '/gift-cards/diamond'
+      path: '/diamond'
+      fullPath: '/gift-cards/diamond'
+      preLoaderRoute: typeof GiftCardsDiamondRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/gift-cards/bronze': {
       id: '/gift-cards/bronze'
       path: '/bronze'
@@ -656,6 +675,7 @@ declare module '@tanstack/react-router' {
 
 interface GiftCardsRouteChildren {
   GiftCardsBronzeRoute: typeof GiftCardsBronzeRoute
+  GiftCardsDiamondRoute: typeof GiftCardsDiamondRoute
   GiftCardsGoldRoute: typeof GiftCardsGoldRoute
   GiftCardsPlatinumRoute: typeof GiftCardsPlatinumRoute
   GiftCardsSilverRoute: typeof GiftCardsSilverRoute
@@ -663,6 +683,7 @@ interface GiftCardsRouteChildren {
 
 const GiftCardsRouteChildren: GiftCardsRouteChildren = {
   GiftCardsBronzeRoute: GiftCardsBronzeRoute,
+  GiftCardsDiamondRoute: GiftCardsDiamondRoute,
   GiftCardsGoldRoute: GiftCardsGoldRoute,
   GiftCardsPlatinumRoute: GiftCardsPlatinumRoute,
   GiftCardsSilverRoute: GiftCardsSilverRoute,
