@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Counter } from "@/components/home/Counter";
 import { Marquee } from "@/components/home/Marquee";
+import { GiftCardsTeaser } from "@/components/home/GiftCardsTeaser";
 // Latest news cards — edit slugs/titles/images directly here.
 const newsPosts = [
   { slug: "tester-program-launch" as const, href: "/news/tester-program-launch" as const, category: "Announcement", title: "Market360 opens its public tester program", excerpt: "We're inviting the community to help shape the next era of Market360.", date: "Jun 12, 2026", readTime: "4 min read", image: "/brand/news-tester-launch.jpg" },
@@ -1243,6 +1244,7 @@ function Home() {
       <LiveLedger />
       <HowItWorks />
       <CategoriesShowcase />
+      <GiftCardsTeaser />
       <WalletShowcase />
       <WhyMarket360 />
       <Stats />
