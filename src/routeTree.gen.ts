@@ -35,6 +35,7 @@ import { Route as NewsSmarterSearchRouteImport } from './routes/news.smarter-sea
 import { Route as NewsSellerDashboardRefreshRouteImport } from './routes/news.seller-dashboard-refresh'
 import { Route as NewsRoadmapQ3RouteImport } from './routes/news.roadmap-q3'
 import { Route as NewsFraudProtectionUpdateRouteImport } from './routes/news.fraud-protection-update'
+import { Route as GiftCardsBronzeRouteImport } from './routes/gift-cards.bronze'
 import { Route as ApiPublicInvestorInterestRouteImport } from './routes/api/public/investor-interest'
 
 const WalletRoute = WalletRouteImport.update({
@@ -169,6 +170,11 @@ const NewsFraudProtectionUpdateRoute =
     path: '/news/fraud-protection-update',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GiftCardsBronzeRoute = GiftCardsBronzeRouteImport.update({
+  id: '/bronze',
+  path: '/bronze',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const ApiPublicInvestorInterestRoute =
   ApiPublicInvestorInterestRouteImport.update({
     id: '/api/public/investor-interest',
@@ -184,7 +190,7 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
-  '/gift-cards': typeof GiftCardsRoute
+  '/gift-cards': typeof GiftCardsRouteWithChildren
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -195,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -213,7 +220,7 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
-  '/gift-cards': typeof GiftCardsRoute
+  '/gift-cards': typeof GiftCardsRouteWithChildren
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -224,6 +231,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -243,7 +251,7 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
-  '/gift-cards': typeof GiftCardsRoute
+  '/gift-cards': typeof GiftCardsRouteWithChildren
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -254,6 +262,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/tester': typeof TesterRoute
   '/wallet': typeof WalletRoute
+  '/gift-cards/bronze': typeof GiftCardsBronzeRoute
   '/news/fraud-protection-update': typeof NewsFraudProtectionUpdateRoute
   '/news/roadmap-q3': typeof NewsRoadmapQ3Route
   '/news/seller-dashboard-refresh': typeof NewsSellerDashboardRefreshRoute
@@ -285,6 +294,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/gift-cards/bronze'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -314,6 +324,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/gift-cards/bronze'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -343,6 +354,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tester'
     | '/wallet'
+    | '/gift-cards/bronze'
     | '/news/fraud-protection-update'
     | '/news/roadmap-q3'
     | '/news/seller-dashboard-refresh'
@@ -362,7 +374,7 @@ export interface RootRouteChildren {
   FeaturesRoute: typeof FeaturesRoute
   ForBuyersRoute: typeof ForBuyersRoute
   ForSellersRoute: typeof ForSellersRoute
-  GiftCardsRoute: typeof GiftCardsRoute
+  GiftCardsRoute: typeof GiftCardsRouteWithChildren
   HelpRoute: typeof HelpRoute
   InvestmentsRoute: typeof InvestmentsRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -568,6 +580,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsFraudProtectionUpdateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gift-cards/bronze': {
+      id: '/gift-cards/bronze'
+      path: '/bronze'
+      fullPath: '/gift-cards/bronze'
+      preLoaderRoute: typeof GiftCardsBronzeRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/api/public/investor-interest': {
       id: '/api/public/investor-interest'
       path: '/api/public/investor-interest'
@@ -578,6 +597,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface GiftCardsRouteChildren {
+  GiftCardsBronzeRoute: typeof GiftCardsBronzeRoute
+}
+
+const GiftCardsRouteChildren: GiftCardsRouteChildren = {
+  GiftCardsBronzeRoute: GiftCardsBronzeRoute,
+}
+
+const GiftCardsRouteWithChildren = GiftCardsRoute._addFileChildren(
+  GiftCardsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -586,7 +617,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesRoute: FeaturesRoute,
   ForBuyersRoute: ForBuyersRoute,
   ForSellersRoute: ForSellersRoute,
-  GiftCardsRoute: GiftCardsRoute,
+  GiftCardsRoute: GiftCardsRouteWithChildren,
   HelpRoute: HelpRoute,
   InvestmentsRoute: InvestmentsRoute,
   PrivacyRoute: PrivacyRoute,
