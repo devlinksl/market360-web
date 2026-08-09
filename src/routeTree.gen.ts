@@ -19,6 +19,7 @@ import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as InvestmentsRouteImport } from './routes/investments'
 import { Route as HelpRouteImport } from './routes/help'
+import { Route as GiftCardsRouteImport } from './routes/gift-cards'
 import { Route as ForSellersRouteImport } from './routes/for-sellers'
 import { Route as ForBuyersRouteImport } from './routes/for-buyers'
 import { Route as FeaturesRouteImport } from './routes/features'
@@ -84,6 +85,11 @@ const InvestmentsRoute = InvestmentsRouteImport.update({
 const HelpRoute = HelpRouteImport.update({
   id: '/help',
   path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiftCardsRoute = GiftCardsRouteImport.update({
+  id: '/gift-cards',
+  path: '/gift-cards',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForSellersRoute = ForSellersRouteImport.update({
@@ -178,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
+  '/gift-cards': typeof GiftCardsRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -206,6 +213,7 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
+  '/gift-cards': typeof GiftCardsRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -235,6 +243,7 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
+  '/gift-cards': typeof GiftCardsRoute
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -265,6 +274,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/for-buyers'
     | '/for-sellers'
+    | '/gift-cards'
     | '/help'
     | '/investments'
     | '/privacy'
@@ -293,6 +303,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/for-buyers'
     | '/for-sellers'
+    | '/gift-cards'
     | '/help'
     | '/investments'
     | '/privacy'
@@ -321,6 +332,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/for-buyers'
     | '/for-sellers'
+    | '/gift-cards'
     | '/help'
     | '/investments'
     | '/privacy'
@@ -350,6 +362,7 @@ export interface RootRouteChildren {
   FeaturesRoute: typeof FeaturesRoute
   ForBuyersRoute: typeof ForBuyersRoute
   ForSellersRoute: typeof ForSellersRoute
+  GiftCardsRoute: typeof GiftCardsRoute
   HelpRoute: typeof HelpRoute
   InvestmentsRoute: typeof InvestmentsRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -441,6 +454,13 @@ declare module '@tanstack/react-router' {
       path: '/help'
       fullPath: '/help'
       preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gift-cards': {
+      id: '/gift-cards'
+      path: '/gift-cards'
+      fullPath: '/gift-cards'
+      preLoaderRoute: typeof GiftCardsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/for-sellers': {
@@ -566,6 +586,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesRoute: FeaturesRoute,
   ForBuyersRoute: ForBuyersRoute,
   ForSellersRoute: ForSellersRoute,
+  GiftCardsRoute: GiftCardsRoute,
   HelpRoute: HelpRoute,
   InvestmentsRoute: InvestmentsRoute,
   PrivacyRoute: PrivacyRoute,
