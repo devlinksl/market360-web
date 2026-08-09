@@ -28,6 +28,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as GiftCardsIndexRouteImport } from './routes/gift-cards.index'
 import { Route as NewsWallet2LaunchRouteImport } from './routes/news.wallet-2-launch'
 import { Route as NewsTesterSpotlightsRouteImport } from './routes/news.tester-spotlights'
 import { Route as NewsTesterProgramLaunchRouteImport } from './routes/news.tester-program-launch'
@@ -138,6 +139,11 @@ const NewsIndexRoute = NewsIndexRouteImport.update({
   path: '/news/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GiftCardsIndexRoute = GiftCardsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GiftCardsRoute,
+} as any)
 const NewsWallet2LaunchRoute = NewsWallet2LaunchRouteImport.update({
   id: '/news/wallet-2-launch',
   path: '/news/wallet-2-launch',
@@ -244,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
@@ -255,7 +262,6 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/for-buyers': typeof ForBuyersRoute
   '/for-sellers': typeof ForSellersRoute
-  '/gift-cards': typeof GiftCardsRouteWithChildren
   '/help': typeof HelpRoute
   '/investments': typeof InvestmentsRoute
   '/privacy': typeof PrivacyRoute
@@ -279,6 +285,7 @@ export interface FileRoutesByTo {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/gift-cards': typeof GiftCardsIndexRoute
   '/news': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
@@ -315,6 +322,7 @@ export interface FileRoutesById {
   '/news/tester-program-launch': typeof NewsTesterProgramLaunchRoute
   '/news/tester-spotlights': typeof NewsTesterSpotlightsRoute
   '/news/wallet-2-launch': typeof NewsWallet2LaunchRoute
+  '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
 }
@@ -352,6 +360,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
   fileRoutesByTo: FileRoutesByTo
@@ -363,7 +372,6 @@ export interface FileRouteTypes {
     | '/features'
     | '/for-buyers'
     | '/for-sellers'
-    | '/gift-cards'
     | '/help'
     | '/investments'
     | '/privacy'
@@ -387,6 +395,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/gift-cards'
     | '/news'
     | '/api/public/investor-interest'
   id:
@@ -422,6 +431,7 @@ export interface FileRouteTypes {
     | '/news/tester-program-launch'
     | '/news/tester-spotlights'
     | '/news/wallet-2-launch'
+    | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
   fileRoutesById: FileRoutesById
@@ -591,6 +601,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gift-cards/': {
+      id: '/gift-cards/'
+      path: '/'
+      fullPath: '/gift-cards/'
+      preLoaderRoute: typeof GiftCardsIndexRouteImport
+      parentRoute: typeof GiftCardsRoute
+    }
     '/news/wallet-2-launch': {
       id: '/news/wallet-2-launch'
       path: '/news/wallet-2-launch'
@@ -699,6 +716,7 @@ interface GiftCardsRouteChildren {
   GiftCardsM360SuperRoute: typeof GiftCardsM360SuperRoute
   GiftCardsPlatinumRoute: typeof GiftCardsPlatinumRoute
   GiftCardsSilverRoute: typeof GiftCardsSilverRoute
+  GiftCardsIndexRoute: typeof GiftCardsIndexRoute
 }
 
 const GiftCardsRouteChildren: GiftCardsRouteChildren = {
@@ -708,6 +726,7 @@ const GiftCardsRouteChildren: GiftCardsRouteChildren = {
   GiftCardsM360SuperRoute: GiftCardsM360SuperRoute,
   GiftCardsPlatinumRoute: GiftCardsPlatinumRoute,
   GiftCardsSilverRoute: GiftCardsSilverRoute,
+  GiftCardsIndexRoute: GiftCardsIndexRoute,
 }
 
 const GiftCardsRouteWithChildren = GiftCardsRoute._addFileChildren(
