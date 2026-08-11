@@ -32,6 +32,7 @@ import { Route as GiftCardsIndexRouteImport } from './routes/gift-cards.index'
 import { Route as NewsMarket360TestersProgramRouteImport } from './routes/news.market360-testers-program'
 import { Route as NewsMarket360GiftCardsLaunchRouteImport } from './routes/news.market360-gift-cards-launch'
 import { Route as NewsMarket360GiftCardCollectionRouteImport } from './routes/news.market360-gift-card-collection'
+import { Route as NewsMarket360AndroidAppLiveRouteImport } from './routes/news.market360-android-app-live'
 import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
 import { Route as GiftCardsPlatinumRouteImport } from './routes/gift-cards.platinum'
 import { Route as GiftCardsM360SuperRouteImport } from './routes/gift-cards.m360-super'
@@ -158,6 +159,12 @@ const NewsMarket360GiftCardCollectionRoute =
     path: '/news/market360-gift-card-collection',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NewsMarket360AndroidAppLiveRoute =
+  NewsMarket360AndroidAppLiveRouteImport.update({
+    id: '/news/market360-android-app-live',
+    path: '/news/market360-android-app-live',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GiftCardsSilverRoute = GiftCardsSilverRouteImport.update({
   id: '/silver',
   path: '/silver',
@@ -220,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-android-app-live': typeof NewsMarket360AndroidAppLiveRoute
   '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/news/market360-testers-program': typeof NewsMarket360TestersProgramRoute
@@ -251,6 +259,7 @@ export interface FileRoutesByTo {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-android-app-live': typeof NewsMarket360AndroidAppLiveRoute
   '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/news/market360-testers-program': typeof NewsMarket360TestersProgramRoute
@@ -284,6 +293,7 @@ export interface FileRoutesById {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-android-app-live': typeof NewsMarket360AndroidAppLiveRoute
   '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/news/market360-testers-program': typeof NewsMarket360TestersProgramRoute
@@ -318,6 +328,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-android-app-live'
     | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
     | '/news/market360-testers-program'
@@ -349,6 +360,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-android-app-live'
     | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
     | '/news/market360-testers-program'
@@ -381,6 +393,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-android-app-live'
     | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
     | '/news/market360-testers-program'
@@ -408,6 +421,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TesterRoute: typeof TesterRoute
   WalletRoute: typeof WalletRoute
+  NewsMarket360AndroidAppLiveRoute: typeof NewsMarket360AndroidAppLiveRoute
   NewsMarket360GiftCardCollectionRoute: typeof NewsMarket360GiftCardCollectionRoute
   NewsMarket360GiftCardsLaunchRoute: typeof NewsMarket360GiftCardsLaunchRoute
   NewsMarket360TestersProgramRoute: typeof NewsMarket360TestersProgramRoute
@@ -578,6 +592,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsMarket360GiftCardCollectionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/market360-android-app-live': {
+      id: '/news/market360-android-app-live'
+      path: '/news/market360-android-app-live'
+      fullPath: '/news/market360-android-app-live'
+      preLoaderRoute: typeof NewsMarket360AndroidAppLiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gift-cards/silver': {
       id: '/gift-cards/silver'
       path: '/silver'
@@ -673,6 +694,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TesterRoute: TesterRoute,
   WalletRoute: WalletRoute,
+  NewsMarket360AndroidAppLiveRoute: NewsMarket360AndroidAppLiveRoute,
   NewsMarket360GiftCardCollectionRoute: NewsMarket360GiftCardCollectionRoute,
   NewsMarket360GiftCardsLaunchRoute: NewsMarket360GiftCardsLaunchRoute,
   NewsMarket360TestersProgramRoute: NewsMarket360TestersProgramRoute,

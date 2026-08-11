@@ -1,91 +1,100 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { PageHero } from "@/components/PageHero";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Gift, Newspaper } from "lucide-react";
 
 /* =============================================================================
-   News index — all articles listed here.
-   To add an article: create a new file src/routes/news.<slug>.tsx
-   and add a matching entry below. No shared data file, no dynamic route.
+   News index — the Market360 newsroom.
+   To add an article: create src/routes/news.<slug>.tsx and add an entry below.
+   No shared data file, no dynamic route — everything is editable in place.
    ============================================================================= */
 
 const ARTICLES = [
   {
-    to: "/news/tester-program-launch",
+    to: "/news/market360-gift-cards-launch" as const,
     category: "Announcement",
-    title: "Market360 opens its public tester program",
-    excerpt: "We're inviting the community to help shape the next era of Market360 — with early access, perks, and direct influence on the roadmap.",
-    date: "Jun 12, 2026",
-    readTime: "4 min read",
-    image: "/brand/news-tester-launch.jpg",
-  },
-  {
-    to: "/news/wallet-2-launch",
-    category: "Product",
-    title: "Wallet 2.0 ships: faster settlements, lower fees",
-    excerpt: "Get paid in minutes with our re-engineered wallet.",
-    date: "Jun 04, 2026",
+    title: "Introducing Market360 Gift Cards",
+    excerpt:
+      "Six e-gift card tiers — from Le 100 to Le 1,000 — are now part of Market360. Delivered digitally, redeemed in the app, spendable across the whole marketplace.",
+    date: "Jun 20, 2026",
     readTime: "5 min read",
-    image: "/brand/news-wallet.jpg",
+    image: "/brand/market360-gift-cards-hero.webp",
+    alt: "The Market360 e-gift card collection on a green diagonal backdrop",
   },
   {
-    to: "/news/smarter-search",
-    category: "Update",
-    title: "Smarter search rolls out to all users",
-    excerpt: "A redesigned discovery engine helps buyers find exactly what they want.",
-    date: "May 22, 2026",
-    readTime: "3 min read",
-    image: "/brand/news-search.jpg",
-  },
-  {
-    to: "/news/roadmap-q3",
-    category: "Roadmap",
-    title: "What's coming this quarter",
-    excerpt: "Storefronts, bulk uploads, smarter analytics, and more.",
-    date: "May 10, 2026",
-    readTime: "6 min read",
-    image: "/brand/news-roadmap.jpg",
-  },
-  {
-    to: "/news/fraud-protection-update",
-    category: "Trust",
-    title: "New fraud protection layer goes live",
-    excerpt: "Our updated AI model flags risky activity in real-time.",
-    date: "Apr 28, 2026",
+    to: "/news/market360-gift-card-collection" as const,
+    category: "Collection",
+    title: "A closer look at the Market360 Gift Card collection",
+    excerpt:
+      "Bronze to M360 Super: a visual tour of all six cards, what each is designed for, and how the denominations were chosen.",
+    date: "Jun 18, 2026",
     readTime: "4 min read",
-    image: "/brand/news-fraud.jpg",
+    image: "/brand/market360-m360-super-gift-card.webp",
+    alt: "Market360 M360 Super e-gift card worth Le 1,000",
   },
   {
-    to: "/news/tester-spotlights",
+    to: "/news/market360-testers-program" as const,
     category: "Community",
-    title: "Tester spotlights: meet 5 of our top contributors",
-    excerpt: "The people helping us ship better, faster.",
-    date: "Apr 15, 2026",
+    title: "Inside the Market360 Testers Program",
+    excerpt:
+      "Early access for shoppers and sellers — and a direct line into what Market360 builds next.",
+    date: "Jun 16, 2026",
     readTime: "5 min read",
-    image: "/brand/news-community.jpg",
+    image: "/brand/news-tester-launch.jpg",
+    alt: "Market360 testers using the marketplace app",
   },
   {
-    to: "/news/seller-dashboard-refresh",
+    to: "/news/market360-android-app-live" as const,
     category: "Product",
-    title: "Seller dashboard gets a refresh",
-    excerpt: "Cleaner layout, faster insights, smoother workflows.",
-    date: "Apr 02, 2026",
-    readTime: "3 min read",
-    image: "/brand/news-dashboard.jpg",
+    title: "The Market360 Android app is live on Google Play",
+    excerpt:
+      "The full marketplace — browsing, selling, the wallet and gift cards — now fits in your pocket.",
+    date: "Jun 14, 2026",
+    readTime: "4 min read",
+    image: "/brand/market360-android-app.webp",
+    alt: "Download Market360 today — the Android app on a phone",
   },
-] as const;
+];
+
+const TITLE = "Market360 Newsroom — Official announcements & updates";
+const DESC =
+  "Official Market360 announcements: gift cards, the Testers Program, and the Android app. Straight from the team building Sierra Leone's online shopping marketplace.";
+const URL = "https://market360.shop/news";
 
 export const Route = createFileRoute("/news/")({
   head: () => ({
     meta: [
-      { title: "News & Updates — Market360" },
-      { name: "description", content: "Latest product updates, announcements, and roadmap news from the Market360 marketplace team." },
-      { property: "og:title", content: "Market360 News & Updates" },
-      { property: "og:description", content: "Stay in the loop with the latest from Market360." },
-      { property: "og:url", content: "https://market360-web.lovable.app/news" },
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: "Market360 Newsroom" },
+      { property: "og:description", content: DESC },
+      { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://market360.shop/brand/market360-gift-cards-hero.webp" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://market360.shop/brand/market360-gift-cards-hero.webp" },
     ],
-    links: [{ rel: "canonical", href: "https://market360-web.lovable.app/news" }],
+    links: [{ rel: "canonical", href: URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Market360 Newsroom",
+          description: DESC,
+          url: URL,
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: ARTICLES.map((a, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: a.title,
+              url: `https://market360.shop${a.to}`,
+            })),
+          },
+        }),
+      },
+    ],
   }),
   component: NewsPage,
 });
@@ -94,59 +103,98 @@ function NewsPage() {
   const [featured, ...rest] = ARTICLES;
   return (
     <SiteLayout>
-      <PageHero
-        eyebrow="News & Updates"
-        title={<>Fresh from <span className="gradient-text">Market360.</span></>}
-        description="Announcements, product updates, and what's next."
-      />
+      {/* Masthead */}
+      <section className="border-b border-border bg-surface">
+        <div className="container-pro py-14 md:py-20">
+          <span className="eyebrow"><Newspaper className="h-3 w-3" /> Newsroom</span>
+          <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            Official news from <span className="gradient-text">Market360.</span>
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+            Product launches, program announcements and platform updates — published by the team
+            building Sierra Leone's online shopping marketplace.
+          </p>
+        </div>
+      </section>
 
+      {/* Featured story */}
       <section className="section-pad">
         <div className="container-pro">
-          <Link
-            to={featured.to}
-            className="block surface-card surface-card-hover overflow-hidden p-0"
-          >
-            <div className="grid md:grid-cols-[1.2fr_1fr]">
-              <div className="relative aspect-[16/10] md:aspect-auto overflow-hidden bg-surface">
-                <img src={featured.image} alt={featured.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" />
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Featured story</p>
+          <Link to={featured.to} className="group mt-5 block">
+            <div className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-border bg-surface">
+                <img
+                  src={featured.image}
+                  alt={featured.alt}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
               </div>
-              <div className="p-7 md:p-10 flex flex-col justify-center">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">Featured · {featured.category}</span>
-                <h2 className="mt-3 text-2xl md:text-3xl font-bold leading-tight">{featured.title}</h2>
-                <p className="mt-3 text-muted-foreground">{featured.excerpt}</p>
-                <div className="mt-5 flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground">{featured.date} · {featured.readTime}</p>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">Read more <ArrowRight className="h-4 w-4" /></span>
-                </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-primary">{featured.category}</span>
+                <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+                  {featured.title}
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">{featured.excerpt}</p>
+                <p className="mt-5 text-sm text-muted-foreground">{featured.date} · {featured.readTime}</p>
+                <span className="mt-6 inline-flex items-center gap-1.5 font-semibold text-primary group-hover:underline">
+                  Read the story <ArrowRight className="h-4 w-4" />
+                </span>
               </div>
             </div>
           </Link>
+        </div>
+      </section>
 
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold">All updates</h2>
-            <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {rest.map((p) => (
-                <Link
-                  key={p.to}
-                  to={p.to}
-                  className="surface-card surface-card-hover overflow-hidden p-0 flex flex-col"
-                >
-                  <div className="relative aspect-[16/9] overflow-hidden bg-surface">
-                    <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" decoding="async" />
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-primary">{p.category}</span>
-                    <h3 className="mt-2 font-semibold text-lg leading-snug">{p.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground flex-1">{p.excerpt}</p>
-                    <div className="mt-4 flex items-center justify-between">
-                      <p className="text-xs text-muted-foreground">{p.date}</p>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">Read <ArrowRight className="h-3.5 w-3.5" /></span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+      {/* Editorial grid */}
+      <section className="section-pad pt-0">
+        <div className="container-pro">
+          <div className="flex items-end justify-between border-t border-border pt-10">
+            <h2 className="text-2xl font-bold tracking-tight">Latest stories</h2>
           </div>
+          <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {rest.map((p) => (
+              <Link key={p.to} to={p.to} className="group flex flex-col">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-surface">
+                  <img
+                    src={p.image}
+                    alt={p.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <span className="mt-5 text-xs font-bold uppercase tracking-wider text-primary">{p.category}</span>
+                <h3 className="mt-2 text-xl font-semibold leading-snug group-hover:text-primary">{p.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-muted-foreground">{p.excerpt}</p>
+                <p className="mt-4 text-xs text-muted-foreground">{p.date} · {p.readTime}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ecosystem links */}
+      <section className="section-pad pt-0">
+        <div className="container-pro grid gap-6 md:grid-cols-3">
+          <Link to="/gift-cards" className="surface-card surface-card-hover p-6">
+            <Gift className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-semibold">Market360 Gift Cards</p>
+            <p className="mt-1 text-sm text-muted-foreground">Six denominations, delivered instantly.</p>
+          </Link>
+          <Link to="/tester" className="surface-card surface-card-hover p-6">
+            <Newspaper className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-semibold">Testers Program</p>
+            <p className="mt-1 text-sm text-muted-foreground">Get early access and shape the roadmap.</p>
+          </Link>
+          <Link to="/download" className="surface-card surface-card-hover p-6">
+            <ArrowRight className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-semibold">Download the app</p>
+            <p className="mt-1 text-sm text-muted-foreground">Market360 for Android on Google Play.</p>
+          </Link>
         </div>
       </section>
     </SiteLayout>
