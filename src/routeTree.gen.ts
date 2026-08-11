@@ -29,6 +29,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as GiftCardsIndexRouteImport } from './routes/gift-cards.index'
+import { Route as NewsMarket360GiftCardsLaunchRouteImport } from './routes/news.market360-gift-cards-launch'
 import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
 import { Route as GiftCardsPlatinumRouteImport } from './routes/gift-cards.platinum'
 import { Route as GiftCardsM360SuperRouteImport } from './routes/gift-cards.m360-super'
@@ -137,6 +138,12 @@ const GiftCardsIndexRoute = GiftCardsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => GiftCardsRoute,
 } as any)
+const NewsMarket360GiftCardsLaunchRoute =
+  NewsMarket360GiftCardsLaunchRouteImport.update({
+    id: '/news/market360-gift-cards-launch',
+    path: '/news/market360-gift-cards-launch',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GiftCardsSilverRoute = GiftCardsSilverRouteImport.update({
   id: '/silver',
   path: '/silver',
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
@@ -227,6 +235,7 @@ export interface FileRoutesByTo {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/gift-cards': typeof GiftCardsIndexRoute
   '/news': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
@@ -257,6 +266,7 @@ export interface FileRoutesById {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
@@ -288,6 +298,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-gift-cards-launch'
     | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
@@ -316,6 +327,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-gift-cards-launch'
     | '/gift-cards'
     | '/news'
     | '/api/public/investor-interest'
@@ -345,6 +357,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-gift-cards-launch'
     | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
@@ -369,6 +382,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TesterRoute: typeof TesterRoute
   WalletRoute: typeof WalletRoute
+  NewsMarket360GiftCardsLaunchRoute: typeof NewsMarket360GiftCardsLaunchRoute
   NewsIndexRoute: typeof NewsIndexRoute
   ApiPublicInvestorInterestRoute: typeof ApiPublicInvestorInterestRoute
 }
@@ -515,6 +529,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GiftCardsIndexRouteImport
       parentRoute: typeof GiftCardsRoute
     }
+    '/news/market360-gift-cards-launch': {
+      id: '/news/market360-gift-cards-launch'
+      path: '/news/market360-gift-cards-launch'
+      fullPath: '/news/market360-gift-cards-launch'
+      preLoaderRoute: typeof NewsMarket360GiftCardsLaunchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gift-cards/silver': {
       id: '/gift-cards/silver'
       path: '/silver'
@@ -610,6 +631,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TesterRoute: TesterRoute,
   WalletRoute: WalletRoute,
+  NewsMarket360GiftCardsLaunchRoute: NewsMarket360GiftCardsLaunchRoute,
   NewsIndexRoute: NewsIndexRoute,
   ApiPublicInvestorInterestRoute: ApiPublicInvestorInterestRoute,
 }
