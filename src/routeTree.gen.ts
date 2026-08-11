@@ -29,6 +29,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as GiftCardsIndexRouteImport } from './routes/gift-cards.index'
+import { Route as NewsMarket360TestersProgramRouteImport } from './routes/news.market360-testers-program'
 import { Route as NewsMarket360GiftCardsLaunchRouteImport } from './routes/news.market360-gift-cards-launch'
 import { Route as NewsMarket360GiftCardCollectionRouteImport } from './routes/news.market360-gift-card-collection'
 import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
@@ -139,6 +140,12 @@ const GiftCardsIndexRoute = GiftCardsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => GiftCardsRoute,
 } as any)
+const NewsMarket360TestersProgramRoute =
+  NewsMarket360TestersProgramRouteImport.update({
+    id: '/news/market360-testers-program',
+    path: '/news/market360-testers-program',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const NewsMarket360GiftCardsLaunchRoute =
   NewsMarket360GiftCardsLaunchRouteImport.update({
     id: '/news/market360-gift-cards-launch',
@@ -215,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
+  '/news/market360-testers-program': typeof NewsMarket360TestersProgramRoute
   '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
@@ -245,6 +253,7 @@ export interface FileRoutesByTo {
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
+  '/news/market360-testers-program': typeof NewsMarket360TestersProgramRoute
   '/gift-cards': typeof GiftCardsIndexRoute
   '/news': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
@@ -277,6 +286,7 @@ export interface FileRoutesById {
   '/gift-cards/silver': typeof GiftCardsSilverRoute
   '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
+  '/news/market360-testers-program': typeof NewsMarket360TestersProgramRoute
   '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/api/public/investor-interest': typeof ApiPublicInvestorInterestRoute
@@ -310,6 +320,7 @@ export interface FileRouteTypes {
     | '/gift-cards/silver'
     | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
+    | '/news/market360-testers-program'
     | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
@@ -340,6 +351,7 @@ export interface FileRouteTypes {
     | '/gift-cards/silver'
     | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
+    | '/news/market360-testers-program'
     | '/gift-cards'
     | '/news'
     | '/api/public/investor-interest'
@@ -371,6 +383,7 @@ export interface FileRouteTypes {
     | '/gift-cards/silver'
     | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
+    | '/news/market360-testers-program'
     | '/gift-cards/'
     | '/news/'
     | '/api/public/investor-interest'
@@ -397,6 +410,7 @@ export interface RootRouteChildren {
   WalletRoute: typeof WalletRoute
   NewsMarket360GiftCardCollectionRoute: typeof NewsMarket360GiftCardCollectionRoute
   NewsMarket360GiftCardsLaunchRoute: typeof NewsMarket360GiftCardsLaunchRoute
+  NewsMarket360TestersProgramRoute: typeof NewsMarket360TestersProgramRoute
   NewsIndexRoute: typeof NewsIndexRoute
   ApiPublicInvestorInterestRoute: typeof ApiPublicInvestorInterestRoute
 }
@@ -543,6 +557,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GiftCardsIndexRouteImport
       parentRoute: typeof GiftCardsRoute
     }
+    '/news/market360-testers-program': {
+      id: '/news/market360-testers-program'
+      path: '/news/market360-testers-program'
+      fullPath: '/news/market360-testers-program'
+      preLoaderRoute: typeof NewsMarket360TestersProgramRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news/market360-gift-cards-launch': {
       id: '/news/market360-gift-cards-launch'
       path: '/news/market360-gift-cards-launch'
@@ -654,6 +675,7 @@ const rootRouteChildren: RootRouteChildren = {
   WalletRoute: WalletRoute,
   NewsMarket360GiftCardCollectionRoute: NewsMarket360GiftCardCollectionRoute,
   NewsMarket360GiftCardsLaunchRoute: NewsMarket360GiftCardsLaunchRoute,
+  NewsMarket360TestersProgramRoute: NewsMarket360TestersProgramRoute,
   NewsIndexRoute: NewsIndexRoute,
   ApiPublicInvestorInterestRoute: ApiPublicInvestorInterestRoute,
 }
