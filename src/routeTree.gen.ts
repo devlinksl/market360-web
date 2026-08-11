@@ -30,6 +30,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as GiftCardsIndexRouteImport } from './routes/gift-cards.index'
 import { Route as NewsMarket360GiftCardsLaunchRouteImport } from './routes/news.market360-gift-cards-launch'
+import { Route as NewsMarket360GiftCardCollectionRouteImport } from './routes/news.market360-gift-card-collection'
 import { Route as GiftCardsSilverRouteImport } from './routes/gift-cards.silver'
 import { Route as GiftCardsPlatinumRouteImport } from './routes/gift-cards.platinum'
 import { Route as GiftCardsM360SuperRouteImport } from './routes/gift-cards.m360-super'
@@ -144,6 +145,12 @@ const NewsMarket360GiftCardsLaunchRoute =
     path: '/news/market360-gift-cards-launch',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NewsMarket360GiftCardCollectionRoute =
+  NewsMarket360GiftCardCollectionRouteImport.update({
+    id: '/news/market360-gift-card-collection',
+    path: '/news/market360-gift-card-collection',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GiftCardsSilverRoute = GiftCardsSilverRouteImport.update({
   id: '/silver',
   path: '/silver',
@@ -206,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
@@ -235,6 +243,7 @@ export interface FileRoutesByTo {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/gift-cards': typeof GiftCardsIndexRoute
   '/news': typeof NewsIndexRoute
@@ -266,6 +275,7 @@ export interface FileRoutesById {
   '/gift-cards/m360-super': typeof GiftCardsM360SuperRoute
   '/gift-cards/platinum': typeof GiftCardsPlatinumRoute
   '/gift-cards/silver': typeof GiftCardsSilverRoute
+  '/news/market360-gift-card-collection': typeof NewsMarket360GiftCardCollectionRoute
   '/news/market360-gift-cards-launch': typeof NewsMarket360GiftCardsLaunchRoute
   '/gift-cards/': typeof GiftCardsIndexRoute
   '/news/': typeof NewsIndexRoute
@@ -298,6 +308,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
     | '/gift-cards/'
     | '/news/'
@@ -327,6 +338,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
     | '/gift-cards'
     | '/news'
@@ -357,6 +369,7 @@ export interface FileRouteTypes {
     | '/gift-cards/m360-super'
     | '/gift-cards/platinum'
     | '/gift-cards/silver'
+    | '/news/market360-gift-card-collection'
     | '/news/market360-gift-cards-launch'
     | '/gift-cards/'
     | '/news/'
@@ -382,6 +395,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   TesterRoute: typeof TesterRoute
   WalletRoute: typeof WalletRoute
+  NewsMarket360GiftCardCollectionRoute: typeof NewsMarket360GiftCardCollectionRoute
   NewsMarket360GiftCardsLaunchRoute: typeof NewsMarket360GiftCardsLaunchRoute
   NewsIndexRoute: typeof NewsIndexRoute
   ApiPublicInvestorInterestRoute: typeof ApiPublicInvestorInterestRoute
@@ -536,6 +550,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsMarket360GiftCardsLaunchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/market360-gift-card-collection': {
+      id: '/news/market360-gift-card-collection'
+      path: '/news/market360-gift-card-collection'
+      fullPath: '/news/market360-gift-card-collection'
+      preLoaderRoute: typeof NewsMarket360GiftCardCollectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gift-cards/silver': {
       id: '/gift-cards/silver'
       path: '/silver'
@@ -631,6 +652,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   TesterRoute: TesterRoute,
   WalletRoute: WalletRoute,
+  NewsMarket360GiftCardCollectionRoute: NewsMarket360GiftCardCollectionRoute,
   NewsMarket360GiftCardsLaunchRoute: NewsMarket360GiftCardsLaunchRoute,
   NewsIndexRoute: NewsIndexRoute,
   ApiPublicInvestorInterestRoute: ApiPublicInvestorInterestRoute,
