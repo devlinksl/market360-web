@@ -3,13 +3,10 @@ import type {} from "@tanstack/react-start";
 
 // News articles — mirror this list when adding a new news.<slug>.tsx file.
 const newsPosts = [
-  { slug: "tester-program-launch", title: "Market360 opens its public tester program", excerpt: "Public tester program is now open.", date: "Jun 12, 2026", image: "/brand/news-tester-launch.jpg" },
-  { slug: "wallet-2-launch", title: "Wallet 2.0 ships: faster settlements, lower fees", excerpt: "Get paid in minutes.", date: "Jun 04, 2026", image: "/brand/news-wallet.jpg" },
-  { slug: "smarter-search", title: "Smarter search rolls out to all users", excerpt: "A redesigned discovery engine.", date: "May 22, 2026", image: "/brand/news-search.jpg" },
-  { slug: "roadmap-q3", title: "What's coming this quarter", excerpt: "Storefronts, bulk uploads, analytics.", date: "May 10, 2026", image: "/brand/news-roadmap.jpg" },
-  { slug: "fraud-protection-update", title: "New fraud protection layer goes live", excerpt: "AI model flags risky activity in real-time.", date: "Apr 28, 2026", image: "/brand/news-fraud.jpg" },
-  { slug: "tester-spotlights", title: "Tester spotlights: meet 5 of our top contributors", excerpt: "People helping us ship better.", date: "Apr 15, 2026", image: "/brand/news-community.jpg" },
-  { slug: "seller-dashboard-refresh", title: "Seller dashboard gets a refresh", excerpt: "Cleaner layout, faster insights.", date: "Apr 02, 2026", image: "/brand/news-dashboard.jpg" },
+  { slug: "market360-gift-cards-launch", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, delivered digitally and redeemed in the Market360 app.", date: "2026-06-20", image: "/brand/market360-gift-cards-hero.webp" },
+  { slug: "market360-gift-card-collection", title: "A closer look at the Market360 Gift Card collection", excerpt: "A visual tour of all six Market360 e-gift cards.", date: "2026-06-18", image: "/brand/market360-m360-super-gift-card.webp" },
+  { slug: "market360-testers-program", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, and a direct line into the roadmap.", date: "2026-06-16", image: "/brand/news-tester-launch.jpg" },
+  { slug: "market360-android-app-live", title: "The Market360 Android app is live on Google Play", excerpt: "The full marketplace on your phone.", date: "2026-06-14", image: "/brand/market360-android-app.webp" },
 ];
 
 const BASE_URL = "https://market360.shop";
@@ -40,22 +37,22 @@ const PAGE_ENTRIES: SitemapEntry[] = [
   { path: "/for-sellers", changefreq: "monthly", priority: "0.9" },
   { path: "/wallet", changefreq: "monthly", priority: "0.9" },
   { path: "/investments", changefreq: "weekly", priority: "0.95" },
-  { path: "/download", changefreq: "monthly", priority: "0.9", images: [{ loc: `${BASE_URL}/brand/flyer-download.png`, title: "Download Market360" }] },
+  { path: "/download", changefreq: "monthly", priority: "0.9", images: [{ loc: `${BASE_URL}/brand/market360-android-app.webp`, title: "Download the Market360 Android app" }] },
   { path: "/gift-cards", changefreq: "weekly", priority: "0.9", images: [
-    { loc: `${BASE_URL}/brand/market360-gift-card-hero.webp`, title: "Market360 E-Gift Cards", caption: "Give more. Share more." },
-    { loc: `${BASE_URL}/brand/market360-gift-card-bronze.webp`, title: "Bronze e-gift card — Le 100" },
-    { loc: `${BASE_URL}/brand/market360-gift-card-silver.webp`, title: "Silver e-gift card — Le 120" },
-    { loc: `${BASE_URL}/brand/market360-gift-card-gold.webp`, title: "Gold e-gift card — Le 300" },
-    { loc: `${BASE_URL}/brand/market360-gift-card-platinum.webp`, title: "Platinum e-gift card — Le 600" },
-    { loc: `${BASE_URL}/brand/market360-gift-card-diamond.webp`, title: "Diamond e-gift card — Le 800" },
-    { loc: `${BASE_URL}/brand/market360-gift-card-super.webp`, title: "M360 Super e-gift card — Le 1,000" },
+    { loc: `${BASE_URL}/brand/market360-gift-cards-hero.webp`, title: "Market360 E-Gift Cards", caption: "Give more. Share more." },
+    { loc: `${BASE_URL}/brand/market360-bronze-gift-card.webp`, title: "Bronze e-gift card — Le 100" },
+    { loc: `${BASE_URL}/brand/market360-silver-gift-card.webp`, title: "Silver e-gift card — Le 120" },
+    { loc: `${BASE_URL}/brand/market360-gold-gift-card.webp`, title: "Gold e-gift card — Le 300" },
+    { loc: `${BASE_URL}/brand/market360-platinum-gift-card.webp`, title: "Platinum e-gift card — Le 600" },
+    { loc: `${BASE_URL}/brand/market360-diamond-gift-card.webp`, title: "Diamond e-gift card — Le 800" },
+    { loc: `${BASE_URL}/brand/market360-m360-super-gift-card.webp`, title: "M360 Super e-gift card — Le 1,000" },
   ] },
-  { path: "/gift-cards/bronze", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-gift-card-bronze.webp`, title: "Bronze e-gift card — Le 100" }] },
-  { path: "/gift-cards/silver", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-gift-card-silver.webp`, title: "Silver e-gift card — Le 120" }] },
-  { path: "/gift-cards/gold", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-gift-card-gold.webp`, title: "Gold e-gift card — Le 300" }] },
-  { path: "/gift-cards/platinum", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-gift-card-platinum.webp`, title: "Platinum e-gift card — Le 600" }] },
-  { path: "/gift-cards/diamond", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-gift-card-diamond.webp`, title: "Diamond e-gift card — Le 800" }] },
-  { path: "/gift-cards/m360-super", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-gift-card-super.webp`, title: "M360 Super e-gift card — Le 1,000" }] },
+  { path: "/gift-cards/bronze", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-bronze-gift-card.webp`, title: "Bronze e-gift card — Le 100" }] },
+  { path: "/gift-cards/silver", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-silver-gift-card.webp`, title: "Silver e-gift card — Le 120" }] },
+  { path: "/gift-cards/gold", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-gold-gift-card.webp`, title: "Gold e-gift card — Le 300" }] },
+  { path: "/gift-cards/platinum", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-platinum-gift-card.webp`, title: "Platinum e-gift card — Le 600" }] },
+  { path: "/gift-cards/diamond", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-diamond-gift-card.webp`, title: "Diamond e-gift card — Le 800" }] },
+  { path: "/gift-cards/m360-super", changefreq: "monthly", priority: "0.7", images: [{ loc: `${BASE_URL}/brand/market360-m360-super-gift-card.webp`, title: "M360 Super e-gift card — Le 1,000" }] },
   { path: "/tester", changefreq: "weekly", priority: "0.9" },
   { path: "/seller-solutions", changefreq: "monthly", priority: "0.9" },
   { path: "/safety", changefreq: "monthly", priority: "0.8" },
@@ -92,7 +89,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           path: `/news/${p.slug}`,
           changefreq: "monthly",
           priority: "0.6",
-          lastmod: p.date ? new Date(p.date).toISOString().slice(0, 10) : NOW,
+          lastmod: p.date,
           images: p.image ? [{ loc: p.image.startsWith("http") ? p.image : `${BASE_URL}${p.image}`, title: p.title, caption: p.excerpt }] : undefined,
         }));
 
