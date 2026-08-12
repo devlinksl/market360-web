@@ -330,8 +330,10 @@ function Carousel({
 }
 
 /* =============================================================================
-   Hero — a real storefront: full-bleed photography, a working search bar,
-   category quick-links. No phone mockup, no floating badges, no glow blobs.
+   Hero — solid, confident ground + a properly framed product shot. The
+   screenshots in /brand are portrait app captures, not wide photography, so
+   they're shown contained in a device frame here rather than stretched as a
+   full-bleed background (which is what produced the muddy banding before).
    ============================================================================= */
 
 const heroCategories = ["Electronics", "Fashion", "Phones & Tablets", "Vehicles", "Property"];
@@ -364,69 +366,64 @@ function HeroSearchBar() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="relative min-h-[560px] md:min-h-[640px]">
-        <ImgFade
-          src={imgHero}
-          alt="Shoppers and sellers using Market360 across Sierra Leone"
-          loading="eager"
-          className="absolute inset-0 h-full w-full"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" aria-hidden />
+    <section className="relative overflow-hidden bg-foreground text-background">
+      <div className="container-pro relative grid gap-12 py-16 md:py-24 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
+        <div>
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-glow">
+              Sierra Leone's marketplace
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+              Everything to buy and sell, in one place.
+            </h1>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-background/70">
+              Thousands of listings from verified sellers, secure wallet payments, and
+              delivery across the country.
+            </p>
+          </Reveal>
 
-        <div className="container-pro relative flex min-h-[560px] flex-col justify-center py-16 md:min-h-[640px] md:py-24">
-          <div className="max-w-xl">
-            <Reveal>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                Sierra Leone's marketplace
-              </p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
-                Everything to buy and sell, in one place.
-              </h1>
-            </Reveal>
-            <Reveal delay={140}>
-              <p className="mt-5 max-w-md text-lg leading-relaxed text-white/80">
-                Thousands of listings from verified sellers, secure wallet payments, and
-                delivery across the country.
-              </p>
-            </Reveal>
-
-            <Reveal delay={200} className="mt-8">
-              <HeroSearchBar />
-              <div className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
-                {heroCategories.map((c) => (
-                  <Link
-                    key={c}
-                    to="/features"
-                    className="rounded-full px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                  >
-                    {c}
-                  </Link>
-                ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={260}>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link to="/download" className="btn-primary">
-                  Download the app
+          <Reveal delay={200} className="mt-8">
+            <HeroSearchBar />
+            <div className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
+              {heroCategories.map((c) => (
+                <Link
+                  key={c}
+                  to="/features"
+                  className="rounded-full px-3 py-1.5 text-background/70 transition-colors hover:bg-background/10 hover:text-background"
+                >
+                  {c}
                 </Link>
-                <Link to="/features" className="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">
-                  Become a seller
-                </Link>
-              </div>
-            </Reveal>
+              ))}
+            </div>
+          </Reveal>
 
-            <Reveal delay={320}>
-              <p className="mt-9 text-sm text-white/65">
-                4.8 average rating · 25,000+ people using Market360 · Verified merchants only
-              </p>
-            </Reveal>
-          </div>
+          <Reveal delay={260}>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/download" className="btn-primary">
+                Download the app
+              </Link>
+              <Link to="/features" className="rounded-full border border-background/25 px-5 py-3 text-sm font-semibold transition-colors hover:bg-background/10">
+                Become a seller
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal delay={320}>
+            <p className="mt-9 text-sm text-background/55">
+              4.8 average rating · 25,000+ people using Market360 · Verified merchants only
+            </p>
+          </Reveal>
         </div>
+
+        <Reveal delay={160} className="relative mx-auto w-full max-w-xs lg:max-w-sm">
+          <div className="relative aspect-[9/16] overflow-hidden rounded-[2.5rem] border-8 border-background/15 bg-background/5 shadow-elevated">
+            <ImgFade src={imgHero} alt="The Market360 app showing the marketplace home feed" loading="eager" className="h-full w-full" />
+          </div>
+        </Reveal>
       </div>
     </section>
   );
