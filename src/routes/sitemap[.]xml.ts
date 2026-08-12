@@ -3,8 +3,8 @@ import type {} from "@tanstack/react-start";
 
 // News articles — mirror this list when adding a new news.<slug>.tsx file.
 const newsPosts = [
-  { slug: "market360-gift-cards-launch", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, delivered digitally and redeemed in the Market360 app.", date: "2026-06-20", image: "/brand/market360-gift-cards-hero.webp" },
-  { slug: "market360-gift-card-collection", title: "A closer look at the Market360 Gift Card collection", excerpt: "A visual tour of all six Market360 e-gift cards.", date: "2026-06-18", image: "/brand/market360-m360-super-gift-card.webp" },
+  { slug: "market360-gift-cards-launch", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, delivered digitally and redeemed in the Market360 app.", date: "2026-06-20", image: "/brand/market360-gift-card-collection-landscape.webp" },
+  { slug: "market360-gift-card-collection", title: "A closer look at the Market360 Gift Card collection", excerpt: "A visual tour of all six Market360 e-gift cards.", date: "2026-06-18", image: "/brand/market360-gift-card-collection-landscape.webp" },
   { slug: "market360-testers-program", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, and a direct line into the roadmap.", date: "2026-06-16", image: "/brand/news-tester-launch.jpg" },
   { slug: "market360-android-app-live", title: "The Market360 Android app is live on Google Play", excerpt: "The full marketplace on your phone.", date: "2026-06-14", image: "/brand/market360-android-app.webp" },
 ];
