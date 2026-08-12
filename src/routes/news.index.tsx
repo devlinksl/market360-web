@@ -17,7 +17,7 @@ const ARTICLES = [
       "Six e-gift card tiers — from Le 100 to Le 1,000 — are now part of Market360. Delivered digitally, redeemed in the app, spendable across the whole marketplace.",
     date: "Jun 20, 2026",
     readTime: "5 min read",
-    image: "/brand/market360-gift-cards-hero.webp",
+    image: "/brand/market360-gift-card-collection-landscape.webp",
     alt: "The Market360 e-gift card collection on a green diagonal backdrop",
   },
   {
@@ -28,7 +28,7 @@ const ARTICLES = [
       "Bronze to M360 Super: a visual tour of all six cards, what each is designed for, and how the denominations were chosen.",
     date: "Jun 18, 2026",
     readTime: "4 min read",
-    image: "/brand/market360-m360-super-gift-card.webp",
+    image: "/brand/market360-gift-card-collection-landscape.webp",
     alt: "Market360 M360 Super e-gift card worth Le 1,000",
   },
   {
@@ -69,9 +69,9 @@ export const Route = createFileRoute("/news/")({
       { property: "og:description", content: DESC },
       { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://market360.shop/brand/market360-gift-cards-hero.webp" },
+      { property: "og:image", content: "https://market360.shop/brand/market360-gift-card-collection-landscape.webp" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://market360.shop/brand/market360-gift-cards-hero.webp" },
+      { name: "twitter:image", content: "https://market360.shop/brand/market360-gift-card-collection-landscape.webp" },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [

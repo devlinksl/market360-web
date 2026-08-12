@@ -83,6 +83,21 @@ function GiftCardsLanding() {
         </div>
       </section>
 
+      {/* Desktop-only full lineup */}
+      <section className="hidden border-b border-border bg-surface lg:block">
+        <div className="container-pro py-14">
+          <img
+            src="/brand/market360-gift-card-collection-landscape.webp"
+            alt="The full Market360 e-gift card collection — Bronze Le 100, Silver Le 120, Gold Le 300, Platinum Le 600, Diamond Le 800 and M360 Super Le 1,000"
+            width={1600}
+            height={889}
+            loading="lazy"
+            decoding="async"
+            className="mx-auto w-full max-w-5xl rounded-3xl"
+          />
+        </div>
+      </section>
+
       {/* Carousel */}
       <section id="cards" className="section-pad">
         <div className="container-pro">
