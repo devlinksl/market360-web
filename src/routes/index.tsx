@@ -10,14 +10,10 @@ const newsPosts = [
   { slug: "market360-android-app-live" as const, href: "/news/market360-android-app-live" as const, category: "Product", title: "The Market360 Android app is live", excerpt: "The full marketplace, now in your pocket on Google Play.", date: "Jun 14, 2026", readTime: "4 min read", image: "/brand/market360-android-app.webp" },
 ];
 import {
-  ShieldCheck, Zap, BadgeCheck, Sparkles, Users, LayoutGrid, ArrowRight,
-  ShoppingBag, Wallet, Store,
-  Star, ChevronDown, ChevronLeft, ChevronRight, Truck, MessageCircle, BarChart3,
-  Bell, CheckCircle2, Download as DownloadIcon, Send, PiggyBank,
-  Lock, Layers, Compass, QrCode, HeartHandshake,
-  Image as ImageIcon, Copy, Check, Tag, Percent,
+  ArrowRight, Star, ChevronDown, ChevronLeft, ChevronRight,
+  Download as DownloadIcon, QrCode, Image as ImageIcon, Copy, Check, Tag,
 } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode, type ComponentType } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 // =============================================================================
 // IMAGES — every image on this page lives here, and only here.
@@ -202,26 +198,26 @@ function ImgFade({
   );
 }
 
-/** Consistent section header — small label, confident statement, one line of support. Left-aligned by default. */
+/** Consistent section header — a quiet typographic kicker, a confident statement,
+ *  one line of support. No icon badge, no pill — the label does the work on its own. */
 function SectionHead({
   eyebrow,
-  icon: Icon,
   title,
   support,
   center = false,
 }: {
   eyebrow: string;
-  icon: ComponentType<{ className?: string }>;
   title: ReactNode;
   support?: string;
   center?: boolean;
 }) {
   return (
     <div className={center ? "text-center" : ""}>
-      <span className="eyebrow">
-        <Icon className="h-3 w-3" /> {eyebrow}
+      <span className={`flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary ${center ? "justify-center" : ""}`}>
+        <span className="h-px w-6 bg-primary/40" aria-hidden />
+        {eyebrow}
       </span>
-      <h2 className={`mt-3 text-3xl font-bold tracking-tight md:text-4xl ${center ? "mx-auto max-w-2xl" : "max-w-xl"}`}>
+      <h2 className={`mt-4 text-3xl font-bold tracking-tight md:text-4xl ${center ? "mx-auto max-w-2xl" : "max-w-xl"}`}>
         {title}
       </h2>
       {support && (
@@ -333,138 +329,104 @@ function Carousel({
   );
 }
 
-/** Auto-advancing crossfade carousel for the hero phone mockup. Pure CSS
- *  opacity transitions (no layout shift), pauses for reduced-motion users,
- *  and exposes tap-to-jump dots so it's never just a passive slideshow. */
-function HeroCarousel({ slides }: { slides: { src: string; alt: string }[] }) {
-  const [active, setActive] = useState(0);
+/* =============================================================================
+   Hero — a real storefront: full-bleed photography, a working search bar,
+   category quick-links. No phone mockup, no floating badges, no glow blobs.
+   ============================================================================= */
 
-  useEffect(() => {
-    if (slides.length <= 1) return;
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % slides.length), 4500);
-    return () => window.clearInterval(id);
-  }, [slides.length]);
+const heroCategories = ["Electronics", "Fashion", "Phones & Tablets", "Vehicles", "Property"];
 
+function HeroSearchBar() {
   return (
-    <div className="relative h-full w-full bg-secondary">
-      {slides.map((s, i) => (
-        <img
-          key={s.src}
-          src={s.src}
-          alt={s.alt}
-          loading={i === 0 ? "eager" : "lazy"}
-          decoding="async"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === active ? "opacity-100" : "opacity-0"}`}
-        />
-      ))}
-      {slides.length > 1 && (
-        <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center gap-1.5">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Show slide ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all ${i === active ? "w-5 bg-white" : "w-1.5 bg-white/50"}`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <form
+      role="search"
+      onSubmit={(e) => e.preventDefault()}
+      className="flex w-full items-stretch overflow-hidden rounded-full bg-white shadow-elevated ring-1 ring-black/5"
+    >
+      <label htmlFor="hero-search" className="sr-only">
+        Search Market360
+      </label>
+      <input
+        id="hero-search"
+        type="text"
+        placeholder="Search products, brands, or sellers"
+        className="min-w-0 flex-1 bg-transparent px-6 py-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+      />
+      <button
+        type="submit"
+        className="flex shrink-0 items-center gap-2 bg-foreground px-6 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+      >
+        Search
+      </button>
+    </form>
   );
 }
 
-/* =============================================================================
-   Hero — one thesis, one image, minimal chrome
-   ============================================================================= */
-
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border">
-      <div className="absolute inset-0 grid-bg opacity-40" aria-hidden />
-      <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-primary/15 blur-3xl" aria-hidden />
-      <div className="absolute top-24 right-0 h-80 w-80 rounded-full bg-primary-glow/20 blur-3xl" aria-hidden />
+    <section className="relative overflow-hidden">
+      <div className="relative min-h-[560px] md:min-h-[640px]">
+        <ImgFade
+          src={imgHero}
+          alt="Shoppers and sellers using Market360 across Sierra Leone"
+          loading="eager"
+          className="absolute inset-0 h-full w-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" aria-hidden />
 
-      <div className="container-pro relative grid gap-10 py-16 md:py-24 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
-        <div>
-          <Reveal>
-            <span className="eyebrow">
-              <Sparkles className="h-3 w-3" /> Sierra Leone's #1 online Marketplace
-            </span>
-          </Reveal>
-          <Reveal delay={80}>
-            <h1 className="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-              Buy. Sell. Pay. <span className="gradient-text">Grow.</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={140}>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Market360 brings shopping, secure payments, verified sellers, and nationwide
-              delivery into one fast app — built for how Sierra Leone buys and sells.
-            </p>
-          </Reveal>
-          <Reveal delay={200}>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/download" className="btn-primary">
-                <DownloadIcon className="h-4 w-4" /> Download the app
-              </Link>
-              <Link to="/features" className="btn-ghost">
-                Explore the marketplace <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </Reveal>
-          <Reveal delay={260}>
-            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <Star className="h-4 w-4 fill-amber-400 text-amber-400" /> 4.8 average rating
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Users className="h-4 w-4 text-primary" /> 25,000+ people using Market360
-              </span>
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="h-4 w-4 text-primary" /> Verified merchants only
-              </span>
-            </div>
-          </Reveal>
+        <div className="container-pro relative flex min-h-[560px] flex-col justify-center py-16 md:min-h-[640px] md:py-24">
+          <div className="max-w-xl">
+            <Reveal>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                Sierra Leone's marketplace
+              </p>
+            </Reveal>
+            <Reveal delay={80}>
+              <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
+                Everything to buy and sell, in one place.
+              </h1>
+            </Reveal>
+            <Reveal delay={140}>
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-white/80">
+                Thousands of listings from verified sellers, secure wallet payments, and
+                delivery across the country.
+              </p>
+            </Reveal>
+
+            <Reveal delay={200} className="mt-8">
+              <HeroSearchBar />
+              <div className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
+                {heroCategories.map((c) => (
+                  <Link
+                    key={c}
+                    to="/features"
+                    className="rounded-full px-3 py-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                  >
+                    {c}
+                  </Link>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={260}>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link to="/download" className="btn-primary">
+                  Download the app
+                </Link>
+                <Link to="/features" className="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">
+                  Become a seller
+                </Link>
+              </div>
+            </Reveal>
+
+            <Reveal delay={320}>
+              <p className="mt-9 text-sm text-white/65">
+                4.8 average rating · 25,000+ people using Market360 · Verified merchants only
+              </p>
+            </Reveal>
+          </div>
         </div>
-
-        {/* Right — a single confident mockup, two supporting proof points (not three) */}
-        <Reveal delay={160} className="relative mx-auto w-full max-w-md lg:max-w-none">
-          <div className="relative aspect-[9/16] max-w-sm mx-auto overflow-hidden rounded-[2.5rem] border-8 border-foreground/90 bg-foreground shadow-elevated">
-            <HeroCarousel slides={[...IMAGES.heroSlides]} />
-            <div className="absolute inset-x-0 top-0 z-10 flex justify-center pt-2">
-              <span className="h-1.5 w-16 rounded-full bg-background/40" />
-            </div>
-          </div>
-
-          <div className="absolute -left-3 top-16 hidden sm:block rounded-2xl border border-border bg-card/95 p-3 shadow-elevated backdrop-blur float-y">
-            <div className="flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-accent">
-                <Wallet className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Wallet</p>
-                <p className="text-sm font-bold">NLE 12,480</p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="absolute -right-3 bottom-10 hidden sm:block rounded-2xl border border-border bg-card/95 p-3 shadow-elevated backdrop-blur float-y"
-            style={{ animationDelay: "1.2s" }}
-          >
-            <div className="flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-50">
-                <Truck className="h-4 w-4 text-emerald-600" />
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Delivery</p>
-                <p className="text-sm font-bold text-emerald-600">Order on the way</p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
@@ -475,12 +437,12 @@ function Hero() {
    ============================================================================= */
 
 const ledgerEvents = [
-  { icon: Wallet, text: "Aminata K. received NLE 450 from a Freetown Threads sale" },
-  { icon: ShoppingBag, text: "New order placed for a Smart Watch S9 in Bo" },
-  { icon: Send, text: "Ibrahim T. cashed out NLE 1,200 to Orange Money" },
-  { icon: BadgeCheck, text: "GreenPower SL just became a Verified Seller" },
-  { icon: ShieldCheck, text: "A protected payment was released after delivery" },
-  { icon: Truck, text: "An order from Freetown arrived in Makeni in 48 hours" },
+  { text: "Aminata K. received NLE 450 from a Freetown Threads sale" },
+  { text: "New order placed for a Smart Watch S9 in Bo" },
+  { text: "Ibrahim T. cashed out NLE 1,200 to Orange Money" },
+  { text: "GreenPower SL just became a Verified Seller" },
+  { text: "A protected payment was released after delivery" },
+  { text: "An order from Freetown arrived in Makeni in 48 hours" },
 ];
 
 function LiveLedger() {
@@ -497,8 +459,8 @@ function LiveLedger() {
         <div className="min-w-0 flex-1">
           <Marquee speed={30}>
             {ledgerEvents.map((e, i) => (
-              <span key={i} className="mx-5 inline-flex items-center gap-2 whitespace-nowrap text-sm text-muted-foreground">
-                <e.icon className="h-3.5 w-3.5 shrink-0 text-primary" /> {e.text}
+              <span key={i} className="mx-5 whitespace-nowrap text-sm text-muted-foreground">
+                {e.text}
               </span>
             ))}
           </Marquee>
@@ -513,10 +475,10 @@ function LiveLedger() {
    ============================================================================= */
 
 const journeySteps = [
-  { n: "01", icon: Compass, title: "Explore the marketplace", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.", img: IMAGES.journeyExplore },
-  { n: "02", icon: Zap, title: "Pay instantly with Wallet", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.", img: IMAGES.journeyPay },
-  { n: "03", icon: Truck, title: "Ship & track", body: "Nationwide delivery with real‑time tracking — from Freetown to Bo, Makeni and beyond, in as little as 48 hours.", img: IMAGES.journeyShip },
-  { n: "04", icon: Store, title: "Sell and grow", body: "Open a storefront, manage orders, and reach shoppers across Sierra Leone from one simple dashboard.", img: IMAGES.journeySell },
+  { n: "01", title: "Explore the marketplace", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.", img: IMAGES.journeyExplore },
+  { n: "02", title: "Pay instantly with Wallet", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.", img: IMAGES.journeyPay },
+  { n: "03", title: "Ship & track", body: "Nationwide delivery with real‑time tracking — from Freetown to Bo, Makeni and beyond, in as little as 48 hours.", img: IMAGES.journeyShip },
+  { n: "04", title: "Sell and grow", body: "Open a storefront, manage orders, and reach shoppers across Sierra Leone from one simple dashboard.", img: IMAGES.journeySell },
 ];
 
 function HowItWorks() {
@@ -525,7 +487,7 @@ function HowItWorks() {
       <div className="container-pro">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <Reveal>
-            <SectionHead eyebrow="How Market360 works" icon={Layers} title="One app carries you from browsing to owning." support="Swipe through the journey — every step happens inside a single Market360 experience." />
+            <SectionHead eyebrow="How Market360 works" title="One app carries you from browsing to owning." support="Swipe through the journey — every step happens inside a single Market360 experience." />
           </Reveal>
         </div>
 
@@ -543,13 +505,8 @@ function HowItWorks() {
                   <span className="absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1 text-xs font-black tracking-wider text-primary">STEP {s.n}</span>
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-glow">
-                      <s.icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="text-lg font-bold">{s.title}</h3>
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                  <h3 className="text-lg font-bold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
                 </div>
               </article>
             ))}
@@ -619,7 +576,6 @@ function CategoriesShowcase() {
           <Reveal>
             <SectionHead
               eyebrow="Marketplace"
-              icon={LayoutGrid}
               title="Explore every category"
               support="From electronics to property — listed by sellers who've been through ID and business verification."
             />
@@ -727,7 +683,7 @@ function PromoCodes() {
     <section className="section-pad">
       <div className="container-pro">
         <Reveal>
-          <SectionHead eyebrow="Promo codes" icon={Percent} title="Codes you can actually use" support="Copy a code below and apply it at checkout in the app — no sign-up required to see them." />
+          <SectionHead eyebrow="Promo codes" title="Codes you can actually use" support="Copy a code below and apply it at checkout in the app — no sign-up required to see them." />
         </Reveal>
         <Reveal delay={80} className="mt-10">
           <Carousel ariaLabel="Market360 promo codes" count={promoCodes.length}>
@@ -748,10 +704,10 @@ function PromoCodes() {
    ============================================================================= */
 
 const walletFeatures = [
-  { icon: Send, title: "Send & receive instantly", body: "Move money to any Market360 user in seconds — no waiting on bank clearance." },
-  { icon: PiggyBank, title: "Top up your way", body: "Fund your wallet from Orange Money, Africell Money, or a linked bank card." },
-  { icon: Lock, title: "Full audit trail", body: "Every transaction is logged and traceable, so disputes resolve in minutes, not weeks." },
-  { icon: ShieldCheck, title: "Bank‑grade protection", body: "Encrypted transfers and fraud monitoring watch every payment around the clock." },
+  { title: "Send & receive instantly", body: "Move money to any Market360 user in seconds — no waiting on bank clearance." },
+  { title: "Top up your way", body: "Fund your wallet from Orange Money, Africell Money, or a linked bank card." },
+  { title: "Full audit trail", body: "Every transaction is logged and traceable, so disputes resolve in minutes, not weeks." },
+  { title: "Bank‑grade protection", body: "Encrypted transfers and fraud monitoring watch every payment around the clock." },
 ];
 
 function WalletShowcase() {
@@ -761,23 +717,20 @@ function WalletShowcase() {
         <Reveal className="order-2 lg:order-1">
           <SectionHead
             eyebrow="Market360 Wallet"
-            icon={Wallet}
             title="Your money moves as fast as your business does."
             support="The wallet is what turns Market360 from an app into an economy — every sale, transfer, and payout settles in real time, without a bank branch in sight."
           />
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {walletFeatures.map(({ icon: Icon, title, body }, i) => (
-              <Reveal key={title} delay={i * 90} className="surface-card p-5">
-                <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-primary">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-3 font-bold">{title}</h3>
+            {walletFeatures.map(({ title, body }, i) => (
+              <Reveal key={title} delay={i * 90} className="surface-card border-t-2 border-t-primary/40 p-5">
+                <p className="text-xs font-semibold text-primary">{String(i + 1).padStart(2, "0")}</p>
+                <h3 className="mt-2 font-bold">{title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{body}</p>
               </Reveal>
             ))}
           </div>
           <Link to="/download" className="btn-primary mt-8">
-            Get the wallet <ArrowRight className="h-4 w-4" />
+            Get the wallet
           </Link>
         </Reveal>
 
@@ -804,15 +757,13 @@ function WhyMarket360() {
     <section className="section-pad">
       <div className="container-pro">
         <Reveal>
-          <SectionHead eyebrow="Why Market360" icon={Sparkles} title="Built differently, for how Sierra Leone actually trades." />
+          <SectionHead eyebrow="Why Market360" title="Built differently, for how Sierra Leone actually trades." />
         </Reveal>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3 md:grid-rows-2">
           <Reveal className="surface-card relative overflow-hidden p-8 md:col-span-2 md:row-span-2">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
-              <BadgeCheck className="h-5 w-5" />
-            </div>
-            <h3 className="mt-5 text-2xl font-bold">Every seller is verified — before they list a single item.</h3>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Verified sellers</p>
+            <h3 className="mt-3 text-2xl font-bold">Every seller is verified — before they list a single item.</h3>
             <p className="mt-3 max-w-md text-muted-foreground">
               ID checks, business verification, and ongoing performance monitoring keep low‑quality and
               fraudulent sellers off the platform, so buyers can trust every purchase.
@@ -822,35 +773,23 @@ function WhyMarket360() {
             </div>
           </Reveal>
 
-          <Reveal delay={80} className="surface-card p-6">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
-              <Zap className="h-5 w-5" />
-            </div>
-            <h3 className="mt-4 font-bold">Settlements in seconds</h3>
+          <Reveal delay={80} className="surface-card border-t-2 border-t-primary/40 p-6">
+            <h3 className="font-bold">Settlements in seconds</h3>
             <p className="mt-1 text-sm text-muted-foreground">Not days like a traditional bank transfer.</p>
           </Reveal>
 
-          <Reveal delay={140} className="surface-card p-6">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
-              <Truck className="h-5 w-5" />
-            </div>
-            <h3 className="mt-4 font-bold">Nationwide delivery</h3>
+          <Reveal delay={140} className="surface-card border-t-2 border-t-primary/40 p-6">
+            <h3 className="font-bold">Nationwide delivery</h3>
             <p className="mt-1 text-sm text-muted-foreground">Fastest turnaround across Freetown, Bo, and Makeni.</p>
           </Reveal>
 
-          <Reveal delay={200} className="surface-card p-6">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
-              <Lock className="h-5 w-5" />
-            </div>
-            <h3 className="mt-4 font-bold">Bank‑grade security</h3>
+          <Reveal delay={200} className="surface-card border-t-2 border-t-primary/40 p-6">
+            <h3 className="font-bold">Bank‑grade security</h3>
             <p className="mt-1 text-sm text-muted-foreground">Encrypted transfers with 24/7 fraud monitoring.</p>
           </Reveal>
 
-          <Reveal delay={260} className="surface-card p-6">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
-              <HeartHandshake className="h-5 w-5" />
-            </div>
-            <h3 className="mt-4 font-bold">Real human support</h3>
+          <Reveal delay={260} className="surface-card border-t-2 border-t-primary/40 p-6">
+            <h3 className="font-bold">Real human support</h3>
             <p className="mt-1 text-sm text-muted-foreground">In‑app help, resolved by people who know the market.</p>
           </Reveal>
         </div>
@@ -876,7 +815,7 @@ function Stats() {
     <section className="section-pad bg-surface border-y border-border">
       <div className="container-pro">
         <Reveal>
-          <SectionHead eyebrow="By the numbers" icon={BarChart3} title="Trusted at scale." center />
+          <SectionHead eyebrow="By the numbers" title="Trusted at scale." center />
         </Reveal>
         <div className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
           {stats.map((s, i) => (
@@ -910,7 +849,7 @@ function Testimonials() {
     <section className="section-pad">
       <div className="container-pro">
         <Reveal>
-          <SectionHead eyebrow="Loved by users" icon={Star} title="What people are saying." />
+          <SectionHead eyebrow="Loved by users" title="What people are saying." />
         </Reveal>
         <Reveal delay={100} className="mt-8">
           <Carousel ariaLabel="Customer testimonials" count={testimonials.length}>
@@ -979,7 +918,7 @@ function LatestNews() {
       <div className="container-pro">
         <div className="flex items-end justify-between gap-4">
           <Reveal>
-            <SectionHead eyebrow="News" icon={Bell} title="From the newsroom" />
+            <SectionHead eyebrow="News" title="From the newsroom" />
           </Reveal>
           <Link to="/news" className="hidden items-center gap-1 text-sm font-semibold text-primary hover:underline sm:inline-flex">
             All news <ArrowRight className="h-4 w-4" />
@@ -1031,7 +970,7 @@ function FAQ() {
     <section className="section-pad bg-surface border-y border-border">
       <div className="container-pro max-w-3xl">
         <Reveal>
-          <SectionHead eyebrow="FAQ" icon={MessageCircle} title="Frequently asked questions" center />
+          <SectionHead eyebrow="FAQ" title="Frequently asked questions" center />
         </Reveal>
         <div className="mt-8 space-y-3">
           {faqs.map((f, idx) => {
@@ -1168,22 +1107,17 @@ function DownloadApp() {
   return (
     <section className="section-pad">
       <div className="container-pro">
-        <Reveal className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary/10 via-background to-primary-glow/10 p-8 md:p-14">
-          <div className="absolute inset-0 grid-bg opacity-30" aria-hidden />
+        <Reveal className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 md:p-14">
           <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div>
-              <span className="eyebrow">
-                <DownloadIcon className="h-3 w-3" /> Get the app
-              </span>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Get the app</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">Download Market360</h2>
               <p className="mt-3 max-w-lg text-muted-foreground">
                 The complete marketplace app for Sierra Leone — buy, sell, pay and get delivery in one place. Free to download.
               </p>
-              <ul className="mt-6 space-y-2 text-sm">
+              <ul className="mt-6 max-w-md space-y-2.5 text-sm text-muted-foreground">
                 {["Instant wallet transfers", "Verified sellers & buyer protection", "Thousands of live listings", "Delivery across the country"].map((b) => (
-                  <li key={b} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" /> {b}
-                  </li>
+                  <li key={b} className="border-l-2 border-primary/30 pl-3">{b}</li>
                 ))}
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -1206,30 +1140,26 @@ function DownloadApp() {
 
 /* =============================================================================
    Final CTA
-
-/* =============================================================================
-   Final CTA
    ============================================================================= */
 
 function FinalCta() {
   return (
     <section className="section-pad pt-0">
       <div className="container-pro">
-        <Reveal className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-glow p-10 text-primary-foreground shadow-glow md:p-16">
-          <div className="absolute inset-0 grid-bg opacity-25" aria-hidden />
+        <Reveal className="relative overflow-hidden rounded-3xl bg-foreground p-10 text-background md:p-16">
           <div className="relative flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h2 className="text-3xl font-bold leading-tight md:text-5xl">Join Sierra Leone's #1 marketplace today.</h2>
-              <p className="mt-4 max-w-xl text-white/85">
+              <p className="mt-4 max-w-xl text-background/70">
                 Download the app, discover trusted sellers, and shop across Sierra Leone — everything you need is one tap away.
               </p>
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
-              <Link to="/download" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-semibold text-primary hover:bg-white/90">
-                <DownloadIcon className="h-4 w-4" /> Download app
+              <Link to="/download" className="rounded-full bg-background px-5 py-3 font-semibold text-foreground transition-opacity hover:opacity-90">
+                Download app
               </Link>
-              <Link to="/features" className="inline-flex items-center gap-2 rounded-full bg-white/15 px-5 py-3 font-semibold text-white ring-1 ring-white/30 hover:bg-white/25">
-                <ShoppingBag className="h-4 w-4" /> Browse marketplace
+              <Link to="/features" className="rounded-full border border-background/30 px-5 py-3 font-semibold text-background transition-colors hover:bg-background/10">
+                Browse marketplace
               </Link>
             </div>
           </div>
