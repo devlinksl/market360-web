@@ -51,6 +51,14 @@ const IMAGES = {
   catPhones: "/brand/cat-phones.jpg",           // 4:3
   catVehicles: "/brand/cat-vehicles.jpg",       // 4:3
   catProperty: "/brand/cat-property.jpg",       // 4:3
+
+  // --- "How Market360 works" journey carousel — 3D icon renders -------------
+  // 16:10, transparent or brand-colored background, consistent 3D render
+  // style. Drop files in /public/brand/3d-crousel/ using these exact names.
+  journeyExplore: "/brand/3d-crousel/01-explore-marketplace.webp",
+  journeyPay: "/brand/3d-crousel/02-pay-wallet.webp",
+  journeyShip: "/brand/3d-crousel/03-ship-track.webp",
+  journeySell: "/brand/3d-crousel/04-sell-grow.webp",
 } as const;
 
 // Back-compat aliases so the rest of the page reads naturally — these just
@@ -505,10 +513,10 @@ function LiveLedger() {
    ============================================================================= */
 
 const journeySteps = [
-  { n: "01", icon: Compass, title: "Explore the marketplace", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.", img: imgCatElectronics },
-  { n: "02", icon: Zap, title: "Pay instantly with Wallet", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.", img: imgWallet },
-  { n: "03", icon: Truck, title: "Ship & track", body: "Nationwide delivery with real‑time tracking — from Freetown to Bo, Makeni and beyond, in as little as 48 hours.", img: imgDelivery },
-  { n: "04", icon: Store, title: "Sell and grow", body: "Open a storefront, manage orders, and reach shoppers across Sierra Leone from one simple dashboard.", img: imgSeller },
+  { n: "01", icon: Compass, title: "Explore the marketplace", body: "Browse thousands of listings from verified sellers across every category, and message sellers directly in‑app.", img: IMAGES.journeyExplore },
+  { n: "02", icon: Zap, title: "Pay instantly with Wallet", body: "Settle every order through your Market360 Wallet — funded from Orange Money, Africell Money, or your bank, in seconds.", img: IMAGES.journeyPay },
+  { n: "03", icon: Truck, title: "Ship & track", body: "Nationwide delivery with real‑time tracking — from Freetown to Bo, Makeni and beyond, in as little as 48 hours.", img: IMAGES.journeyShip },
+  { n: "04", icon: Store, title: "Sell and grow", body: "Open a storefront, manage orders, and reach shoppers across Sierra Leone from one simple dashboard.", img: IMAGES.journeySell },
 ];
 
 function HowItWorks() {
