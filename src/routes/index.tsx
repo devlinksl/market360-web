@@ -5,7 +5,7 @@ import { Marquee } from "@/components/home/Marquee";
 import { GiftCardsTeaser } from "@/components/home/GiftCardsTeaser";
 // Latest news cards — edit slugs/titles/images directly here.
 const newsPosts = [
-  { slug: "market360-gift-cards-launch" as const, href: "/news/market360-gift-cards-launch" as const, category: "Announcement", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, from Le 100 to Le 1,000, delivered instantly.", date: "Jun 20, 2026", readTime: "5 min read", image: "/brand/market360-gift-cards-hero.webp" },
+  { slug: "market360-gift-cards-launch" as const, href: "/news/market360-gift-cards-launch" as const, category: "Announcement", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, from Le 100 to Le 1,000, delivered instantly.", date: "Jun 20, 2026", readTime: "5 min read", image: "/brand/market360-gift-card-collection-landscape.webp" },
   { slug: "market360-testers-program" as const, href: "/news/market360-testers-program" as const, category: "Community", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, plus a direct line into the roadmap.", date: "Jun 16, 2026", readTime: "5 min read", image: "/brand/news-tester-launch.jpg" },
   { slug: "market360-android-app-live" as const, href: "/news/market360-android-app-live" as const, category: "Product", title: "The Market360 Android app is live", excerpt: "The full marketplace, now in your pocket on Google Play.", date: "Jun 14, 2026", readTime: "4 min read", image: "/brand/market360-android-app.webp" },
 ];

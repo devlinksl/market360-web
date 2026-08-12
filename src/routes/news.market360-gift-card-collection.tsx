@@ -12,7 +12,7 @@ const TITLE = "A closer look at the Market360 Gift Card collection";
 const HEADLINE = "A closer look at the Market360 Gift Card collection";
 const EXCERPT =
   "Bronze to M360 Super: a visual tour of all six Market360 e-gift cards, what each one is designed for, and how the denominations were chosen.";
-const IMAGE = "/brand/market360-m360-super-gift-card.webp";
+const IMAGE = "/brand/market360-gift-card-collection-landscape.webp";
 const IMAGE_ALT = "Market360 M360 Super e-gift card worth Le 1,000";
 const CATEGORY = "Collection";
 const AUTHOR = "Market360 Team";
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/news/market360-gift-card-collection")({
           "@type": "NewsArticle",
           headline: HEADLINE,
           description: EXCERPT,
-          image: [IMAGE_URL, "https://market360.shop/brand/market360-gift-cards-hero.webp"],
+          image: [IMAGE_URL, "https://market360.shop/brand/market360-gift-card-collection-landscape.webp"],
           datePublished: ISO_DATE,
           dateModified: ISO_DATE,
           articleSection: CATEGORY,
@@ -200,8 +200,8 @@ function ShareRow({ url, title }: { url: string; title: string }) {
 }
 
 const ALL = [
-  { slug: "market360-gift-cards-launch", to: "/news/market360-gift-cards-launch" as const, title: "Introducing Market360 Gift Cards", image: "/brand/market360-gift-cards-hero.webp", category: "Announcement" },
-  { slug: "market360-gift-card-collection", to: "/news/market360-gift-card-collection" as const, title: "A closer look at the Market360 Gift Card collection", image: "/brand/market360-m360-super-gift-card.webp", category: "Collection" },
+  { slug: "market360-gift-cards-launch", to: "/news/market360-gift-cards-launch" as const, title: "Introducing Market360 Gift Cards", image: "/brand/market360-gift-card-collection-landscape.webp", category: "Announcement" },
+  { slug: "market360-gift-card-collection", to: "/news/market360-gift-card-collection" as const, title: "A closer look at the Market360 Gift Card collection", image: "/brand/market360-gift-card-collection-landscape.webp", category: "Collection" },
   { slug: "market360-testers-program", to: "/news/market360-testers-program" as const, title: "Inside the Market360 Testers Program", image: "/brand/news-tester-launch.jpg", category: "Community" },
   { slug: "market360-android-app-live", to: "/news/market360-android-app-live" as const, title: "The Market360 Android app is live", image: "/brand/market360-android-app.webp", category: "Product" },
 ];
