@@ -5,7 +5,7 @@ import {
   ShieldCheck, Search, Truck, MessageCircle, Star, CreditCard, RefreshCw,
   Award, LayoutGrid, Lock, CheckCircle2, ArrowRight, Smartphone, Heart, Bell,
 } from "lucide-react";
-const imgBuyer = "/brand/img-buyer.jpg";
+const imgBuyer = "/brand/market360-buyer-shopping.jpg";
 
 export const Route = createFileRoute("/for-buyers")({
   head: () => ({

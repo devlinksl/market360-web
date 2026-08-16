@@ -6,7 +6,7 @@ import { GiftCardsTeaser } from "@/components/home/GiftCardsTeaser";
 // Latest news cards — edit slugs/titles/images directly here.
 const newsPosts = [
   { slug: "market360-gift-cards-launch" as const, href: "/news/market360-gift-cards-launch" as const, category: "Announcement", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, from Le 100 to Le 1,000, delivered instantly.", date: "Jun 20, 2026", readTime: "5 min read", image: "/brand/market360-gift-card-collection-landscape.webp" },
-  { slug: "market360-testers-program" as const, href: "/news/market360-testers-program" as const, category: "Community", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, plus a direct line into the roadmap.", date: "Jun 16, 2026", readTime: "5 min read", image: "/brand/news-tester-launch.jpg" },
+  { slug: "market360-testers-program" as const, href: "/news/market360-testers-program" as const, category: "Community", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, plus a direct line into the roadmap.", date: "Jun 16, 2026", readTime: "5 min read", image: "/brand/market360-testers-program.jpg" },
   { slug: "market360-android-app-live" as const, href: "/news/market360-android-app-live" as const, category: "Product", title: "The Market360 Android app is live", excerpt: "The full marketplace, now in your pocket on Google Play.", date: "Jun 14, 2026", readTime: "4 min read", image: "/brand/market360-android-app.webp" },
 ];
 import {
@@ -28,25 +28,25 @@ const IMAGES = {
   // --- Hero — the phone mockup carousel at the very top of the page ---------
   // Portrait, ~9:16. Add/remove entries to change how many slides rotate.
   heroSlides: [
-    { src: "/brand/img-hero.jpg", alt: "The Market360 app showing the marketplace home feed" },
-    { src: "/brand/img-wallet.webp", alt: "The Market360 wallet screen with a live balance" },
-    { src: "/brand/img-hero-2.webp", alt: "A verified Market360 seller managing their store" },
+    { src: "/brand/market360-app-marketplace-home.jpg", alt: "The Market360 app showing the marketplace home feed" },
+    { src: "/brand/market360-wallet-app.webp", alt: "The Market360 wallet screen with a live balance" },
+    { src: "/brand/market360-seller-dashboard.webp", alt: "A verified Market360 seller managing their store" },
   ],
   // Phone mockup used in the "Download the app" section. Portrait, ~9:16.
-  heroSecondary: "/brand/hero-buysellgrow.webp",
+  heroSecondary: "/brand/market360-buy-sell-pay-grow.webp",
 
   // --- People / lifestyle shots — used in "How it works", Wallet, Why -------
-  buyer: "/brand/img-buyer.jpg",       // 4:3 or 16:9 — a buyer using the app
-  seller: "/brand/img-seller.webp",     // 16:9 — a verified seller at work
-  wallet: "/brand/img-wallet.webp",     // 9:16 — wallet / transfer screen
-  delivery: "/brand/img-delivery.jpg", // 16:10 — delivery / logistics shot
+  buyer: "/brand/market360-buyer-shopping.jpg",       // 4:3 or 16:9 — a buyer using the app
+  seller: "/brand/market360-seller-store.webp",     // 16:9 — a verified seller at work
+  wallet: "/brand/market360-wallet-app.webp",     // 9:16 — wallet / transfer screen
+  delivery: "/brand/market360-delivery-tracking.jpg", // 16:10 — delivery / logistics shot
 
   // --- Category tiles — the bento grid in "Explore every category" ---------
-  catElectronics: "/brand/cat-electronics.jpg", // 16:9 (this one is the big tile)
-  catFashion: "/brand/cat-fashion.jpg",         // 4:3
-  catPhones: "/brand/cat-phones.jpg",           // 4:3
-  catVehicles: "/brand/cat-vehicles.jpg",       // 4:3
-  catProperty: "/brand/cat-property.jpg",       // 4:3
+  catElectronics: "/brand/market360-category-electronics.webp", // 16:9 (this one is the big tile)
+  catFashion: "/brand/market360-category-fashion.webp",         // 4:3
+  catPhones: "/brand/market360-category-phones-tablets.webp",           // 4:3
+  catVehicles: "/brand/market360-category-vehicles.webp",       // 4:3
+  catProperty: "/brand/market360-category-property.webp",       // 4:3
 
   // --- "How Market360 works" journey carousel — 3D icon renders -------------
   // 16:10, transparent or brand-colored background, consistent 3D render
@@ -71,20 +71,51 @@ const imgCatPhones = IMAGES.catPhones;
 const imgCatVehicles = IMAGES.catVehicles;
 const imgCatProperty = IMAGES.catProperty;
 
+const HOME_TITLE = "Market360 — Sierra Leone's #1 Online Shopping Marketplace";
+const HOME_DESC =
+  "Shop electronics, fashion, phones, vehicles and property from verified Sierra Leonean sellers. Pay securely with the Market360 wallet and track every delivery.";
+const HOME_OG = "https://market360.shop/brand/market360-flyer-endless-opportunities.webp";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Market360 Sl" },
-      { name: "description", content: "Sierra Leone's #1 online marketplace" },
-      { property: "og:title", content: "Market360 Sl" },
-      { property: "og:description", content: "Sierra Leone's #1 online marketplace" },
-      { property: "og:url", content: "https://market360-web.lovable.app/" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/uaTGTTTP6CZvDiW0j9X2wXr0ezW2/social-images/social-1783796844307-5448f48a-5176-48e7-8f87-50bf9c4934e5-1_all_31722.webp" },
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESC },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://market360.shop/" },
+      { property: "og:image", content: HOME_OG },
+      { property: "og:image:alt", content: "Market360 — one app, endless opportunities" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: HOME_OG },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://market360.shop/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Market360 marketplace categories",
+          itemListElement: [
+            { name: "Electronics & Computing", image: "https://market360.shop/brand/market360-category-electronics.webp" },
+            { name: "Fashion", image: "https://market360.shop/brand/market360-category-fashion.webp" },
+            { name: "Phones & Tablets", image: "https://market360.shop/brand/market360-category-phones-tablets.webp" },
+            { name: "Vehicles", image: "https://market360.shop/brand/market360-category-vehicles.webp" },
+            { name: "Property", image: "https://market360.shop/brand/market360-category-property.webp" },
+          ].map((c, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: { "@type": "Thing", name: c.name, image: c.image, url: "https://market360.shop/#marketplace" },
+          })),
+        }),
+      },
+    ],
   }),
   component: Home,
 });
+
 
 /* =============================================================================
    Shared primitives — scroll reveals and a skeleton-loading image
@@ -330,20 +361,24 @@ function Carousel({
 }
 
 /* =============================================================================
-   Hero — solid, confident ground + a properly framed product shot. The
-   screenshots in /brand are portrait app captures, not wide photography, so
-   they're shown contained in a device frame here rather than stretched as a
-   full-bleed background (which is what produced the muddy banding before).
+   Hero — light, premium, product-first. White canvas, soft green light,
+   a framed app shot with floating 3D product cards around it.
    ============================================================================= */
 
-const heroCategories = ["Electronics", "Fashion", "Phones & Tablets", "Vehicles", "Property"];
+const heroCategories = [
+  { name: "Electronics", img: IMAGES.catElectronics },
+  { name: "Fashion", img: IMAGES.catFashion },
+  { name: "Phones", img: IMAGES.catPhones },
+  { name: "Vehicles", img: IMAGES.catVehicles },
+  { name: "Property", img: IMAGES.catProperty },
+];
 
 function HeroSearchBar() {
   return (
     <form
       role="search"
       onSubmit={(e) => e.preventDefault()}
-      className="flex w-full items-stretch overflow-hidden rounded-full bg-white shadow-elevated ring-1 ring-black/5"
+      className="flex w-full items-stretch overflow-hidden rounded-full border border-border bg-card shadow-elevated"
     >
       <label htmlFor="hero-search" className="sr-only">
         Search Market360
@@ -356,7 +391,7 @@ function HeroSearchBar() {
       />
       <button
         type="submit"
-        className="flex shrink-0 items-center gap-2 bg-foreground px-6 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+        className="flex shrink-0 items-center gap-2 bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
       >
         Search
       </button>
@@ -366,21 +401,33 @@ function HeroSearchBar() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-foreground text-background">
-      <div className="container-pro relative grid gap-12 py-16 md:py-24 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
+    <section className="relative overflow-hidden bg-background">
+      {/* soft brand light — no heavy green flood */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent/60 via-background to-background" aria-hidden />
+      <div className="pointer-events-none absolute -left-40 top-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-primary/5 blur-3xl" aria-hidden />
+
+      <div className="container-pro relative grid gap-14 py-16 md:py-24 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
         <div>
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-glow">
-              Sierra Leone's marketplace
-            </p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold text-primary shadow-sm">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
+              Sierra Leone's #1 Online Marketplace
+            </span>
           </Reveal>
+
           <Reveal delay={80}>
-            <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-              Everything to buy and sell, in one place.
+            <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+              Everything to buy and sell,{" "}
+              <span className="text-primary">in one app.</span>
             </h1>
           </Reveal>
+
           <Reveal delay={140}>
-            <p className="mt-5 max-w-md text-lg leading-relaxed text-background/70">
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
               Thousands of listings from verified sellers, secure wallet payments, and
               delivery across the country.
             </p>
@@ -388,15 +435,24 @@ function Hero() {
 
           <Reveal delay={200} className="mt-8">
             <HeroSearchBar />
-            <div className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
+            <div className="mt-4 flex flex-wrap items-center gap-2">
               {heroCategories.map((c) => (
-                <Link
-                  key={c}
-                  to="/features"
-                  className="rounded-full px-3 py-1.5 text-background/70 transition-colors hover:bg-background/10 hover:text-background"
+                <a
+                  key={c.name}
+                  href="#marketplace"
+                  className="group flex items-center gap-2 rounded-full border border-border bg-card py-1 pl-1 pr-3.5 text-sm text-muted-foreground shadow-sm transition-colors hover:border-primary/40 hover:text-foreground"
                 >
-                  {c}
-                </Link>
+                  <img
+                    src={c.img}
+                    alt={`${c.name} on Market360`}
+                    width={28}
+                    height={28}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-7 w-7 rounded-full object-cover"
+                  />
+                  {c.name}
+                </a>
               ))}
             </div>
           </Reveal>
@@ -406,28 +462,75 @@ function Hero() {
               <Link to="/download" className="btn-primary">
                 Download the app
               </Link>
-              <Link to="/features" className="rounded-full border border-background/25 px-5 py-3 text-sm font-semibold transition-colors hover:bg-background/10">
-                Become a seller
+              <Link
+                to="/for-sellers"
+                className="rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-accent"
+              >
+                Start selling
               </Link>
             </div>
           </Reveal>
 
           <Reveal delay={320}>
-            <p className="mt-9 text-sm text-background/55">
-              4.8 average rating · 25,000+ people using Market360 · Verified merchants only
+            <p className="mt-9 text-sm text-muted-foreground">
+              Verified merchants · Escrow-protected payments · Nationwide delivery
             </p>
           </Reveal>
         </div>
 
-        <Reveal delay={160} className="relative mx-auto w-full max-w-xs lg:max-w-sm">
-          <div className="relative aspect-[9/16] overflow-hidden rounded-[2.5rem] border-8 border-background/15 bg-background/5 shadow-elevated">
-            <ImgFade src={imgHero} alt="The Market360 app showing the marketplace home feed" loading="eager" className="h-full w-full" />
+        <Reveal delay={160} className="relative mx-auto w-full max-w-sm lg:max-w-md">
+          <div className="relative">
+            {/* device */}
+            <div className="relative mx-auto w-[74%] overflow-hidden rounded-[2.25rem] border-[10px] border-foreground/90 bg-foreground shadow-elevated sm:w-[68%]">
+              <img
+                src={imgHero}
+                alt="The Market360 app showing the marketplace home feed with featured products"
+                width={720}
+                height={1280}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="aspect-[9/16] w-full object-cover"
+              />
+            </div>
+
+            {/* floating product renders */}
+            <img
+              src={IMAGES.catPhones}
+              alt="Phones and tablets available on the Market360 marketplace"
+              width={320}
+              height={240}
+              loading="lazy"
+              decoding="async"
+              className="absolute -left-2 top-8 hidden w-32 rotate-[-6deg] rounded-2xl border border-border bg-card object-cover shadow-elevated sm:block"
+            />
+            <img
+              src="/brand/market360-gift-card-collection-landscape.webp"
+              alt="The Market360 e-gift card collection, Bronze through M360 Super"
+              width={420}
+              height={236}
+              loading="lazy"
+              decoding="async"
+              className="absolute -right-3 bottom-16 hidden w-40 rotate-[5deg] rounded-2xl border border-border bg-card object-cover shadow-elevated sm:block"
+            />
+
+            {/* wallet chip */}
+            <div className="absolute -bottom-4 left-0 flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-elevated">
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent text-primary">
+                <Star className="h-4 w-4" />
+              </span>
+              <span className="text-left">
+                <span className="block text-xs text-muted-foreground">Wallet balance</span>
+                <span className="block text-sm font-bold text-foreground">NLE 12,480</span>
+              </span>
+            </div>
           </div>
         </Reveal>
       </div>
     </section>
   );
 }
+
 
 /* =============================================================================
    Live Ledger — a quiet, precise proof strip. Real activity, not icon soup.
@@ -520,12 +623,13 @@ function HowItWorks() {
    ============================================================================= */
 
 const categories = [
-  { name: "Electronics", count: "2.4k listings", img: imgCatElectronics, big: true },
-  { name: "Fashion", count: "3.1k listings", img: imgCatFashion },
-  { name: "Phones & Tablets", count: "1.8k listings", img: imgCatPhones },
-  { name: "Vehicles", count: "620 listings", img: imgCatVehicles },
-  { name: "Property", count: "410 listings", img: imgCatProperty },
+  { name: "Electronics", count: "2.4k listings", img: imgCatElectronics, big: true, alt: "Market360 Electronics & Computing category — laptop, smartphone, gaming controller and smartwatch on a green backdrop" },
+  { name: "Fashion", count: "3.1k listings", img: imgCatFashion, alt: "Market360 Fashion category — folded knitwear, leather handbag, sneakers and a wristwatch" },
+  { name: "Phones & Tablets", count: "1.8k listings", img: imgCatPhones, alt: "Market360 Phones & Tablets category — smartphone, tablet, foldable phone and wireless earbuds" },
+  { name: "Vehicles", count: "620 listings", img: imgCatVehicles, alt: "Market360 Vehicles category — matte green helmet, model sports car and a tyre" },
+  { name: "Property", count: "410 listings", img: imgCatProperty, alt: "Market360 Property category — modern apartment model with keys and a blueprint" },
 ];
+
 
 function DownloadPromptModal({ open, onClose, category }: { open: boolean; onClose: () => void; category: string | null }) {
   useEffect(() => {
@@ -593,7 +697,8 @@ function CategoriesShowcase() {
               >
                 <ImgFade
                   src={c.img}
-                  alt={c.name}
+                  alt={c.alt}
+
                   className={`${c.big ? "aspect-[16/9] md:aspect-auto md:h-full" : "aspect-[4/3]"} transition-transform duration-500 group-hover:scale-105`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden />

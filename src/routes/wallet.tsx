@@ -5,7 +5,7 @@ import {
   Wallet, Zap, Globe, RefreshCw, FileText, Shield, Lock, Smartphone,
   CheckCircle2, ArrowRight, CreditCard, Bell, Fingerprint,
 } from "lucide-react";
-const imgWallet = "/brand/img-wallet.jpg";
+const imgWallet = "/brand/market360-wallet-app.webp";
 
 export const Route = createFileRoute("/wallet")({
   head: () => ({

@@ -5,7 +5,7 @@ import type {} from "@tanstack/react-start";
 const newsPosts = [
   { slug: "market360-gift-cards-launch", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, delivered digitally and redeemed in the Market360 app.", date: "2026-06-20", image: "/brand/market360-gift-card-collection-landscape.webp" },
   { slug: "market360-gift-card-collection", title: "A closer look at the Market360 Gift Card collection", excerpt: "A visual tour of all six Market360 e-gift cards.", date: "2026-06-18", image: "/brand/market360-gift-card-collection-landscape.webp" },
-  { slug: "market360-testers-program", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, and a direct line into the roadmap.", date: "2026-06-16", image: "/brand/news-tester-launch.jpg" },
+  { slug: "market360-testers-program", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, and a direct line into the roadmap.", date: "2026-06-16", image: "/brand/market360-testers-program.jpg" },
   { slug: "market360-android-app-live", title: "The Market360 Android app is live on Google Play", excerpt: "The full marketplace on your phone.", date: "2026-06-14", image: "/brand/market360-android-app.webp" },
 ];
 
@@ -23,11 +23,11 @@ interface SitemapEntry {
 // Public pages with per-page imagery for image sitemap discovery
 const HOMEPAGE_IMAGES = [
   { loc: `${BASE_URL}/brand/market360-logo.webp`, title: "Market360 logo", caption: "Market360 — Sierra Leone's #1 online marketplace" },
-  { loc: `${BASE_URL}/brand/img-hero.jpg`, title: "Market360 marketplace hero", caption: "Buy, sell, pay, and grow with Market360" },
-  { loc: `${BASE_URL}/brand/flyer-endless.webp`, title: "One App. Endless Opportunities.", caption: "Discover thousands of listings on Market360" },
-  { loc: `${BASE_URL}/brand/flyer-download.png`, title: "Download Market360 Today", caption: "Available on Google Play and the App Store" },
-  { loc: `${BASE_URL}/brand/flyer-everything.png`, title: "Everything you need. One powerful marketplace.", caption: "Delivery, wallet, storefronts and more" },
-  { loc: `${BASE_URL}/brand/flyer-buysell.png`, title: "Buy. Sell. Pay. Grow.", caption: "The Market360 digital wallet and seller dashboard" },
+  { loc: `${BASE_URL}/brand/market360-app-marketplace-home.jpg`, title: "Market360 marketplace hero", caption: "Buy, sell, pay, and grow with Market360" },
+  { loc: `${BASE_URL}/brand/market360-flyer-endless-opportunities.webp`, title: "One App. Endless Opportunities.", caption: "Discover thousands of listings on Market360" },
+  { loc: `${BASE_URL}/brand/market360-flyer-download-app.webp`, title: "Download Market360 Today", caption: "Available on Google Play and the App Store" },
+  { loc: `${BASE_URL}/brand/market360-flyer-everything-you-need.webp`, title: "Everything you need. One powerful marketplace.", caption: "Delivery, wallet, storefronts and more" },
+  { loc: `${BASE_URL}/brand/market360-flyer-buy-sell-pay-grow.webp`, title: "Buy. Sell. Pay. Grow.", caption: "The Market360 digital wallet and seller dashboard" },
 ];
 
 const PAGE_ENTRIES: SitemapEntry[] = [
