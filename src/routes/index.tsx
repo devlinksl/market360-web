@@ -594,7 +594,8 @@ function CategoriesShowcase() {
               >
                 <ImgFade
                   src={c.img}
-                  alt={c.name}
+                  alt={c.alt}
+
                   className={`${c.big ? "aspect-[16/9] md:aspect-auto md:h-full" : "aspect-[4/3]"} transition-transform duration-500 group-hover:scale-105`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden />
