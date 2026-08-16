@@ -520,12 +520,13 @@ function HowItWorks() {
    ============================================================================= */
 
 const categories = [
-  { name: "Electronics", count: "2.4k listings", img: imgCatElectronics, big: true },
-  { name: "Fashion", count: "3.1k listings", img: imgCatFashion },
-  { name: "Phones & Tablets", count: "1.8k listings", img: imgCatPhones },
-  { name: "Vehicles", count: "620 listings", img: imgCatVehicles },
-  { name: "Property", count: "410 listings", img: imgCatProperty },
+  { name: "Electronics", count: "2.4k listings", img: imgCatElectronics, big: true, alt: "Market360 Electronics & Computing category — laptop, smartphone, gaming controller and smartwatch on a green backdrop" },
+  { name: "Fashion", count: "3.1k listings", img: imgCatFashion, alt: "Market360 Fashion category — folded knitwear, leather handbag, sneakers and a wristwatch" },
+  { name: "Phones & Tablets", count: "1.8k listings", img: imgCatPhones, alt: "Market360 Phones & Tablets category — smartphone, tablet, foldable phone and wireless earbuds" },
+  { name: "Vehicles", count: "620 listings", img: imgCatVehicles, alt: "Market360 Vehicles category — matte green helmet, model sports car and a tyre" },
+  { name: "Property", count: "410 listings", img: imgCatProperty, alt: "Market360 Property category — modern apartment model with keys and a blueprint" },
 ];
+
 
 function DownloadPromptModal({ open, onClose, category }: { open: boolean; onClose: () => void; category: string | null }) {
   useEffect(() => {
