@@ -71,20 +71,51 @@ const imgCatPhones = IMAGES.catPhones;
 const imgCatVehicles = IMAGES.catVehicles;
 const imgCatProperty = IMAGES.catProperty;
 
+const HOME_TITLE = "Market360 — Sierra Leone's #1 Online Shopping Marketplace";
+const HOME_DESC =
+  "Shop electronics, fashion, phones, vehicles and property from verified Sierra Leonean sellers. Pay securely with the Market360 wallet and track every delivery.";
+const HOME_OG = "https://market360.shop/brand/market360-flyer-endless-opportunities.webp";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Market360 Sl" },
-      { name: "description", content: "Sierra Leone's #1 online marketplace" },
-      { property: "og:title", content: "Market360 Sl" },
-      { property: "og:description", content: "Sierra Leone's #1 online marketplace" },
-      { property: "og:url", content: "https://market360-web.lovable.app/" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/uaTGTTTP6CZvDiW0j9X2wXr0ezW2/social-images/social-1783796844307-5448f48a-5176-48e7-8f87-50bf9c4934e5-1_all_31722.webp" },
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESC },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://market360.shop/" },
+      { property: "og:image", content: HOME_OG },
+      { property: "og:image:alt", content: "Market360 — one app, endless opportunities" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: HOME_OG },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://market360.shop/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Market360 marketplace categories",
+          itemListElement: [
+            { name: "Electronics & Computing", image: "https://market360.shop/brand/market360-category-electronics.webp" },
+            { name: "Fashion", image: "https://market360.shop/brand/market360-category-fashion.webp" },
+            { name: "Phones & Tablets", image: "https://market360.shop/brand/market360-category-phones-tablets.webp" },
+            { name: "Vehicles", image: "https://market360.shop/brand/market360-category-vehicles.webp" },
+            { name: "Property", image: "https://market360.shop/brand/market360-category-property.webp" },
+          ].map((c, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: { "@type": "Thing", name: c.name, image: c.image, url: "https://market360.shop/#marketplace" },
+          })),
+        }),
+      },
+    ],
   }),
   component: Home,
 });
+
 
 /* =============================================================================
    Shared primitives — scroll reveals and a skeleton-loading image
