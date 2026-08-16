@@ -39,7 +39,7 @@ const ARTICLES = [
       "Early access for shoppers and sellers — and a direct line into what Market360 builds next.",
     date: "Jun 16, 2026",
     readTime: "5 min read",
-    image: "/brand/news-tester-launch.jpg",
+    image: "/brand/market360-testers-program.jpg",
     alt: "Market360 testers using the marketplace app",
   },
   {

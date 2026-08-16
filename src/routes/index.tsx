@@ -6,7 +6,7 @@ import { GiftCardsTeaser } from "@/components/home/GiftCardsTeaser";
 // Latest news cards — edit slugs/titles/images directly here.
 const newsPosts = [
   { slug: "market360-gift-cards-launch" as const, href: "/news/market360-gift-cards-launch" as const, category: "Announcement", title: "Introducing Market360 Gift Cards", excerpt: "Six e-gift card tiers, from Le 100 to Le 1,000, delivered instantly.", date: "Jun 20, 2026", readTime: "5 min read", image: "/brand/market360-gift-card-collection-landscape.webp" },
-  { slug: "market360-testers-program" as const, href: "/news/market360-testers-program" as const, category: "Community", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, plus a direct line into the roadmap.", date: "Jun 16, 2026", readTime: "5 min read", image: "/brand/news-tester-launch.jpg" },
+  { slug: "market360-testers-program" as const, href: "/news/market360-testers-program" as const, category: "Community", title: "Inside the Market360 Testers Program", excerpt: "Early access for shoppers and sellers, plus a direct line into the roadmap.", date: "Jun 16, 2026", readTime: "5 min read", image: "/brand/market360-testers-program.jpg" },
   { slug: "market360-android-app-live" as const, href: "/news/market360-android-app-live" as const, category: "Product", title: "The Market360 Android app is live", excerpt: "The full marketplace, now in your pocket on Google Play.", date: "Jun 14, 2026", readTime: "4 min read", image: "/brand/market360-android-app.webp" },
 ];
 import {
@@ -28,25 +28,25 @@ const IMAGES = {
   // --- Hero — the phone mockup carousel at the very top of the page ---------
   // Portrait, ~9:16. Add/remove entries to change how many slides rotate.
   heroSlides: [
-    { src: "/brand/img-hero.jpg", alt: "The Market360 app showing the marketplace home feed" },
-    { src: "/brand/img-wallet.webp", alt: "The Market360 wallet screen with a live balance" },
-    { src: "/brand/img-hero-2.webp", alt: "A verified Market360 seller managing their store" },
+    { src: "/brand/market360-app-marketplace-home.jpg", alt: "The Market360 app showing the marketplace home feed" },
+    { src: "/brand/market360-wallet-app.webp", alt: "The Market360 wallet screen with a live balance" },
+    { src: "/brand/market360-seller-dashboard.webp", alt: "A verified Market360 seller managing their store" },
   ],
   // Phone mockup used in the "Download the app" section. Portrait, ~9:16.
-  heroSecondary: "/brand/hero-buysellgrow.webp",
+  heroSecondary: "/brand/market360-buy-sell-pay-grow.webp",
 
   // --- People / lifestyle shots — used in "How it works", Wallet, Why -------
-  buyer: "/brand/img-buyer.jpg",       // 4:3 or 16:9 — a buyer using the app
-  seller: "/brand/img-seller.webp",     // 16:9 — a verified seller at work
-  wallet: "/brand/img-wallet.webp",     // 9:16 — wallet / transfer screen
-  delivery: "/brand/img-delivery.jpg", // 16:10 — delivery / logistics shot
+  buyer: "/brand/market360-buyer-shopping.jpg",       // 4:3 or 16:9 — a buyer using the app
+  seller: "/brand/market360-seller-store.webp",     // 16:9 — a verified seller at work
+  wallet: "/brand/market360-wallet-app.webp",     // 9:16 — wallet / transfer screen
+  delivery: "/brand/market360-delivery-tracking.jpg", // 16:10 — delivery / logistics shot
 
   // --- Category tiles — the bento grid in "Explore every category" ---------
-  catElectronics: "/brand/cat-electronics.jpg", // 16:9 (this one is the big tile)
-  catFashion: "/brand/cat-fashion.jpg",         // 4:3
-  catPhones: "/brand/cat-phones.jpg",           // 4:3
-  catVehicles: "/brand/cat-vehicles.jpg",       // 4:3
-  catProperty: "/brand/cat-property.jpg",       // 4:3
+  catElectronics: "/brand/market360-category-electronics.webp", // 16:9 (this one is the big tile)
+  catFashion: "/brand/market360-category-fashion.webp",         // 4:3
+  catPhones: "/brand/market360-category-phones-tablets.webp",           // 4:3
+  catVehicles: "/brand/market360-category-vehicles.webp",       // 4:3
+  catProperty: "/brand/market360-category-property.webp",       // 4:3
 
   // --- "How Market360 works" journey carousel — 3D icon renders -------------
   // 16:10, transparent or brand-colored background, consistent 3D render

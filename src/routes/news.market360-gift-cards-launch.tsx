@@ -214,7 +214,7 @@ function ShareRow({ url, title }: { url: string; title: string }) {
 const ALL = [
   { slug: "market360-gift-cards-launch", to: "/news/market360-gift-cards-launch" as const, title: "Introducing Market360 Gift Cards", image: "/brand/market360-gift-card-collection-landscape.webp", category: "Announcement" },
   { slug: "market360-gift-card-collection", to: "/news/market360-gift-card-collection" as const, title: "A closer look at the Market360 Gift Card collection", image: "/brand/market360-gift-card-collection-landscape.webp", category: "Collection" },
-  { slug: "market360-testers-program", to: "/news/market360-testers-program" as const, title: "Inside the Market360 Testers Program", image: "/brand/news-tester-launch.jpg", category: "Community" },
+  { slug: "market360-testers-program", to: "/news/market360-testers-program" as const, title: "Inside the Market360 Testers Program", image: "/brand/market360-testers-program.jpg", category: "Community" },
   { slug: "market360-android-app-live", to: "/news/market360-android-app-live" as const, title: "The Market360 Android app is live", image: "/brand/market360-android-app.webp", category: "Product" },
 ];
 

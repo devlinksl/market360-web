@@ -1,8 +1,8 @@
-const imgWallet = "/brand/img-wallet.jpg";
-const imgSeller = "/brand/img-seller.jpg";
-const imgDelivery = "/brand/img-delivery.jpg";
-const imgHero = "/brand/img-hero.jpg";
-const imgBuyer = "/brand/img-buyer.jpg";
+const imgWallet = "/brand/market360-wallet-app.webp";
+const imgSeller = "/brand/market360-seller-store.webp";
+const imgDelivery = "/brand/market360-delivery-tracking.jpg";
+const imgHero = "/brand/market360-app-marketplace-home.jpg";
+const imgBuyer = "/brand/market360-buyer-shopping.jpg";
 
 export type Risk = "Low" | "Medium" | "High";
 

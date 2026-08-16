@@ -91,7 +91,7 @@ function MobileDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (o:
             >
               {/* Background image */}
               <img
-                src="/brand/news-tester-launch.jpg"
+                src="/brand/market360-testers-program.jpg"
                 alt="Join the Market360 Tester Program"
                 aria-hidden="true"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

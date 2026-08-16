@@ -5,7 +5,7 @@ import {
   Store, UserCheck, Package, DollarSign, Repeat, BarChart3, Award, Megaphone,
   Zap, CheckCircle2, ArrowRight, Smartphone, FileText, Users,
 } from "lucide-react";
-const imgSeller = "/brand/img-seller.jpg";
+const imgSeller = "/brand/market360-seller-store.webp";
 
 export const Route = createFileRoute("/for-sellers")({
   head: () => ({

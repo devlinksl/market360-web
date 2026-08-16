@@ -3,8 +3,8 @@ import { useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { CheckCircle2, Sparkles, MessageCircle, Award, Users, Bug, Rocket, Download, ArrowRight, Apple, PlayCircle, X } from "lucide-react";
-const flyerEverything = "/brand/flyer-everything.png";
-const flyerBuysell = "/brand/flyer-buysell.png";
+const flyerEverything = "/brand/market360-flyer-everything-you-need.webp";
+const flyerBuysell = "/brand/market360-flyer-buy-sell-pay-grow.webp";
 
 export const Route = createFileRoute("/tester")({
   head: () => ({
