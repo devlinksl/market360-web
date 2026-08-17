@@ -61,20 +61,26 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 const SITE_URL = "https://market360.shop";
-const SITE_DESC = "Market360 is Sierra Leone's #1 online shopping marketplace to buy and sell electronics, fashion, phones, vehicles, and more — with a built-in wallet, secure payments, verified sellers, and delivery.";
-const OG_IMAGE = `${SITE_URL}/brand/market360-flyer-endless-opportunities.webp`;
+const SITE_TITLE = "Market360 — Sierra Leone's #1 Online Marketplace";
+const SITE_DESC = "Shop smarter with Market360, Sierra Leone's online marketplace for electronics, fashion, and more.";
+const OG_IMAGE = `${SITE_URL}/brand/market360-social-preview.jpg`;
+const OG_IMAGE_ALT = "Market360 — Sierra Leone's #1 online marketplace";
+
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "Market360 Sl" },
+      { title: SITE_TITLE },
       { name: "description", content: SITE_DESC },
       { name: "author", content: "Market360" },
       { name: "publisher", content: "Market360" },
       { name: "application-name", content: "Market360" },
-      { name: "theme-color", content: "#00A859" },
+      { name: "apple-mobile-web-app-title", content: "Market360" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
+      { name: "theme-color", content: "#16a34a" },
       { name: "color-scheme", content: "light" },
       { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" },
       { name: "googlebot", content: "index,follow" },
@@ -82,27 +88,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Market360" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_SL" },
-      { property: "og:title", content: "Market360 Sl" },
+      { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESC },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Market360 — One App. Endless Opportunities." },
+      { property: "og:image:height", content: "800" },
+      { property: "og:image:alt", content: OG_IMAGE_ALT },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Market360" },
       { name: "twitter:creator", content: "@Market360" },
-      { name: "twitter:title", content: "Market360 Sl" },
+      { name: "twitter:title", content: SITE_TITLE },
       { name: "twitter:description", content: SITE_DESC },
       { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:image:alt", content: OG_IMAGE_ALT },
       { name: "format-detection", content: "telephone=no" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: logoAsset },
-      { rel: "apple-touch-icon", href: logoAsset },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png" },
+      { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
+      { rel: "icon", type: "image/png", sizes: "512x512", href: "/icon-512.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "alternate", type: "application/xml", title: "Sitemap", href: `${SITE_URL}/sitemap.xml` },
     ],
+
     scripts: [
       {
         type: "application/ld+json",
