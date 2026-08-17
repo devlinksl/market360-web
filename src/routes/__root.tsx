@@ -61,8 +61,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 const SITE_URL = "https://market360.shop";
-const SITE_DESC = "Market360 is Sierra Leone's #1 online shopping marketplace to buy and sell electronics, fashion, phones, vehicles, and more — with a built-in wallet, secure payments, verified sellers, and delivery.";
-const OG_IMAGE = `${SITE_URL}/brand/market360-flyer-endless-opportunities.webp`;
+const SITE_TITLE = "Market360 — Sierra Leone's #1 Online Marketplace";
+const SITE_DESC = "Shop smarter with Market360, Sierra Leone's online marketplace for electronics, fashion, and more.";
+const OG_IMAGE = `${SITE_URL}/brand/market360-social-preview.jpg`;
+const OG_IMAGE_ALT = "Market360 — Sierra Leone's #1 online marketplace";
+
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
