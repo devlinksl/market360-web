@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useMemo, useState } from "react";
@@ -17,18 +18,14 @@ const IR_HERO = "/images/ir-hero.jpg";
 const IR_TEAM = "/images/ir-team.jpg";
 
 export const Route = createFileRoute("/investments")({
-  head: () => ({
-    meta: [
-      { title: "Investor Relations — Invest in Market360" },
-      { name: "description", content: "Market360 is Sierra Leone's #1 online marketplace, integrating commerce, payments, and logistics. Explore our investor deck, funding rounds, KPIs, leadership, and how to invest." },
-      { property: "og:title", content: "Market360 Investor Relations" },
-      { property: "og:description", content: "Institutional-grade investor relations for Market360 — West Africa's fastest-growing commerce platform." },
-      { property: "og:image", content: "/images/ir-hero.jpg" },
-      { property: "og:url", content: "/investments" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "canonical", href: "/investments" }],
-  }),
+  head: () =>
+    seo({
+      title: "Investor Relations — Invest in Market360",
+      description: "Market360 is Sierra Leone's #1 online marketplace, integrating commerce, payments, and logistics. Explore our investor deck, funding rounds, KPIs, leadership, and how to invest.",
+      path: "/investments",
+      image: "/images/ir-hero.jpg",
+      imageAlt: "Market360 investor relations",
+    }),
   component: InvestorRelationsPage,
 });
 

@@ -1,19 +1,16 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Mail, MessageCircle, MapPin, Phone, Send, Clock, Headphones, Building2, Sparkles } from "lucide-react";
 const flyerEndless = "/brand/market360-flyer-endless-opportunities.webp";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact Market360 — Get in Touch" },
-      { name: "description", content: "Reach the Market360 team for support, partnerships, press, or feedback. We're here to help 24/7." },
-      { property: "og:title", content: "Contact Market360" },
-      { property: "og:description", content: "Talk to us anytime." },
-      { property: "og:url", content: "/contact" },
-    ],
-    links: [{ rel: "canonical", href: "/contact" }],
-  }),
+  head: () =>
+    seo({
+      title: "Contact Market360 — Get in Touch",
+      description: "Reach the Market360 team for support, partnerships, press, or feedback. We're here to help 24/7.",
+      path: "/contact",
+    }),
   component: ContactPage,
 });
 

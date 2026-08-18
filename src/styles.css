@@ -68,15 +68,35 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Belt-and-braces against stray horizontal scroll on small screens.
+       `clip` (unlike `hidden`) keeps position: sticky working. */
+    overflow-x: clip;
   }
-  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: 0; }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  img, svg, video, canvas { max-width: 100%; }
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  ::selection { background: var(--color-accent); color: var(--color-accent-foreground); }
+  button, [role="button"], a { -webkit-tap-highlight-color: transparent; }
+  [disabled], [aria-disabled="true"] { cursor: not-allowed; opacity: 0.55; }
 }
 
 @utility container-pro {
@@ -120,7 +140,8 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   min-height: 44px;
   &:hover { transform: translateY(-1px); filter: brightness(1.05); }
-  &:active { transform: translateY(0); }
+  &:active { transform: translateY(0); box-shadow: var(--shadow-soft); }
+  &:disabled { transform: none; filter: none; box-shadow: var(--shadow-soft); }
 }
 
 @utility btn-ghost {
@@ -138,6 +159,13 @@
   transition: background 0.2s ease, border-color 0.2s ease;
   min-height: 44px;
   &:hover { background: var(--color-accent); border-color: oklch(0.72 0.17 152 / 0.3); }
+  &:active { background: var(--color-secondary); }
+}
+
+@utility btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-height: 40px;
 }
 
 @utility section-pad {
@@ -163,8 +191,10 @@
 @utility input-pro {
   display: block;
   width: 100%;
-  padding: 0.65rem 0.9rem;
-  font-size: 0.95rem;
+  padding: 0.7rem 0.95rem;
+  /* 16px keeps iOS Safari from zooming the viewport on focus */
+  font-size: 1rem;
+  min-height: 44px;
   color: var(--color-foreground);
   background: var(--color-background);
   border: 1px solid var(--color-border);
@@ -187,6 +217,20 @@
 
 @keyframes spinner-rotate {
   to { transform: rotate(360deg); }
+}
+
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-muted);
+  border-radius: 0.75rem;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.6), transparent);
+    animation: shimmer-x 1.4s infinite;
+  }
 }
 
 @utility page-spinner {
@@ -227,8 +271,10 @@
 /* Perf hints — keep interactions snappy on slow networks */
 img, video { content-visibility: auto; }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }

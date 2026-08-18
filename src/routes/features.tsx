@@ -1,19 +1,16 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { ShoppingBag, Store, Wallet, BarChart3, Shield, Smartphone, Search, Truck, MessageCircle, Star, Bell, Lock, Users, PackageCheck, Globe, Zap, CreditCard, FileText, CheckCircle2, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/features")({
-  head: () => ({
-    meta: [
-      { title: "Features — Market360" },
-      { name: "description", content: "Discover everything Market360 offers: buying, selling, wallet, analytics, store management, and trust tools — built into one marketplace." },
-      { property: "og:title", content: "Market360 Features" },
-      { property: "og:description", content: "Every tool buyers and sellers need, in one app." },
-      { property: "og:url", content: "/features" },
-    ],
-    links: [{ rel: "canonical", href: "/features" }],
-  }),
+  head: () =>
+    seo({
+      title: "Features — Market360",
+      description: "Discover everything Market360 offers: buying, selling, wallet, analytics, store management, and trust tools — built into one marketplace.",
+      path: "/features",
+    }),
   component: FeaturesPage,
 });
 
