@@ -1,19 +1,16 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { Store, PackageCheck, BarChart3, Megaphone, Wallet, Users, TrendingUp, CheckCircle2, ArrowRight, Truck, MessageCircle, Tag } from "lucide-react";
 
 export const Route = createFileRoute("/seller-solutions")({
-  head: () => ({
-    meta: [
-      { title: "Seller Solutions — Market360" },
-      { name: "description", content: "Open a store on Market360. Manage products, orders, analytics, and grow your business with built-in tools." },
-      { property: "og:title", content: "Market360 Seller Solutions" },
-      { property: "og:description", content: "Run your store. Reach more buyers. Grow on Market360." },
-      { property: "og:url", content: "/seller-solutions" },
-    ],
-    links: [{ rel: "canonical", href: "/seller-solutions" }],
-  }),
+  head: () =>
+    seo({
+      title: "Seller Solutions — Market360",
+      description: "Open a store on Market360. Manage products, orders, analytics, and grow your business with built-in tools.",
+      path: "/seller-solutions",
+    }),
   component: SellerPage,
 });
 

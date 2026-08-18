@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import {
@@ -8,16 +9,12 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: "Terms of Service — Market360" },
-      { name: "description", content: "The terms governing your use of the Market360 marketplace — account responsibilities, buying & selling rules, fees, prohibited conduct, and dispute resolution." },
-      { property: "og:title", content: "Market360 Terms of Service" },
-      { property: "og:description", content: "Clear, comprehensive terms of service for buyers, sellers, and stores on Market360." },
-      { property: "og:url", content: "/terms" },
-    ],
-    links: [{ rel: "canonical", href: "/terms" }],
-  }),
+  head: () =>
+    seo({
+      title: "Terms of Service — Market360",
+      description: "The terms governing your use of the Market360 marketplace — account responsibilities, buying & selling rules, fees, prohibited conduct, and dispute resolution.",
+      path: "/terms",
+    }),
   component: TermsPage,
 });
 

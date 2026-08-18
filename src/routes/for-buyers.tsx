@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
@@ -8,17 +9,14 @@ import {
 const imgBuyer = "/brand/market360-buyer-shopping.jpg";
 
 export const Route = createFileRoute("/for-buyers")({
-  head: () => ({
-    meta: [
-      { title: "For Buyers — Shop safely on Market360" },
-      { name: "description", content: "Discover thousands of verified sellers across Sierra Leone. Pay securely with escrow, track every delivery, and shop with full buyer protection on Market360." },
-      { property: "og:title", content: "Market360 for Buyers" },
-      { property: "og:description", content: "Verified sellers, escrow protection, and real-time tracking." },
-      { property: "og:url", content: "/for-buyers" },
-      { property: "og:image", content: imgBuyer },
-    ],
-    links: [{ rel: "canonical", href: "/for-buyers" }],
-  }),
+  head: () =>
+    seo({
+      title: "For Buyers — Shop safely on Market360",
+      description: "Discover thousands of verified sellers across Sierra Leone. Pay securely with escrow, track every delivery, and shop with full buyer protection on Market360.",
+      path: "/for-buyers",
+      image: imgBuyer,
+      imageAlt: "Shopper using the Market360 app",
+    }),
   component: BuyersPage,
 });
 

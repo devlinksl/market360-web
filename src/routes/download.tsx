@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
@@ -7,16 +8,12 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/download")({
-  head: () => ({
-    meta: [
-      { title: "Download Market360 — iOS & Android" },
-      { name: "description", content: "Download the Market360 marketplace app on iOS and Android. Buy, sell, manage stores, and use the integrated wallet from anywhere in Sierra Leone." },
-      { property: "og:title", content: "Download Market360" },
-      { property: "og:description", content: "Get the Market360 app on iOS and Android." },
-      { property: "og:url", content: "/download" },
-    ],
-    links: [{ rel: "canonical", href: "/download" }],
-  }),
+  head: () =>
+    seo({
+      title: "Download Market360 — iOS & Android",
+      description: "Download the Market360 marketplace app on iOS and Android. Buy, sell, manage stores, and use the integrated wallet from anywhere in Sierra Leone.",
+      path: "/download",
+    }),
   component: DownloadPage,
 });
 
@@ -31,14 +28,14 @@ function AppStoreBadge({ className = "" }: { className?: string }) {
       target="_blank"
       rel="noopener"
       aria-label="Download Market360 on the App Store"
-      className={`group inline-flex items-center gap-3 rounded-2xl bg-black px-5 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] ${className}`}
+      className={`group inline-flex max-w-full items-center gap-3 rounded-2xl bg-black px-4 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] sm:px-5 ${className}`}
     >
-      <svg viewBox="0 0 24 24" className="h-8 w-8" aria-hidden="true" fill="currentColor">
+      <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" aria-hidden="true" fill="currentColor">
         <path d="M16.365 1.43c0 1.14-.43 2.22-1.27 3.05-.88.88-2.31 1.55-3.5 1.45-.14-1.16.45-2.36 1.23-3.13.85-.84 2.32-1.47 3.54-1.37zM20.5 17.48c-.55 1.27-.81 1.83-1.52 2.95-.99 1.55-2.39 3.49-4.13 3.51-1.54.02-1.94-1-4.04-1-2.09 0-2.53 1.02-4.07 1-1.74-.02-3.05-1.78-4.04-3.33C.83 17.16.45 11.7 3.13 8.79c1.45-1.58 3.42-2.59 5.5-2.62 1.86-.03 3.62 1.25 4.04 1.25.42 0 2.56-1.55 4.81-1.32.94.04 3.58.38 5.28 2.84-4.65 2.55-3.88 8.99 1.74 8.54z" />
       </svg>
       <div className="flex flex-col leading-none">
         <span className="text-[10px] uppercase tracking-wide opacity-80">Download on the</span>
-        <span className="mt-0.5 text-lg font-semibold">App Store</span>
+        <span className="mt-0.5 text-base font-semibold sm:text-lg">App Store</span>
       </div>
     </a>
   );
@@ -51,9 +48,9 @@ function GooglePlayBadge({ className = "" }: { className?: string }) {
       target="_blank"
       rel="noopener"
       aria-label="Get Market360 on Google Play"
-      className={`group inline-flex items-center gap-3 rounded-2xl bg-black px-5 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] ${className}`}
+      className={`group inline-flex max-w-full items-center gap-3 rounded-2xl bg-black px-4 py-3 text-white shadow-lg ring-1 ring-white/10 transition-transform hover:scale-[1.03] sm:px-5 ${className}`}
     >
-      <svg viewBox="0 0 512 512" className="h-8 w-8" aria-hidden="true">
+      <svg viewBox="0 0 512 512" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" aria-hidden="true">
         <defs>
           <linearGradient id="gpBlue" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#00C3FF" /><stop offset="100%" stopColor="#1A73E8" />
@@ -75,7 +72,7 @@ function GooglePlayBadge({ className = "" }: { className?: string }) {
       </svg>
       <div className="flex flex-col leading-none">
         <span className="text-[10px] uppercase tracking-wide opacity-80">Get it on</span>
-        <span className="mt-0.5 text-lg font-semibold">Google Play</span>
+        <span className="mt-0.5 text-base font-semibold sm:text-lg">Google Play</span>
       </div>
     </a>
   );
@@ -96,23 +93,23 @@ function DownloadPage() {
 
       {/* QR + WHY */}
       <section className="section-pad">
-        <div className="container-pro grid gap-12 lg:grid-cols-2 items-center">
-          <div className="surface-card p-8">
-            <div className="flex items-center gap-5">
-              <div className="grid h-32 w-32 place-items-center rounded-2xl bg-accent text-primary">
-                <QrCode className="h-16 w-16" />
+        <div className="container-pro grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+          <div className="surface-card p-6 sm:p-8">
+            <div className="flex items-center gap-4 sm:gap-5">
+              <div className="grid h-24 w-24 shrink-0 place-items-center rounded-2xl bg-accent text-primary sm:h-32 sm:w-32">
+                <QrCode className="h-12 w-12 sm:h-16 sm:w-16" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm text-muted-foreground">Scan to install</p>
-                <p className="text-2xl font-bold">Get the app</p>
-                <div className="mt-3 flex items-center gap-1 text-sm">
+                <p className="text-xl font-bold sm:text-2xl">Get the app</p>
+                <div className="mt-3 flex flex-wrap items-center gap-x-1 gap-y-1 text-sm">
                   {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-primary text-primary" />)}
                   <span className="ml-1 font-medium">4.9</span>
                   <span className="ml-1 text-muted-foreground">· 2,400+ ratings</span>
                 </div>
               </div>
             </div>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <AppStoreBadge className="w-full justify-center" />
               <GooglePlayBadge className="w-full justify-center" />
             </div>
@@ -154,7 +151,7 @@ function DownloadPage() {
               Every screen has been crafted for clarity, speed, and trust — from home feed to checkout.
             </p>
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
             {["Home feed", "Product page", "Wallet", "Seller dashboard"].map((label, i) => (
               <div key={label} className="surface-card surface-card-hover aspect-[9/16] overflow-hidden p-0">
                 <div className="relative h-full w-full bg-gradient-to-br from-primary/15 via-background to-primary-glow/10">
@@ -206,7 +203,7 @@ function DownloadPage() {
       {/* DEVICE REQUIREMENTS + FAQ */}
       <section className="section-pad bg-surface border-t border-border">
         <div className="container-pro max-w-3xl">
-          <h2 className="text-3xl font-bold">Device requirements</h2>
+          <h2 className="text-2xl font-bold sm:text-3xl">Device requirements</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <div className="surface-card p-5">
               <p className="font-semibold flex items-center gap-2">
@@ -224,7 +221,7 @@ function DownloadPage() {
             </div>
           </div>
 
-          <h2 className="mt-14 text-3xl font-bold">Frequently asked questions</h2>
+          <h2 className="mt-14 text-2xl font-bold sm:text-3xl">Frequently asked questions</h2>
           <div className="mt-6 space-y-3">
             {[
               { q: "Is the app free?", a: "Yes — free to download and use. Sellers pay a small per-transaction fee only when a sale completes." },
@@ -244,7 +241,7 @@ function DownloadPage() {
             ))}
           </div>
 
-          <div className="mt-12 rounded-3xl border border-primary/20 bg-gradient-to-br from-accent/60 to-background p-8 text-center">
+          <div className="mt-12 rounded-3xl border border-primary/20 bg-gradient-to-br from-accent/60 to-background p-6 text-center sm:p-8">
             <DownloadIcon className="mx-auto h-8 w-8 text-primary" />
             <h3 className="mt-3 text-2xl font-bold">Ready to join Market360?</h3>
             <p className="mt-2 text-muted-foreground">Install the app and start buying or selling in under a minute.</p>

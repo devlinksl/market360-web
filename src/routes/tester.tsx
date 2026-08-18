@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -7,16 +8,12 @@ const flyerEverything = "/brand/market360-flyer-everything-you-need.webp";
 const flyerBuysell = "/brand/market360-flyer-buy-sell-pay-grow.webp";
 
 export const Route = createFileRoute("/tester")({
-  head: () => ({
-    meta: [
-      { title: "Become a Market360 Tester — Early Access Program" },
-      { name: "description", content: "Join the Market360 tester program. Get early access, shape the product, and earn perks while helping build the future of commerce." },
-      { property: "og:title", content: "Market360 Tester Program" },
-      { property: "og:description", content: "Help us build the marketplace of the future." },
-      { property: "og:url", content: "/tester" },
-    ],
-    links: [{ rel: "canonical", href: "/tester" }],
-  }),
+  head: () =>
+    seo({
+      title: "Become a Market360 Tester — Early Access Program",
+      description: "Join the Market360 tester program. Get early access, shape the product, and earn perks while helping build the future of commerce.",
+      path: "/tester",
+    }),
   component: TesterPage,
 });
 

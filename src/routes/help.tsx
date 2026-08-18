@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { seo } from "@/lib/seo";
 import {
   Search, Book, ShoppingBag, Store, Wallet, Shield, MessageCircle,
   ArrowRight, CreditCard, Smartphone, Truck, AlertTriangle, Mail,
@@ -1506,26 +1507,16 @@ function formatDate(iso: string) {
 // ─── Route ──────────────────────────────────────────────────────────────────
 
 export const Route = createFileRoute("/help")({
-  head: () => ({
-    meta: [
-      { title: "Help Center — Market360" },
-      {
-        name: "description",
-        content:
-          "Find answers about buying, selling, the wallet, security, and your account on Market360. Complete knowledge base with step-by-step guides, FAQs, and 24/7 support.",
-      },
-      { property: "og:title", content: "Market360 Help Center" },
-      {
-        property: "og:description",
-        content: "Sierra Leone's most comprehensive marketplace help center. Guides, FAQs, and expert support for Market360 buyers and sellers.",
-      },
-      { property: "og:url", content: "https://market360.shop/help" },
-      { property: "og:type", content: "website" },
-      { name: "robots", content: "index,follow" },
-    ],
-    links: [{ rel: "canonical", href: "https://market360.shop/help" }],
+  head: () => {
+    const base = seo({
+      title: "Help Center — Market360",
+      description:
+        "Find answers about buying, selling, the wallet, security, and your account on Market360. Complete knowledge base with step-by-step guides, FAQs, and 24/7 support.",
+      path: "/help",
+    });
     // FAQ + WebPage structured data injected via script tag below
-  }),
+    return { ...base, meta: [...base.meta, { name: "robots", content: "index,follow" }] };
+  },
   component: HelpPage,
 });
 

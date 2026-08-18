@@ -1,19 +1,16 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { Heart, Compass, Target, Award, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Market360 — Our Story & Mission" },
-      { name: "description", content: "We're building the modern marketplace where buyers, sellers, and stores grow together with trust at the core." },
-      { property: "og:title", content: "About Market360" },
-      { property: "og:description", content: "Our mission: empower commerce for everyone." },
-      { property: "og:url", content: "/about" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
+  head: () =>
+    seo({
+      title: "About Market360 — Our Story & Mission",
+      description: "We're building the modern marketplace where buyers, sellers, and stores grow together with trust at the core.",
+      path: "/about",
+    }),
   component: AboutPage,
 });
 

@@ -39,25 +39,48 @@ export function Logo({ className = "h-9 w-9" }: { className?: string }) {
 }
 
 function Header({ onOpen }: { onOpen: () => void }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-40 border-b bg-background/80 backdrop-blur-xl transition-shadow duration-300 ${
+        scrolled ? "border-border shadow-soft" : "border-border/60"
+      }`}
+    >
       <div className="container-pro flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2.5 font-display font-bold text-lg">
+        <Link to="/" className="flex shrink-0 items-center gap-2.5 rounded-xl font-display text-lg font-bold">
           <Logo className="h-9 w-9 rounded-xl" />
           <span>Market<span className="text-primary">360</span></span>
         </Link>
-        <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           {navLinks.map((l) => (
-            <Link key={l.to} to={l.to} className="px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground rounded-md" activeProps={{ className: "text-foreground" }}>
+            <Link
+              key={l.to}
+              to={l.to}
+              className="rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              activeProps={{ className: "bg-accent text-primary" }}
+              activeOptions={{ exact: l.to === "/" }}
+            >
               {l.label}
             </Link>
           ))}
         </nav>
-        <div className="hidden lg:flex items-center gap-2">
-          <Link to="/contact" className="btn-ghost text-sm py-2 px-4">Contact</Link>
-          <Link to="/download" className="btn-primary text-sm py-2 px-4">Get the App</Link>
+        <div className="hidden items-center gap-2 lg:flex">
+          <Link to="/contact" className="btn-ghost btn-sm">Contact</Link>
+          <Link to="/download" className="btn-primary btn-sm">Get the App</Link>
         </div>
-        <button aria-label="Open menu" className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-secondary" onClick={onOpen}>
+        <button
+          aria-label="Open menu"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-secondary transition-colors hover:bg-accent lg:hidden"
+          onClick={onOpen}
+        >
           <Menu className="h-5 w-5" />
         </button>
       </div>
@@ -269,8 +292,8 @@ function Footer() {
   return (
     <footer className="border-t border-border bg-surface mt-16">
       <div className="container-pro py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(5,1fr)]">
-          <div>
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.4fr_repeat(5,1fr)] lg:gap-12">
+          <div className="sm:col-span-2 md:col-span-3 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 font-display font-bold text-lg">
               <Logo className="h-9 w-9 rounded-xl" />
               <span>Market<span className="text-primary">360</span></span>
@@ -289,7 +312,7 @@ function Footer() {
                 { Icon: Instagram, label: "Instagram" },
                 { Icon: Linkedin, label: "LinkedIn" },
               ].map(({ Icon, label }) => (
-                <a key={label} href="#" aria-label={label} className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:text-primary hover:border-primary/40">
+                <a key={label} href="#" aria-label={label} className="grid h-11 w-11 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary">
                   <Icon className="h-4 w-4" />
                 </a>
               ))}
@@ -304,7 +327,7 @@ function Footer() {
                     {l.to.endsWith(".xml") ? (
                       <a href={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">{l.label}</a>
                     ) : (
-                      <Link to={l.to} className="text-sm text-muted-foreground transition-colors hover:text-primary">
+                      <Link to={l.to} className="inline-flex min-h-[24px] items-center text-sm text-muted-foreground transition-colors hover:text-primary">
                         {l.label}
                       </Link>
                     )}
@@ -327,10 +350,16 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="flex min-h-dvh flex-col">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
       <Header onOpen={() => setMenuOpen(true)} />
       <MobileDrawer open={menuOpen} onOpenChange={setMenuOpen} />
       <TesterPopup />
-      <main className="flex-1">{children}</main>
+      <main id="main" className="flex-1">{children}</main>
       <Footer />
     </div>
   );

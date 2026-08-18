@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
@@ -8,17 +9,14 @@ import {
 const imgSeller = "/brand/market360-seller-store.webp";
 
 export const Route = createFileRoute("/for-sellers")({
-  head: () => ({
-    meta: [
-      { title: "For Sellers — Launch your store on Market360" },
-      { name: "description", content: "Open a verified store on Market360 in minutes. Manage listings, fulfil orders, and get paid instantly with the built-in wallet. Tools built for Sierra Leone's sellers." },
-      { property: "og:title", content: "Market360 for Sellers" },
-      { property: "og:description", content: "Pro selling tools, instant payouts, verified storefronts." },
-      { property: "og:url", content: "/for-sellers" },
-      { property: "og:image", content: imgSeller },
-    ],
-    links: [{ rel: "canonical", href: "/for-sellers" }],
-  }),
+  head: () =>
+    seo({
+      title: "For Sellers — Launch your store on Market360",
+      description: "Open a verified store on Market360 in minutes. Manage listings, fulfil orders, and get paid instantly with the built-in wallet. Tools built for Sierra Leone's sellers.",
+      path: "/for-sellers",
+      image: imgSeller,
+      imageAlt: "A verified Market360 seller managing their store",
+    }),
   component: SellersPage,
 });
 

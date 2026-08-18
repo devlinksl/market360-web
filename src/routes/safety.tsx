@@ -1,19 +1,16 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
 import { Shield, Lock, Eye, AlertTriangle, BadgeCheck, Scale, CheckCircle2, ArrowRight, FileWarning } from "lucide-react";
 
 export const Route = createFileRoute("/safety")({
-  head: () => ({
-    meta: [
-      { title: "Marketplace Safety — Market360" },
-      { name: "description", content: "Learn how Market360 protects buyers and sellers with escrow, KYC, fraud detection, and dispute resolution." },
-      { property: "og:title", content: "Market360 Marketplace Safety" },
-      { property: "og:description", content: "Trust at every step of every transaction." },
-      { property: "og:url", content: "/safety" },
-    ],
-    links: [{ rel: "canonical", href: "/safety" }],
-  }),
+  head: () =>
+    seo({
+      title: "Marketplace Safety — Market360",
+      description: "Learn how Market360 protects buyers and sellers with escrow, KYC, fraud detection, and dispute resolution.",
+      path: "/safety",
+    }),
   component: SafetyPage,
 });
 

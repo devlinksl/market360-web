@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHero } from "@/components/PageHero";
@@ -8,17 +9,14 @@ import {
 const imgWallet = "/brand/market360-wallet-app.webp";
 
 export const Route = createFileRoute("/wallet")({
-  head: () => ({
-    meta: [
-      { title: "Market360 Wallet — Instant payments for Sierra Leone" },
-      { name: "description", content: "The Market360 Wallet powers every transaction on the marketplace. Instant settlement, free internal transfers, and one-tap withdrawals to Orange Money, Africell Money, or your bank." },
-      { property: "og:title", content: "Market360 Wallet" },
-      { property: "og:description", content: "Instant settlements, free transfers, secure payouts." },
-      { property: "og:url", content: "/wallet" },
-      { property: "og:image", content: imgWallet },
-    ],
-    links: [{ rel: "canonical", href: "/wallet" }],
-  }),
+  head: () =>
+    seo({
+      title: "Market360 Wallet — Instant payments for Sierra Leone",
+      description: "The Market360 Wallet powers every transaction on the marketplace. Instant settlement, free internal transfers, and one-tap withdrawals to Orange Money, Africell Money, or your bank.",
+      path: "/wallet",
+      image: imgWallet,
+      imageAlt: "The Market360 wallet screen with a live balance",
+    }),
   component: WalletPage,
 });
 

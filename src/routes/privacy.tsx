@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import {
@@ -7,16 +8,12 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/privacy")({
-  head: () => ({
-    meta: [
-      { title: "Privacy Policy — How Market360 Protects Your Data" },
-      { name: "description", content: "How Market360 collects, uses, stores, and protects your personal data — including your rights, retention periods, cookies, security, international transfers, and contact details." },
-      { property: "og:title", content: "Market360 Privacy Policy" },
-      { property: "og:description", content: "Transparent data practices, GDPR-aligned rights, and bank-grade security." },
-      { property: "og:url", content: "/privacy" },
-    ],
-    links: [{ rel: "canonical", href: "/privacy" }],
-  }),
+  head: () =>
+    seo({
+      title: "Privacy Policy — How Market360 Protects Your Data",
+      description: "How Market360 collects, uses, stores, and protects your personal data — including your rights, retention periods, cookies, security, international transfers, and contact details.",
+      path: "/privacy",
+    }),
   component: PrivacyPage,
 });
 
