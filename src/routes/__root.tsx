@@ -148,10 +148,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      // Google reads the first parsable `rel="icon"`; the .ico carries 16/32/48
-      // so any crawler or browser resolves a square, non-distorted mark.
+      // Keep the supplied Market360 logo as the first, globally discoverable favicon.
+      { rel: "icon", type: "image/png", sizes: "512x512", href: "/market360-favicon.png" },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48 32x32 16x16", type: "image/x-icon" },
-      { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "shortcut icon", href: "/market360-favicon.png", type: "image/png" },
       { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
