@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.market360.devlink",
+      "sha256_cert_fingerprints": [
+        "3B:73:3D:47:69:ED:8D:38:9B:09:2A:C4:8E:9D:7E:2D:1A:B5:23:36:B0:6E:83:4F:61:60:79:0A:BC:18:8C:4E"
+      ]
+    }
+  }
+]
