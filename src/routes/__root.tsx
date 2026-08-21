@@ -148,15 +148,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      // Keep the supplied Market360 logo as the first, globally discoverable favicon.
-      { rel: "icon", type: "image/png", sizes: "512x512", href: "/market360-favicon.png" },
-      { rel: "icon", href: "/favicon.ico", sizes: "48x48 32x32 16x16", type: "image/x-icon" },
-      { rel: "shortcut icon", href: "/market360-favicon.png", type: "image/png" },
+      // Every icon below is generated from the supplied square Market360 logo.
+      { rel: "icon", type: "image/png", sizes: "1254x1254", href: "/market360-favicon.png" },
+      { rel: "icon", type: "image/png", sizes: "512x512", href: "/icon-512.png" },
+      { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
       { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
-      { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },
-      { rel: "icon", type: "image/png", sizes: "512x512", href: "/icon-512.png" },
+      { rel: "icon", href: "/favicon.ico", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
+      { rel: "shortcut icon", href: "/market360-favicon.png", type: "image/png", sizes: "1254x1254" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "alternate", type: "application/xml", title: "Sitemap", href: `${SITE_URL}/sitemap.xml` },
